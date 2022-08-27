@@ -7,7 +7,7 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - master
 env:
-  CI: ""
+  CI: ''
 
 defaults:
   run:
@@ -24,4 +24,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TWADDER_B2796 }}'
           channelId: live
           projectId: twadder-b2796
-          entrypoint: "./frontend
+          entrypoint: './frontend'
