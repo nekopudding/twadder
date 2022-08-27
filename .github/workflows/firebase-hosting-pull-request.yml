@@ -5,7 +5,7 @@ name: Deploy to Firebase Hosting on PR
 'on': pull_request
 
 env:
-  CI: ""
+  CI: ''
 
 defaults:
   run:
@@ -22,4 +22,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TWADDER_B2796 }}'
           projectId: twadder-b2796
-          entrypoint: "./frontend"
+          entrypoint: './frontend'
