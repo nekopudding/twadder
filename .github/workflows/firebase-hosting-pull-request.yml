@@ -4,6 +4,9 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 
+env:
+  CI: ""
+  
 defaults:
   run:
     working-directory: frontend
