@@ -2,13 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './utils/tests/reportWebVitals';
 import { initializeApp } from 'firebase/app';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from './pages/Home';
+import Messages from './pages/Messages';
+import SignUp from './pages/SignUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<Home />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="signup" element={<SignUp/>} />
+      </Route>
+    </Routes>
+  </BrowserRouter>,
   </React.StrictMode>
 );
 
