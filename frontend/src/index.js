@@ -18,10 +18,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
+      <Route path="signup" element={<SignUp/>} />
+
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="messages" element={<Messages />} />
-        <Route path="signup" element={<SignUp/>} />
       </Route>
     </Routes>
   </BrowserRouter>

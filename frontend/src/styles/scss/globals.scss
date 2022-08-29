@@ -1,31 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;700&display=swap');
-
-/* ------------------- */
-/* Variables            */
-/* ------------------- */
-$s: 8px;
-
-/* Colors */
-$clrWhite: #e7e9ea;
-$clrBlack: #000;
-$clrTextGrey:  #71767b;
-$clrBgGrey: #202327;
-$clrMainAccent: #761df0;
-$clrRetwadd: #00ba7c;
-$clrLike: #f91880;
-
-/* Typography */
-$ff: 'Libre Franklin', sans-serif;
+@use 'variables' as v;
 
 /* ------------------- */
 /* Globals            */
 /* ------------------- */
 html {
-  background-color: $clrBlack;
+  background-color: v.$clrBlack;
 }
+
 h1,h2,h3,input,a,p,body,div {
-  font-family: $ff;
-  color: $clrWhite;
+  font-family: v.$ff;
+  color: v.$clrWhite;
+}
+svg {
+  fill: v.$clrWhite;
 }
 
 div {
@@ -90,21 +77,6 @@ a {
 .chatHeaderSelected {
   @extend %size2;
   font-weight: 500;
-}
-.banner {
-  font-size: 64px;
-  line-height: 84px;
-  letter-spacing: -1.2px;
-  font-weight: 700;
-}
-.subBanner {
-  font-size: 31px;
-  line-height: 36px;
-  font-weight: 700;
-}
-
-/*only when hover is activated (non-touch screen)*/
-@media (any-hover: hover) { 
 }
 
 /* ------------------- */
