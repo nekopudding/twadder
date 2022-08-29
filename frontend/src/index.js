@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/css/globals.css';
 import App from './App';
 import reportWebVitals from './utils/tests/reportWebVitals';
 import { initializeApp } from 'firebase/app';
@@ -24,7 +24,7 @@ root.render(
         <Route path="signup" element={<SignUp/>} />
       </Route>
     </Routes>
-  </BrowserRouter>,
+  </BrowserRouter>
   </React.StrictMode>
 );
 

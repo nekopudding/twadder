@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+#auto generated css
+/src/styles/css/*
+
 # production
 /build
 

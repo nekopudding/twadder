@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;700&display=swap');
+
+/* ------------------- */
+/* Variables            */
+/* ------------------- */
+$s: 8px;
+
+/* Colors */
+$clrWhite: #e7e9ea;
+$clrBlack: #000;
+$clrTextGrey:  #71767b;
+$clrBgGrey: #202327;
+$clrMainAccent: #761df0;
+$clrRetwadd: #00ba7c;
+$clrLike: #f91880;
+
+/* Typography */
+$ff: 'Libre Franklin', sans-serif;
+
+/* ------------------- */
+/* Globals            */
+/* ------------------- */
+html {
+  background-color: $clrBlack;
+}
+h1,h2,h3,input,a,p,body,div {
+  font-family: $ff;
+  color: $clrWhite;
+}
+
+div {
+  display: block;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* ------------------- */
+/* Typography classes     */
+/* ------------------- */
+%size1 {
+  font-size: 20px;
+  line-height: 24px;
+}
+%size2 {
+  font-size: 15px;
+  line-height: 20px;
+}
+%size3 {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.h2 {
+  @extend %size1;
+  font-weight: 700;
+}
+.input {
+  @extend %size1;
+  font-weight: 400;
+}
+.sidebarButton {
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 700;
+}
+.body {
+  @extend %size2;
+  font-weight: 400;
+}
+.bodyHeader {
+  @extend %size2;
+  font-weight: 700;
+}
+.inputNote {
+  @extend %size3;
+  font-weight: 700;
+}
+.subText {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+}
+.chatHeader {
+  @extend %size2;
+  font-weight: 700;
+}
+.chatHeaderSelected {
+  @extend %size2;
+  font-weight: 500;
+}
+.banner {
+  font-size: 64px;
+  line-height: 84px;
+  letter-spacing: -1.2px;
+  font-weight: 700;
+}
+.subBanner {
+  font-size: 31px;
+  line-height: 36px;
+  font-weight: 700;
+}
+
+/*only when hover is activated (non-touch screen)*/
+@media (any-hover: hover) { 
+}
+
+/* ------------------- */
+/* Resets              */
+/* ------------------- */
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+  margin: 0; 
+}
+
+p {
+  font-weight: 400;
+}
+
+img {
+  user-select: none;
+}
+
+
+/* make form elements easier to work with */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {  
+*,
+*::before,
+*::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+}
