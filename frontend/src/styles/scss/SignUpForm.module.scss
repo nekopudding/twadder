@@ -1,0 +1,67 @@
+@use 'variables' as v;
+
+.form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  height: 650px;
+  background-color: v.$clrBlack;
+  border-radius: 16px;
+  overflow: scroll;
+  padding: 0 (v.$s * 10);
+  padding-top: 53px;
+}
+
+.header {
+  height: 53px;
+  padding: 0 (v.$s * 2);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  svg {
+    width: 20px;
+  }
+  h2 {
+    margin-left: v.$s * 4.5;
+    letter-spacing: 1px;
+  }
+}
+
+.stepTitle {
+  font-size: 31px;
+  line-height: 36px;
+  font-weight: 700;
+  margin: (v.$s * 2.5) 0;
+}
+
+.inputContainer {
+  padding: v.$s * 1;
+  padding-bottom: 0;
+  border: 1px solid v.$clrTextGrey;
+  border-radius: 4px;
+
+  .label {
+    position: absolute;
+    color: v.$clrTextGrey;
+    pointer-events: none;
+  }
+  .input {
+    padding-top: v.$s * 3.5;
+    padding-bottom: v.$s * 1;
+    background: none;
+    width: 100%;
+  }
+
+  &.focus,&:focus-within {
+    border-color: v.$clrMainAccent;
+    box-shadow: v.$clrMainAccent 0px 0px 0px 1px;
+    .label {
+      color: v.$clrMainAccent;
+    }
+  }
+}

@@ -11,6 +11,10 @@ h1,h2,h3,input,a,p,body,div {
   font-family: v.$ff;
   color: v.$clrWhite;
 }
+input,input:focus-visible {
+  border: none;
+  outline: none;
+}
 svg {
   fill: v.$clrWhite;
 }
