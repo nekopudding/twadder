@@ -7,11 +7,11 @@ html {
   background-color: v.$clrBlack;
 }
 
-h1,h2,h3,input,a,p,body,div {
+h1,h2,h3,input,a,p,body,div,select {
   font-family: v.$ff;
   color: v.$clrWhite;
 }
-input,input:focus-visible {
+input,input:focus-visible, select, select:focus-visible {
   border: none;
   outline: none;
 }

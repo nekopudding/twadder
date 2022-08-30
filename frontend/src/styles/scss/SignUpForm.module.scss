@@ -37,9 +37,11 @@
   line-height: 36px;
   font-weight: 700;
   margin: (v.$s * 2.5) 0;
+  margin-bottom: v.$s * 4;
 }
 
 .inputContainer {
+  margin-bottom: v.$s * 3;
   padding: v.$s * 1;
   padding-bottom: 0;
   border: 1px solid v.$clrTextGrey;
@@ -63,5 +65,58 @@
     .label {
       color: v.$clrMainAccent;
     }
+  }
+}
+
+.subTitle {
+  margin-top: v.$s * 2.5;
+  margin-bottom: v.$s;
+}
+.subBody {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: v.$clrTextGrey;
+}
+.dateInputContainer {
+  margin: (v.$s * 2) 0;
+  display: flex;
+  & > * + * {
+    margin-left: v.$s * 1.5;
+  }
+}
+.inputContainer.birthday {
+  &.month {
+    flex-basis: 45%;
+  }
+  &.day {
+    flex-basis: 25%;
+  }
+  &.year {
+    flex-basis: 30%;
+  }
+}
+.submitButtonContainer {
+  margin: (v.$s * 3) 0;
+  width: 100%;
+}
+.submitButton {
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+  width: 100%;
+  border-radius: 9999px;
+  background-color: v.$clrMainAccent;
+  color: v.$clrWhite;
+  @media (any-hover: hover) { 
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &:active {
+    opacity: 0.5;
   }
 }
