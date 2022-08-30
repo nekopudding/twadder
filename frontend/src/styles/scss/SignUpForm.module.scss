@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%,-50%);
   width: 600px;
-  height: 650px;
+  height: clamp(90vh,650px,90vh);
   background-color: v.$clrBlack;
   border-radius: 16px;
   overflow: scroll;
@@ -30,8 +30,23 @@
     margin-left: v.$s * 4.5;
     letter-spacing: 1px;
   }
+  .closeIconContainer {
+    @media (any-hover: hover) { 
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    &:active {
+      opacity: 0.5;
+    }
+  }
 }
-
+.stepContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .stepTitle {
   font-size: 31px;
   line-height: 36px;
@@ -85,7 +100,7 @@
     margin-left: v.$s * 1.5;
   }
 }
-.inputContainer.birthday {
+.inputContainer {
   &.month {
     flex-basis: 45%;
   }
@@ -96,27 +111,51 @@
     flex-basis: 30%;
   }
 }
-.submitButtonContainer {
+.buttonContainer {
   margin: (v.$s * 3) 0;
   width: 100%;
 }
-.submitButton {
+@mixin button($bgColor,$color){
   user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: v.$s * 3;
   height: 52px;
   width: 100%;
   border-radius: 9999px;
-  background-color: v.$clrMainAccent;
-  color: v.$clrWhite;
+  background-color: $bgColor;
+  color: $color;
+
   @media (any-hover: hover) { 
     &:hover {
       opacity: 0.8;
     }
   }
-
   &:active {
     opacity: 0.5;
   }
+  &:disabled {
+    opacity: 0.4 !important;
+  }
+}
+.submitButton {
+  @include button(v.$clrMainAccent,v.$clrWhite);
+}
+.nextButton {
+  @include button(v.$clrWhite,v.$clrBlack);
+}
+
+//STEP 2
+.step2Title {
+  margin:0;
+  margin-top: v.$s*2.5;
+}
+.verifyText {
+  margin-top: v.$s;
+  margin-bottom: v.$s*3;
+  color: v.$clrTextGrey;
+}
+.verifyInput {
+
 }

@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { useState } from 'react'
 import {ReactComponent as TwitterLogo} from '../assets/icons/twitter.svg'
 import {ReactComponent as GoogleLogo} from '../assets/icons/google.svg'
@@ -9,8 +11,8 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import styles from '../styles/css/SignUp.module.css'
-import SignUpForm from './components/SignUpForm';
+import styles from 'styles/css/SignUp.module.css'
+import SignUpForm from './components/SignUpForm/SignUpForm';
 
 
 function SignUp() {
@@ -95,7 +97,10 @@ function SignUp() {
   // }
   return (
     <>
-    <div className={styles.root}>
+    <div className={styles.root} css={css`
+      overflow: ${formOpen ? 'hidden' : 'visible'};
+      pointer-events: ${formOpen ? 'none' : 'auto'};
+    `}>
       <div className={styles.bg}></div>
       <div className={styles.container}>
           <div className={styles.logo}>
@@ -104,17 +109,17 @@ function SignUp() {
           <div className={styles.banner}>Happening Now</div>
           <div className={styles.actionsSection}>
             <div className={styles.subBanner}>Join Twadder today</div>
-            <div className={`${styles.button} ${styles.light}`} >
+            <div className={`${styles.button} ${styles.light}`} onClick={signUpWithGoogle}>
               <GoogleLogo/>
-              <span className='chatHeaderSelected' onClick={signUpWithGoogle}>Sign up with Google</span>
+              <span className='chatHeaderSelected'>Sign up with Google</span>
             </div>
             <div>
               <div className={`body ${styles.divider}`}>
                 <div className={`body ${styles.text}`}>or</div>
               </div>
             </div>
-            <div className={`${styles.button} ${styles.accented}`}>
-              <span className='bodyHeader' onClick={signUpWithEmail}>Sign up with email</span>
+            <div className={`${styles.button} ${styles.accented}`} onClick={signUpWithEmail}>
+              <span className='bodyHeader'>Sign up with email</span>
             </div>
             <div>{`${formOpen}`}</div>
             <div className={`sidebarButton ${styles.haveAccountText}`}>Already have an account?</div>
@@ -124,7 +129,7 @@ function SignUp() {
           </div>
         </div>
     </div>
-    <SignUpForm open={formOpen} setOpen={setFormOpen}/>
+    {formOpen && <SignUpForm setOpen={setFormOpen}/>}
     </>
   )
 }
