@@ -46,10 +46,10 @@ function Step1({
     return valid;
   }
   const nameIsValid = () => {
-    return /[a-zA-Z0-9]{3,}$/.test(formData.name);
+    return /^[a-zA-Z0-9]{3,}$/.test(formData.name);
   }
   const emailIsValid = () => {
-    return /[a-zA-Z0-9._+-]+@[a-zA-Z0-9 -]+\.[a-z]{2,}$/.test(formData.email);
+    return /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9 -]+\.[a-z]{2,}$/.test(formData.email);
   }
 
   return (
