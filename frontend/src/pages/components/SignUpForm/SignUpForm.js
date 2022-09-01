@@ -15,7 +15,8 @@ function SignUpForm({
     month: 0, //0 if unselected
     day: 0,
     year: 0,
-    enableNotifications: false
+    enableNotifications: false,
+    verificationCode: ''
   })
 
   const changeStep = (n) => {
@@ -23,7 +24,7 @@ function SignUpForm({
   }
   
   const handleDataChange = (e) => {
-    // console.log(`${e.target.name}: ${e.target.value}`)
+    console.log(`${e.target.name}: ${e.target.value}`)
     setFormData(prev => { return { ...prev, [e.target.name]: e.target.value} });
   }
 

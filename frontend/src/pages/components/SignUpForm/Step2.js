@@ -17,10 +17,14 @@ function Step2({
       <div className={`body ${styles.verifyText}`}>Enter it below to verify {formData.email}.</div>
         <div className={styles.inputContainer}>
           <div className={`subText ${styles.label}`}>Verification code</div>
-          <input type="text" name='name' className={styles.input}/>
+          <input type="text" name='verificationCode' className={styles.input} value={formData.verificationCode} onChange={handleDataChange}/>
         </div>
         <div className={styles.buttonContainer}>
-          <div className={`sidebarButton ${styles.nextButton}`} onClick={handleCodeSubmit}>Next</div>
+          <button 
+            className={`sidebarButton ${styles.nextButton}`} 
+            onClick={handleCodeSubmit}
+            disabled={formData.verificationCode === ''}
+          >Next</button>
         </div>
     </>
   )

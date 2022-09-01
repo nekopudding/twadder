@@ -81,6 +81,13 @@
       color: v.$clrMainAccent;
     }
   }
+  &.error {
+    border-color: v.$clrError;
+    box-shadow: v.$clrError 0px 0px 0px 1px;
+    .label {
+      color: v.$clrError;
+    }
+  }
 }
 
 .subTitle {
@@ -158,4 +165,10 @@
 }
 .verifyInput {
 
+}
+
+.inputTooltip {
+  margin-top: - v.$s * 2;
+  color: v.$clrError;
+  margin-bottom: v.$s * 2;
 }

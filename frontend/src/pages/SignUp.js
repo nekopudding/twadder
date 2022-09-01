@@ -121,7 +121,6 @@ function SignUp() {
             <div className={`${styles.button} ${styles.accented}`} onClick={signUpWithEmail}>
               <span className='bodyHeader'>Sign up with email</span>
             </div>
-            <div>{`${formOpen}`}</div>
             <div className={`sidebarButton ${styles.haveAccountText}`}>Already have an account?</div>
             <div className={`${styles.button} ${styles.outlined}`}>
               <span className='bodyHeader'>Sign in</span>

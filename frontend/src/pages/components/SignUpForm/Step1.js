@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
 
@@ -9,6 +11,17 @@ function Step1({
 }) {
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const [maxDay,setMaxDay] = useState(31);
+
+  const [enableChecks,setEnableChecks] = useState({
+    name: false,
+    email: false
+  })
+  const toggleCheck = (key,bool) => {
+    setEnableChecks(prev => { return ({
+      ...prev,
+      [key]:bool
+    }) })
+  }
 
   useEffect(() => {
     const day = getMaxDay();
@@ -27,25 +40,51 @@ function Step1({
   }
   const inputsAreValid = () => {
     let valid = true;
-    if (formData.name === '') valid = false;
-    if (formData.email === '') valid = false;
+    if (!nameIsValid()) valid = false;
+    if (!emailIsValid()) valid = false;
     if (formData.month === 0 || formData.year === 0 || formData.day === 0) valid = false;
-    // console.log(valid)
     return valid;
   }
+  const nameIsValid = () => {
+    return /[a-zA-Z0-9]{3,}/.test(formData.name);
+  }
+  const emailIsValid = () => {
+    return /[a-zA-Z0-9._+-]+@[a-zA-Z0-9 -]+\.[a-z]{2,}$/.test(formData.email);
+  }
+
   return (
     <>
-      <div className={styles.stepContainer}>
+      <form className={styles.stepContainer}>
         <div>
           <div className={styles.stepTitle}>Create your account</div>
-          <div className={styles.inputContainer}>
+          <div className={`${styles.inputContainer} ${enableChecks.name && !nameIsValid() && styles.error}`}>
             <div className={`subText ${styles.label}`}>Name</div>
-            <input type="text" name='name' className={styles.input} value={formData.name} onChange={handleDataChange}/>
+            <input 
+              type="text" 
+              name='name' 
+              className={styles.input} 
+              value={formData.name} 
+              onChange={handleDataChange}
+              onBlur={() => toggleCheck('name',true)}
+              onFocus={()=>toggleCheck('name',false)}
+            />
           </div>
-          <div className={styles.inputContainer}>
+          {enableChecks.name && !nameIsValid() && <p className={`subText ${styles.inputTooltip}`}>Name can only contain alphanumeric characters, and must contain a minimum of 3 characters.</p>}
+
+          <div className={`${styles.inputContainer} ${enableChecks.email && !emailIsValid() && styles.error}`}>
             <div className={`subText ${styles.label}`}>Email</div>
-            <input type="email" className={styles.input} name='email'  value={formData.email} onChange={handleDataChange}/>
+            <input 
+              type="email" 
+              className={styles.input} 
+              name='email' 
+              value={formData.email} 
+              onChange={handleDataChange}
+              onBlur={() => toggleCheck('email',true)}
+              onFocus={()=>toggleCheck('email',false)}
+            />
           </div>
+          {enableChecks.email && !emailIsValid() && <p className={`subText ${styles.inputTooltip}`}>Invalid email.</p>}
+
           <div className={`bodyHeader ${styles.subTitle}`}>Date of birth</div>
           <div className={styles.subBody}>This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</div>
           <div className={styles.dateInputContainer}>
@@ -83,7 +122,7 @@ function Step1({
         <div className={styles.buttonContainer}>
           <button className={`sidebarButton ${styles.nextButton}`} onClick={()=>changeStep(2)} disabled={!inputsAreValid()}>Next</button>
         </div>
-      </div>
+      </form>
       
     </>
   )
