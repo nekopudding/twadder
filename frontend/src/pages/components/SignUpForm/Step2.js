@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
+import { fetchApi } from 'utils/api-endpoints';
 
 function Step2({
   formData,
@@ -7,8 +8,15 @@ function Step2({
   setFormData,
   changeStep
 }) {
-  const handleCodeSubmit = () => {
-    changeStep(3);
+  const {email,verificationCode} = formData;
+
+  const handleCodeSubmit = async (e) => {
+    e.preventDefault();
+    
+    const res = await fetchApi(`/signup/verify`,'POST',{verificationCode: Number(verificationCode),email});
+    console.log(await res.json());
+    if (res.status === 200)
+      changeStep(3);
   }
 
   return (

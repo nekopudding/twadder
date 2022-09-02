@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
+import { fetchApi } from 'utils/api-endpoints';
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const nameRegex = /^[a-zA-Z0-9]{3,}$/;
@@ -53,6 +54,15 @@ function Step1({
   }
   const emailIsValid = () => {
     return emailRegex.test(formData.email);
+  }
+
+  const submitForm = async (e)=> {
+    e.preventDefault();
+    
+    const res = await fetchApi(`/signup/verify?email=${formData.email}`,'GET');
+    console.log(await res.json());
+    if (res.status === 200)
+      changeStep(2);
   }
 
   return (
@@ -123,7 +133,7 @@ function Step1({
       </div>
         
         <div className={styles.buttonContainer}>
-          <button className={`sidebarButton ${styles.nextButton}`} onClick={()=>changeStep(2)} disabled={!inputsAreValid()}>Next</button>
+          <button className={`sidebarButton ${styles.nextButton}`} onClick={submitForm} disabled={!inputsAreValid()}>Next</button>
         </div>
       </form>
       
