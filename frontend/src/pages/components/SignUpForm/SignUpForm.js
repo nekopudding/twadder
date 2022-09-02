@@ -24,7 +24,7 @@ function SignUpForm({
   }
   
   const handleDataChange = (e) => {
-    console.log(`${e.target.name}: ${e.target.value}`)
+    // console.log(`${e.target.name}: ${e.target.value}`)
     setFormData(prev => { return { ...prev, [e.target.name]: e.target.value} });
   }
 

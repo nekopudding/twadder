@@ -10,7 +10,7 @@ function Step2({
 }) {
   const {email,verificationCode} = formData;
 
-  const handleCodeSubmit = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     
     const res = await fetchApi(`/signup/verify`,'POST',{verificationCode: Number(verificationCode),email});
@@ -30,7 +30,7 @@ function Step2({
         <div className={styles.buttonContainer}>
           <button 
             className={`sidebarButton ${styles.nextButton}`} 
-            onClick={handleCodeSubmit}
+            onClick={submitForm}
             disabled={formData.verificationCode === ''}
           >Next</button>
         </div>
