@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%,-50%);
   width: 600px;
-  height: clamp(90vh,650px,90vh);
+  max-height: 90vh;
   background-color: v.$clrBlack;
   border-radius: 16px;
   overflow: scroll;

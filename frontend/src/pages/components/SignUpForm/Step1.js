@@ -3,6 +3,9 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
 
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const nameRegex = /^[a-zA-Z0-9]{3,}$/;
+
 function Step1({
   formData,
   handleDataChange,
@@ -46,10 +49,10 @@ function Step1({
     return valid;
   }
   const nameIsValid = () => {
-    return /^[a-zA-Z0-9]{3,}$/.test(formData.name);
+    return nameRegex.test(formData.name);
   }
   const emailIsValid = () => {
-    return /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9 -]+\.[a-z]{2,}$/.test(formData.email);
+    return emailRegex.test(formData.email);
   }
 
   return (
