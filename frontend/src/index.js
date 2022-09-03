@@ -4,28 +4,11 @@ import './styles/css/globals.css';
 import App from './App';
 import reportWebVitals from './utils/tests/reportWebVitals';
 import { initializeApp } from 'firebase/app';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import Home from './pages/Home';
-import Messages from './pages/Messages';
-import SignUp from './pages/SignUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route path="signup" element={<SignUp/>} />
-
-      <Route path="/" element={<App />}>
-        <Route index element={<Home />} />
-        <Route path="messages" element={<Messages />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
+    <App/>
   </React.StrictMode>
 );
 

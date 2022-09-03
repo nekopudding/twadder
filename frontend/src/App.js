@@ -1,21 +1,28 @@
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
-  Outlet,
+  Outlet
 } from "react-router-dom";
+import Home from './pages/Home';
+import Messages from './pages/Messages';
+import SignUp from './pages/SignUp';
 
 
 function App() {
   return (
     <>
-      <h1>App</h1>
-      <Link to="/signup">Sign Up</Link> |{" "}
-      <Link to="/messages">Messages</Link>
-      <Outlet/>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/">
+        <Route index element={<Home />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="signup" element={<SignUp/>} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+      
     </>
   );
 }

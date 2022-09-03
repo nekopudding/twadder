@@ -1,6 +1,6 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
-const { EmailVerification, VerifiedEmail } = require('./models/signup-models');
+const { EmailVerification } = require('./models/signup-models');
 
 module.exports = function(app) {
   const transporter = nodemailer.createTransport({
@@ -51,9 +51,6 @@ module.exports = function(app) {
         return res.status(401).json({msg: 'invalid code submitted'})
       }
       else {
-        await EmailVerification.deleteOne({email});
-        const ve = new VerifiedEmail({email});
-        await ve.save();
         return res.status(200).json({msg: 'email successfully verified. You may continue signing up.'})
       }
 

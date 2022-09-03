@@ -13,9 +13,11 @@ import {
 } from "firebase/auth";
 import styles from 'styles/css/SignUp.module.css'
 import SignUpForm from './components/SignUpForm/SignUpForm';
+import Toast from './components/Toast';
 
 
 function SignUp() {
+  const [toast,setToast] = useState({update: true, msg: ''});
   const [formOpen, setFormOpen] = useState(false);
 
   // const signUpWithEmail = () => {
@@ -129,6 +131,7 @@ function SignUp() {
         </div>
     </div>
     {formOpen && <SignUpForm setOpen={setFormOpen}/>}
+    {toast.msg !== '' && <Toast toast={toast} duration='2s' fadeOutTime='0.5s'/>}
     </>
   )
 }

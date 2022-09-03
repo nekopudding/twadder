@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
 import { fetchApi } from 'utils/api-endpoints';
+import StyledInput from './StyledInput';
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const nameRegex = /^[a-zA-Z0-9]{3,}$/;
+const nameRegex = /^[a-zA-Z0-9]{1,16}$/;
 
 function Step1({
   formData,
@@ -70,33 +71,28 @@ function Step1({
       <form className={styles.stepContainer}>
         <div>
           <div className={styles.stepTitle}>Create your account</div>
-          <div className={`${styles.inputContainer} ${enableChecks.name && !nameIsValid() && styles.error}`}>
-            <div className={`subText ${styles.label}`}>Name</div>
-            <input 
-              type="text" 
-              name='name' 
-              className={styles.input} 
-              value={formData.name} 
-              onChange={handleDataChange}
-              onBlur={() => toggleCheck('name',true)}
-              onFocus={()=>toggleCheck('name',false)}
-            />
-          </div>
-          {enableChecks.name && !nameIsValid() && <p className={`subText ${styles.inputTooltip}`}>Name can only contain alphanumeric characters, and must contain a minimum of 3 characters.</p>}
 
-          <div className={`${styles.inputContainer} ${enableChecks.email && !emailIsValid() && styles.error}`}>
-            <div className={`subText ${styles.label}`}>Email</div>
-            <input 
-              type="email" 
-              className={styles.input} 
-              name='email' 
-              value={formData.email} 
-              onChange={handleDataChange}
-              onBlur={() => toggleCheck('email',true)}
-              onFocus={()=>toggleCheck('email',false)}
-            />
-          </div>
-          {enableChecks.email && !emailIsValid() && <p className={`subText ${styles.inputTooltip}`}>Invalid email.</p>}
+          <StyledInput
+            name='name'
+            label='Display Name'
+            type='text'
+            value={formData.name}
+            onChange={handleDataChange}
+            onBlur={()=>toggleCheck('name',true)}
+            showError={enableChecks.name && !nameIsValid()}
+            errorMsg = 'Display names can only contain alphanumeric characters, and must be between 1 and 16 characters.'
+          />
+
+          <StyledInput
+            name='email'
+            label='Email'
+            type='email'
+            value={formData.email}
+            onChange={handleDataChange}
+            onBlur={()=>toggleCheck('email',true)}
+            showError={enableChecks.email && !emailIsValid()}
+            errorMsg = 'Invalid email.'
+          />
 
           <div className={`bodyHeader ${styles.subTitle}`}>Date of birth</div>
           <div className={styles.subBody}>This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</div>

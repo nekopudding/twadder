@@ -5,7 +5,6 @@ import { fetchApi } from 'utils/api-endpoints';
 function Step2({
   formData,
   handleDataChange,
-  setFormData,
   changeStep,
   setToast
 }) {
@@ -27,7 +26,13 @@ function Step2({
       <div className={`body ${styles.verifyText}`}>Enter it below to verify {formData.email}.</div>
         <div className={styles.inputContainer}>
           <div className={`subText ${styles.label}`}>Verification code</div>
-          <input type="text" name='verificationCode' className={styles.input} value={formData.verificationCode} onChange={handleDataChange}/>
+          <input 
+            type="text" 
+            name='verificationCode' 
+            className={styles.input} 
+            value={formData.verificationCode} 
+            onChange={handleDataChange}  
+          />
         </div>
         <div className={styles.buttonContainer}>
           <button 

@@ -24,5 +24,4 @@ const emailVerificationSchema = new mongoose.Schema({
 
 module.exports = {
   EmailVerification: mongoose.model('EmailVerification',emailVerificationSchema),
-  VerifiedEmail: mongoose.model('ValidatedEmail', emailSchema)
 }

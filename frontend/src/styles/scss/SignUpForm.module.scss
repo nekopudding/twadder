@@ -131,6 +131,7 @@
   height: 52px;
   width: 100%;
   border-radius: 9999px;
+  border: none;
   background-color: $bgColor;
   color: $color;
 
@@ -146,7 +147,7 @@
     opacity: 0.4 !important;
   }
 }
-.submitButton {
+.signUpButton {
   @include button(v.$clrMainAccent,v.$clrWhite);
 }
 .nextButton {
@@ -163,8 +164,10 @@
   margin-bottom: v.$s*3;
   color: v.$clrTextGrey;
 }
-.verifyInput {
-
+.checkbox {
+  background-color: transparent !important;
+  margin: 0;
+  padding: 0;
 }
 
 .inputTooltip {
