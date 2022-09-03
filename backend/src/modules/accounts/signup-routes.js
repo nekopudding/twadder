@@ -1,5 +1,6 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
+const { Account } = require('./models/account-model');
 const { EmailVerification } = require('./models/signup-models');
 
 module.exports = function(app) {
@@ -58,5 +59,11 @@ module.exports = function(app) {
       console.log(err)
       return res.status(500).json(err);
     }
+  })
+
+  app.post('/signup', async (req,res) => {
+    const account = new Account({
+      
+    })
   })
 }
