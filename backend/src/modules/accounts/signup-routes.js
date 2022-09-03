@@ -30,7 +30,7 @@ module.exports = function(app) {
       
       await transporter.sendMail(mailOptions);
 
-      await EmailVerification.deleteMany({email: req.body.email});
+      await EmailVerification.deleteMany({email});
       const ev = new EmailVerification({email,verificationCode});
       await ev.save();
 

@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
 import { fetchApi } from 'utils/api-endpoints';
@@ -11,7 +9,8 @@ function Step1({
   formData,
   handleDataChange,
   setFormData,
-  changeStep
+  changeStep,
+  setToast
 }) {
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const [maxDay,setMaxDay] = useState(31);
@@ -60,7 +59,8 @@ function Step1({
     e.preventDefault();
     
     const res = await fetchApi(`/signup/verify?email=${formData.email}`,'GET');
-    console.log(await res.json());
+    const {msg} = await res.json();
+    if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
     if (res.status === 200)
       changeStep(2);
   }

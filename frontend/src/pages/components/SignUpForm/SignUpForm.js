@@ -3,12 +3,14 @@ import styles from 'styles/css/SignUpForm.module.css'
 import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import Step1 from './Step1'
 import Step2 from './Step2';
+import Toast from '../Toast';
 
 function SignUpForm({
   setOpen
 }) {
 
   const [currStep, setCurrStep] = useState(1);
+  const [toast,setToast] = useState({update: false, msg: ''});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -35,9 +37,10 @@ function SignUpForm({
           <div className={styles.closeIconContainer} onClick={()=>setOpen(false)}><CloseIcon/></div>
           <h2 className='h2'>{`Step ${currStep} of 3`}</h2>
         </div>
-        {currStep === 1 && <Step1 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep}/>}
-        {currStep === 2 && <Step2 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep}/>}
+        {currStep === 1 && <Step1 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep} setToast={setToast}/>}
+        {currStep === 2 && <Step2 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep} setToast={setToast}/>}
       </div>
+      {toast.msg !== '' && <Toast toast={toast} duration='2s' fadeOutTime='0.5s'>{toast.msg}</Toast>}
     </>
   )
 }

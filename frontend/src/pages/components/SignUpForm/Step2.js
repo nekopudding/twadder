@@ -6,7 +6,8 @@ function Step2({
   formData,
   handleDataChange,
   setFormData,
-  changeStep
+  changeStep,
+  setToast
 }) {
   const {email,verificationCode} = formData;
 
@@ -14,7 +15,8 @@ function Step2({
     e.preventDefault();
     
     const res = await fetchApi(`/signup/verify`,'POST',{verificationCode: Number(verificationCode),email});
-    console.log(await res.json());
+    const {msg} = await res.json();
+    if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
     if (res.status === 200)
       changeStep(3);
   }
