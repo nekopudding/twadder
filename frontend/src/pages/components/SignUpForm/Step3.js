@@ -77,7 +77,7 @@ function Step3({
         showError={enableChecks.password && !passwordIsValid()}
         errorMsg = 'Passwords must be between 8 and 16 characters.'
       />
-      <input type="checkbox" name="enableNotifications" className={styles.checkbox} onChange={handleDataChange}/>
+      
       <div className={styles.buttonContainer}>
         <button 
           className={`sidebarButton ${styles.signUpButton}`} 

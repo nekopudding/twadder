@@ -126,6 +126,8 @@ function Step1({
               </select>
             </div>
           </div>
+          <input type="checkbox" name="enableNotifications" className={styles.checkbox} onChange={handleDataChange}/>
+          <div className={styles.enableNotifText}>Turn on notifications</div>
       </div>
         
         <div className={styles.buttonContainer}>

@@ -20,9 +20,9 @@ module.exports = function(app) {
     const {email} = req.query;
     try {
       if (!email) return res.status(400).json({msg: 'you must provide a valid email.'});
-
-      await VerifiedEmail.deleteOne({email});
-  
+      if (await Account.findOne({email})) {
+        return res.status(400).json({msg: 'an account with this email already exists'});
+      }  
       const verificationCode = Math.floor(100000 + Math.random() * 900000);
       const mailOptions = {
         from: process.env.SUPPORT_EMAIL,
@@ -66,12 +66,15 @@ module.exports = function(app) {
 
   app.post('/signup', async (req,res) => {
     const {username,password,googleId,email,enableNotifications,verificationCode, name, birthday} = req.body;
+    let createdAccount,createdProfile;
     try {
       const item = await EmailVerification.findOne({email}); //check email is verified
       if (!item) {
         return res.status(400).json({msg: 'email not found'});
       } else if (item.verificationCode !== verificationCode) {
         return res.status(401).json({msg: 'invalid code submitted'})
+      } else if (await Account.findOne({email})) {
+        return res.status(400).json({msg: 'an account with this email already exists'});
       } else {
         const account = new Account({username,
           passwordHash: await encrypt(password),
@@ -81,14 +84,15 @@ module.exports = function(app) {
           name,birthday,
           accountId: account._id
         });
-        await account.save();
-        await profile.save();
+        createdAccount = await account.save();
+        createdProfile = await profile.save();
         return res.status(200).json({msg: 'account successfully created'});
       }
     } catch (err) {
-      console.log(err)
-      const account = await Account.findOneAndDelete({email});
-      if (account) await Profile.deleteOne({accountId: account._id})
+      console.log(err);
+      if (createdAccount && !createdProfile) { //delete the created account if profile creation was unsuccessful
+        await Account.deleteOne({_id: createdAccount._id});
+      }
       return res.status(500).json(err);
     }
   })

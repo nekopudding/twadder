@@ -9,7 +9,6 @@
   max-height: 90vh;
   background-color: v.$clrBlack;
   border-radius: 16px;
-  overflow: scroll;
   padding: 0 (v.$s * 10);
   padding-top: 53px;
 }
@@ -165,11 +164,15 @@
   color: v.$clrTextGrey;
 }
 .checkbox {
-  background-color: transparent !important;
-  margin: 0;
-  padding: 0;
+  margin-right: v.$s * 1.5;
+  width: 40px;
 }
-
+.enableNotifText {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: v.$s * 3;
+  font-size: 17px;
+}
 .inputTooltip {
   margin-top: - v.$s * 2;
   color: v.$clrError;

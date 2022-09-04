@@ -31,6 +31,9 @@ function SignUpForm({
   const handleDataChange = (e) => {
     if (e.target.name === 'enableNotifications') {
       setFormData(prev => { return { ...prev, enableNotifications: !prev.enableNotifications} });
+    } else if (e.target.name === 'verificationCode') {
+      // console.log({verificationCode: Number(e.target.value)});
+      setFormData(prev => { return { ...prev, verificationCode: Number(e.target.value)} });
     } else {
       // console.log(`${e.target.name}: ${e.target.value}`)
       setFormData(prev => { return { ...prev, [e.target.name]: e.target.value} });

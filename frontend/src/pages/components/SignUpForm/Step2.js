@@ -13,7 +13,7 @@ function Step2({
   const submitForm = async (e) => {
     e.preventDefault();
     
-    const res = await fetchApi(`/signup/verify`,'POST',{verificationCode: Number(verificationCode),email});
+    const res = await fetchApi(`/signup/verify`,'POST',{verificationCode,email});
     const {msg} = await res.json();
     if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
     if (res.status === 200)
@@ -30,7 +30,7 @@ function Step2({
             type="text" 
             name='verificationCode' 
             className={styles.input} 
-            value={formData.verificationCode} 
+            value={formData.verificationCode || ''} 
             onChange={handleDataChange}  
           />
         </div>

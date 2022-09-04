@@ -130,7 +130,7 @@ function SignUp() {
           </div>
         </div>
     </div>
-    {formOpen && <SignUpForm setOpen={setFormOpen}/>}
+    {formOpen && <SignUpForm setOpen={setFormOpen} setToast={setToast} />}
     {toast.msg !== '' && <Toast toast={toast} duration='2s' fadeOutTime='0.5s'/>}
     </>
   )
