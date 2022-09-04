@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const { emailFormat, verificationCodeFormat, usernameFormat, googleIdFormat, passwordFormat, enableNotificationsFormat, accountListFormat } = require('../../../utils/mongoose-types')
+const { emailFormat, usernameFormat, googleIdFormat, passwordHashFormat, enableNotificationsFormat, accountListFormat } = require('../../../utils/mongoose-types')
 
 
 const accountSchema = new mongoose.Schema({
   username: usernameFormat,
-  password: passwordFormat,
+  passwordHash: passwordHashFormat,
   googleId: googleIdFormat,
   email: emailFormat,
   enableNotifications: enableNotificationsFormat,

@@ -18,9 +18,9 @@ module.exports = {
   usernameFormat: {
     type: String,
     required: true,
-    match: [/^[a-zA-Z0-9]{3,16}$/]
+    match: /^[a-zA-Z0-9]{3,16}$/
   },
-  passwordFormat: { //will be encrypted
+  passwordHashFormat: { 
     type: String,
     required: true,
   },
@@ -35,5 +35,30 @@ module.exports = {
     type: Boolean,
     required: true
   },
-  accountListFormat: {type: [mongoose.ObjectId], default: []}
+  accountListFormat: {type: [mongoose.ObjectId], default: []},
+  URLFormat: {
+    type: String,
+    match: /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
+  },
+  displayNameFormat: {
+    type: String,
+    required: true,
+    match: /^[a-zA-Z0-9]{1,16}$/
+  },
+  bioFormat: {
+    type: String,
+    default: ''
+  },
+  locationFormat: {
+    type: String,
+    default: ''
+  },
+  accountIdFormat: {
+    type: mongoose.ObjectId,
+    required: true
+  },
+  isPrivateFormat: {
+    type: Boolean,
+    default: false
+  }
 }

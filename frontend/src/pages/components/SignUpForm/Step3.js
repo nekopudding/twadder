@@ -5,7 +5,7 @@ import { fetchApi } from 'utils/api-endpoints';
 import StyledInput from './StyledInput';
 
 const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
-//Passwrod must contain at least 1 special character and number, and be between 8 and 16 characters long.
+//Password must be between 8 and 16 characters long.
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+`~]{8,16}$/
 
 function Step3({
