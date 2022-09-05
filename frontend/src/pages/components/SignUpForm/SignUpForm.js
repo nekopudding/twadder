@@ -11,7 +11,7 @@ function SignUpForm({
   setOpen, setToast
 }) {
 
-  const [currStep, setCurrStep] = useState(3);
+  const [currStep, setCurrStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     email: '',

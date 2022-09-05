@@ -1,6 +1,7 @@
 @use 'variables' as v;
 
 .form {
+  z-index: 100;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -14,6 +15,7 @@
 }
 
 .header {
+  width: 100%;
   height: 53px;
   padding: 0 (v.$s * 2);
   display: flex;
@@ -55,22 +57,40 @@
 }
 
 .inputContainer {
+  position: relative;
   margin-bottom: v.$s * 3;
-  padding: v.$s * 1;
-  padding-bottom: 0;
+  padding: v.$s*1;
+  padding-top: v.$s * 3.5;
   border: 1px solid v.$clrTextGrey;
   border-radius: 4px;
 
   .label {
+    top: v.$s * 1;
+    left: v.$s * 1;
     position: absolute;
     color: v.$clrTextGrey;
     pointer-events: none;
+    user-select: none;
   }
   .input {
-    padding-top: v.$s * 3.5;
-    padding-bottom: v.$s * 1;
     background: none;
     width: 100%;
+  }
+
+  .inputFlex {
+    display: flex;
+    .input {
+      background: none;
+      flex-grow: 1;
+    }
+    .icon {
+      width: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: v.$s * 0.25;
+      padding-left: v.$s;
+    }
   }
 
   &.focus,&:focus-within {
@@ -120,6 +140,9 @@
 .buttonContainer {
   margin: (v.$s * 3) 0;
   width: 100%;
+  &.signInButtonContainer {
+    margin-bottom: v.$s * 6;
+  }
 }
 @mixin button($bgColor,$color){
   user-select: none;
@@ -177,4 +200,75 @@
   margin-top: - v.$s * 2;
   color: v.$clrError;
   margin-bottom: v.$s * 2;
+}
+.link {
+  color: v.$clrMainAccent;
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  top: v.$s * -2;
+  margin-left: v.$s;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.5;
+  }
+}
+.twitterIcon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  & svg {
+    width: 100%;
+  }
+}
+//sign in form divider
+.divider {
+  border-bottom: 1px solid v.$clrBgGrey;
+  margin: (v.$s * 2.5) 0;
+  position: relative;
+
+  .text {
+    width: v.$s * 3.5;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-color: v.$clrBlack;
+    transform: translate(-50%,-50%);
+  }
+}
+.googleButton {
+  height: 38px;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  /*only when hover is activated (non-touch screen)*/
+  @media (any-hover: hover) { 
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &.light {
+    color: v.$clrBlack;
+    background-color: v.$clrWhite;
+    svg {
+      width: 18px;
+      fill: v.$clrBlack;
+    }
+    span {
+      margin-left: 8px;
+    }
+  }
 }
