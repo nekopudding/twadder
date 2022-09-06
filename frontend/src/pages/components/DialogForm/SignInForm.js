@@ -4,9 +4,9 @@ import StyledInput from './StyledInput'
 import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import {ReactComponent as Logo} from 'assets/icons/twitter.svg'
 import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
-import { fetchApi } from 'utils/fetch-api'
+import { fetchApi } from 'utils/fetch-api.js'
 import { useState } from 'react'
-import { getCookie, setCookie } from 'utils/cookies'
+import { getCookie, setCookie } from 'utils/cookies.js'
 
 
 function SignInForm({

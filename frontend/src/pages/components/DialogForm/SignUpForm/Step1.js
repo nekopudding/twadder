@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/fetch-api';
+import { fetchApi } from 'utils/fetch-api.js';
 import StyledInput from '../StyledInput';
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
