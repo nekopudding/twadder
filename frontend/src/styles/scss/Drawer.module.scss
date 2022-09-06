@@ -2,16 +2,21 @@
 
 .container {
   width: 233px;
-
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+.containerOffset {
+  width: 233px;
+  height: 100vh;
+  margin-left: 0;
 }
 .linkList {
-  padding: v.$s*2 v.$s v.$s*6 v.$s*1.5;
-  & > * + * {
-    margin-top: v.$s*3;
-  }
-  .listItem {
-    @include v.clickable;
-    display: flex;
+  margin: v.$s 0;
+  .link {
+    display: inline-flex;
     align-items: center;
 
     .icon {
@@ -20,7 +25,65 @@
       align-items: center;
     }
     .text {
-      margin-left: v.$s*3;
+      user-select: none;
+      margin-left: v.$s*2.5;
+      margin-right: v.$s*2;
     }
+  }
+}
+.linkGlow,.accountButton {
+  @include v.hoverGlowWhite;
+  padding: v.$s*1.5;
+  display: inline-flex;
+  border-radius: 9999px;
+
+  &.logo {
+    @include v.hoverGlowMainAccent;
+    margin-bottom: v.$s;
+  }
+}
+
+.button {
+  @include v.clickable;
+  width: 225px;
+  padding: v.$s*2 0;
+  display: flex;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: v.$clrMainAccent;
+}
+.accountButtonContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  padding: v.$s*1.5 0;
+}
+.accountButton {
+  background-color: v.$clrBlack;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  & * {
+    user-select: none;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: v.$clrBgGrey;
+    border-radius: 9999px;
+  }
+  .textContainer {
+    margin-left: v.$s*2;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .icon {
+    width: 19px;
+    display: flex;
+    align-items: center;
   }
 }

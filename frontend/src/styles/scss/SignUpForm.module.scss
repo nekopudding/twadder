@@ -138,6 +138,7 @@
   }
 }
 @mixin button($bgColor,$color){
+  @include v.clickable;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,8 +149,6 @@
   border: none;
   background-color: $bgColor;
   color: $color;
-
-  @include v.clickable;
 }
 .signUpButton {
   @include button(v.$clrMainAccent,v.$clrWhite);

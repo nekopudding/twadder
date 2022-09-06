@@ -7,10 +7,12 @@ $s: 8px;
 
 /* Colors */
 $clrWhite: #e7e9ea;
+$clrWhiteGlow: rgba(231, 233, 234,0.1);
 $clrBlack: #000;
 $clrTextGrey:  #71767b;
 $clrBgGrey: #202327;
 $clrMainAccent: #761df0;
+$clrMainAccentGlow: rgba(118, 29, 240,0.15);
 $clrRetwadd: #00ba7c;
 $clrLike: #f91880;
 $clrError: rgb(244, 33, 46);
@@ -30,5 +32,21 @@ $ff: 'Libre Franklin', sans-serif;
   }
   &:disabled {
     opacity: 0.4 !important;
+  }
+}
+
+@mixin hoverGlowWhite() {
+  @media (any-hover: hover) { 
+    &:hover {
+      background-color: $clrWhiteGlow;
+    }
+  }
+}
+
+@mixin hoverGlowMainAccent() {
+  @media (any-hover: hover) { 
+    &:hover {
+      background-color: $clrMainAccentGlow;
+    }
   }
 }
