@@ -1,6 +1,6 @@
 Built with:
 - frontend
-  - scss
+  - scss && css modules && emotion/react
   - React
   - css modules
 - cloud
@@ -9,6 +9,8 @@ Built with:
   - firestore for messages
   - firebase storage for images
   - nodejs server
+  - mongoose for database
+  - bcrypt for security
 
 
-site deployed at: [link](twadder-b2796.firebaseapp.com)
+site deployed at: [link](https://twadder-b2796.firebaseapp.com)
