@@ -10,4 +10,4 @@ function eraseCookie(name) {
   cookies.remove(name)
 }
 
-module.exports = {setCookie,getCookie,eraseCookie};
+export {setCookie,getCookie,eraseCookie};

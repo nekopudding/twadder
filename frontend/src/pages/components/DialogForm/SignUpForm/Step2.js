@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/fetch-api.js';
+import { fetchApi } from 'utils/fetch-api';
 
 function Step2({
   formData,
