@@ -4,8 +4,9 @@ import StyledInput from './StyledInput'
 import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import {ReactComponent as Logo} from 'assets/icons/twitter.svg'
 import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
-import { fetchApi } from 'utils/api-endpoints'
+import { fetchApi } from 'utils/fetch-api'
 import { useState } from 'react'
+import { getCookie, setCookie } from 'utils/cookies'
 
 
 function SignInForm({
@@ -26,8 +27,12 @@ function SignInForm({
     const {name,email,username,password,month,day,year,enableNotifications,verificationCode} = formData;
 
     const res = await fetchApi(`/login`,'POST',{username,password});
-    const {msg} = await res.json();
+    const {msg,sessionId} = await res.json();
     if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
+    if (sessionId) {
+      setCookie('sessionId',sessionId,7);
+      // console.log(getCookie('sessionId'));
+    }
     if (res.status === 200)
       setOpen(false);
   }

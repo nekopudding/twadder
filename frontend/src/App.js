@@ -1,3 +1,4 @@
+import Drawer from "pages/components/Drawer";
 import {
   BrowserRouter,
   Routes,
@@ -5,24 +6,17 @@ import {
   Link,
   Outlet
 } from "react-router-dom";
-import Home from './pages/Home';
-import Messages from './pages/Messages';
-import SignUp from './pages/SignUp';
+import styles from 'styles/css/App.module.css'
+
 
 
 function App() {
   return (
     <>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/">
-        <Route index element={<Home />} />
-        <Route path="messages" element={<Messages />} />
-        <Route path="signup" element={<SignUp/>} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
-      
+      <div className={styles.layout}>
+        <Drawer/>
+        <Outlet/>
+      </div>
     </>
   );
 }

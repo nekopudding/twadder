@@ -13,12 +13,12 @@ module.exports = {
         const account = await Account.findOne({username});
         const validated = await validate(password,account.passwordHash);
         if (validated) {
-          const newSession = {token: uuid.v4(), accountId: account._id };
+          const newSession = {id: uuid.v4(), accountId: account._id };
           sessionList.push(newSession);
-
+          // console.log(newSession.id)
           return res.status(200).json({
             msg: 'login successful',
-            sessionToken: newSession.token //generate a token for this login session
+            sessionId: newSession.id //generate a id for this login session
           })
         } else {
           return res.status(403).json({

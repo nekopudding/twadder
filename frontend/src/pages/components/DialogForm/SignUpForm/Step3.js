@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/api-endpoints';
-import StyledInput from './StyledInput';
+import { fetchApi } from 'utils/fetch-api';
+import StyledInput from '../StyledInput';
 
 const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
 //Password must be between 8 and 16 characters long.

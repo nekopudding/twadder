@@ -32,14 +32,7 @@
     letter-spacing: 1px;
   }
   .closeIconContainer {
-    @media (any-hover: hover) { 
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-    &:active {
-      opacity: 0.5;
-    }
+    @include v.clickable;
   }
 }
 .stepContainer {
@@ -145,7 +138,6 @@
   }
 }
 @mixin button($bgColor,$color){
-  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -157,17 +149,7 @@
   background-color: $bgColor;
   color: $color;
 
-  @media (any-hover: hover) { 
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-  &:active {
-    opacity: 0.5;
-  }
-  &:disabled {
-    opacity: 0.4 !important;
-  }
+  @include v.clickable;
 }
 .signUpButton {
   @include button(v.$clrMainAccent,v.$clrWhite);
@@ -202,18 +184,13 @@
   margin-bottom: v.$s * 2;
 }
 .link {
+  @include v.clickable;
   color: v.$clrMainAccent;
   position: relative;
   display: inline-block;
   user-select: none;
   top: v.$s * -2;
   margin-left: v.$s;
-  &:hover {
-    opacity: 0.7;
-  }
-  &:active {
-    opacity: 0.5;
-  }
 }
 .twitterIcon {
   position: absolute;
@@ -242,23 +219,12 @@
   }
 }
 .googleButton {
+  @include v.clickable;
   height: 38px;
   border-radius: 9999px;
   display: flex;
   justify-content: center;
   align-items: center;
-  user-select: none;
-
-  /*only when hover is activated (non-touch screen)*/
-  @media (any-hover: hover) { 
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  &:active {
-    opacity: 0.5;
-  }
 
   &.light {
     color: v.$clrBlack;

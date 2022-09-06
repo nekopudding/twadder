@@ -17,3 +17,18 @@ $clrError: rgb(244, 33, 46);
 
 /* Typography */
 $ff: 'Libre Franklin', sans-serif;
+
+@mixin clickable() {
+  user-select: none;
+  @media (any-hover: hover) { 
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &:active {
+    opacity: 0.5;
+  }
+  &:disabled {
+    opacity: 0.4 !important;
+  }
+}

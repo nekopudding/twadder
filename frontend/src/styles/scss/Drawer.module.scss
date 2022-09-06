@@ -1,0 +1,26 @@
+@use 'variables' as v;
+
+.container {
+  width: 233px;
+
+}
+.linkList {
+  padding: v.$s*2 v.$s v.$s*6 v.$s*1.5;
+  & > * + * {
+    margin-top: v.$s*3;
+  }
+  .listItem {
+    @include v.clickable;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      width: 28px;
+      display: flex;
+      align-items: center;
+    }
+    .text {
+      margin-left: v.$s*3;
+    }
+  }
+}
