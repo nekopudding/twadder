@@ -20,10 +20,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.4.9
-        with:
-          source: ./src/styles/scss
-          destination: ./src/styles/css
+        run: sass src/styles/scss:src/styles/css
       - name: Build
         run:  npm run build
       - name: Firebase Deploy
