@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import Messages from './pages/Messages';
-import SignUp from './pages/SignUp';
+// import SignUp from './pages/SignUp';
 import Search from './pages/Search';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
@@ -22,7 +22,7 @@ root.render(
     <BrowserRouter>
     
     <Routes>
-      <Route path="/signup" element={<SignUp/>} />
+      {/* <Route path="/signup" element={<SignUp/>} /> */}
       <Route path="/" element={<App/>}>
         <Route index path="home" element={<Home/>}/>
         <Route path="messages" element={<Messages/>}/>
