@@ -1,4 +1,4 @@
-import Drawer from "pages/components/Drawer";
+import Drawer from "./pages/components/Drawer";
 import {
   BrowserRouter,
   Routes,
@@ -6,7 +6,7 @@ import {
   Link,
   Outlet
 } from "react-router-dom";
-import styles from 'styles/css/App.module.css'
+import styles from './styles/css/App.module.css'
 
 
 

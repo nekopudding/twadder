@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react'
-import { useState } from 'react';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-import styles from 'styles/css/Toast.module.css'
+import { useState,useRef,useEffect } from 'react';
+import styles from '../../styles/css/Toast.module.css'
 
 function Toast(props) {
   const {duration = '3s',fadeOutTime = '0.5s'} = props;

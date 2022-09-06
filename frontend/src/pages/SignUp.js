@@ -11,7 +11,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import styles from 'styles/css/SignUp.module.css'
+import styles from '../styles/css/SignUp.module.css'
 import SignUpForm from './components/DialogForm/SignUpForm/SignUpForm';
 import SignInForm from './components/DialogForm/SignInForm';
 import Toast from './components/Toast';

@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from 'styles/css/SignUpForm.module.css'
-import {ReactComponent as ShowIcon} from 'assets/icons/eye-solid.svg'
-import {ReactComponent as HideIcon} from 'assets/icons/eye-slash-solid.svg'
+import styles from '../../../styles/css/SignUpForm.module.css'
+import {ReactComponent as ShowIcon} from '../../../assets/icons/eye-solid.svg'
+import {ReactComponent as HideIcon} from '../../../assets/icons/eye-slash-solid.svg'
 import { useState } from 'react'
 
 

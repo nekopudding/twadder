@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styles from 'styles/css/SignUpForm.module.css'
-import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
-import {ReactComponent as BackIcon} from  'assets/icons/arrow-left.svg'
+import styles from '../../../../styles/css/SignUpForm.module.css'
+import {ReactComponent as CloseIcon} from  '../../../../assets/icons/close.svg'
+import {ReactComponent as BackIcon} from  '../../../../assets/icons/arrow-left.svg'
 import Step1 from './Step1'
 import Step2 from './Step2';
 import Step3 from './Step3';

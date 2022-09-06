@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/fetch-api';
+import styles from '../../../../styles/css/SignUpForm.module.css'
+import { fetchApi } from '../../../../utils/fetch-api';
 import StyledInput from '../StyledInput';
 
 const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;

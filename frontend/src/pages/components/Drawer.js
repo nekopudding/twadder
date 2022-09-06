@@ -1,11 +1,11 @@
 import React from 'react'
-import styles from 'styles/css/Drawer.module.css'
-import {ReactComponent as Logo} from 'assets/icons/twitter.svg'
-import {ReactComponent as HomeIcon} from 'assets/icons/home.svg'
-import {ReactComponent as BellIcon} from 'assets/icons/bell.svg'
-import {ReactComponent as EnvelopeIcon} from 'assets/icons/envelope.svg'
-import {ReactComponent as UserIcon} from 'assets/icons/user.svg'
-import {ReactComponent as MoreIcon} from 'assets/icons/ellipsis-circle.svg'
+import styles from '../../styles/css/Drawer.module.css'
+import {ReactComponent as Logo} from '../../assets/icons/twitter.svg'
+import {ReactComponent as HomeIcon} from '../../assets/icons/home.svg'
+import {ReactComponent as BellIcon} from '../../assets/icons/bell.svg'
+import {ReactComponent as EnvelopeIcon} from '../../assets/icons/envelope.svg'
+import {ReactComponent as UserIcon} from '../../assets/icons/user.svg'
+import {ReactComponent as MoreIcon} from '../../assets/icons/ellipsis-circle.svg'
 import { Link } from 'react-router-dom'
 
 const linkList = [

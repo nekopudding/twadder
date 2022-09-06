@@ -1,12 +1,12 @@
 import React from 'react'
-import styles from 'styles/css/SignUpForm.module.css'
+import styles from '../../../styles/css/SignUpForm.module.css'
 import StyledInput from './StyledInput'
-import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
-import {ReactComponent as Logo} from 'assets/icons/twitter.svg'
-import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
-import { fetchApi } from 'utils/fetch-api'
+import {ReactComponent as CloseIcon} from  '../../../assets/icons/close.svg'
+import {ReactComponent as Logo} from '../../../assets/icons/twitter.svg'
+import {ReactComponent as GoogleLogo} from '../../../assets/icons/google.svg'
+import { fetchApi } from '../../../utils/fetch-api'
 import { useState } from 'react'
-import { getCookie, setCookie } from 'utils/cookies'
+import { getCookie, setCookie } from '../../../utils/cookies'
 
 
 function SignInForm({

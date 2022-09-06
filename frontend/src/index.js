@@ -4,20 +4,17 @@ import './styles/css/globals.css';
 import App from './App';
 import reportWebVitals from './utils/tests/reportWebVitals';
 import { initializeApp } from 'firebase/app';
-import Drawer from "pages/components/Drawer";
 import {
   BrowserRouter,
   Routes,
-  Route,
-  Link,
-  Outlet
+  Route
 } from "react-router-dom";
 import Home from './pages/Home';
 import Messages from './pages/Messages';
 import SignUp from './pages/SignUp';
-import Search from 'pages/Search';
-import Notifications from 'pages/Notifications';
-import Profile from 'pages/Profile';
+import Search from './pages/Search';
+import Notifications from './pages/Notifications';
+import Profile from './pages/Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
