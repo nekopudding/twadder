@@ -1,0 +1,9 @@
+@use 'variables' as v;
+
+.layout {
+  display: flex;
+  padding-left: 142px;
+  & > * + * {
+    margin-left: v.$s*3;
+  }
+}

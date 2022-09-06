@@ -1,0 +1,21 @@
+@use 'variables' as v;
+
+.container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 30px;
+  background-color: v.$clrBgGrey;
+  padding: (v.$s * 1.5) (v.$s * 3);
+  border-radius: 9999px;
+  border: 4px solid v.$clrTextGrey;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+.fadeOut {
+  opacity: 1;
+  animation: fadeOut 500ms ease-out 3s forwards;
+}

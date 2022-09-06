@@ -37,23 +37,12 @@
 }
 
 .button {
+  @include v.clickable;
   height: 38px;
   border-radius: 9999px;
   display: flex;
   justify-content: center;
   align-items: center;
-  user-select: none;
-
-  /*only when hover is activated (non-touch screen)*/
-  @media (any-hover: hover) { 
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  &:active {
-    opacity: 0.5;
-  }
 
   &.light {
     color: v.$clrBlack;

@@ -1,21 +1,22 @@
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
+import Drawer from "pages/components/Drawer";
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
-  Outlet,
+  Outlet
 } from "react-router-dom";
+import styles from 'styles/css/App.module.css'
+
 
 
 function App() {
   return (
     <>
-      <h1>App</h1>
-      <Link to="/signup">Sign Up</Link> |{" "}
-      <Link to="/messages">Messages</Link>
-      <Outlet/>
+      <div className={styles.layout}>
+        <Drawer/>
+        <Outlet/>
+      </div>
     </>
   );
 }
