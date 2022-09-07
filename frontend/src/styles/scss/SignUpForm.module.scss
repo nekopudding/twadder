@@ -66,14 +66,12 @@
     user-select: none;
   }
   .input {
-    background: none;
     width: 100%;
   }
 
   .inputFlex {
     display: flex;
     .input {
-      background: none;
       flex-grow: 1;
     }
     .icon {
