@@ -20,6 +20,10 @@ textarea,textarea:focus-visible {
   background: none;
 }
 
+textarea {
+  overflow: auto;
+}
+
 svg {
   fill: v.$clrWhite;
 }

@@ -37,12 +37,8 @@
 }
 
 .button {
-  @include v.clickable;
+  @include v.button;
   height: 38px;
-  border-radius: 9999px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &.light {
     color: v.$clrBlack;

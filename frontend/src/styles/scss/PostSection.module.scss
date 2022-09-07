@@ -34,9 +34,53 @@
     margin-left: v.$s*2;
     .textarea {
       width: 100%;
+      max-height: 700px;
+      min-height: 52px;
+      padding: v.$s*1.5 0;
+    }
+    .divider {
+      padding-left: v.$s*1.5;
+      transform: translateX(v.$s*-1.5);
     }
     .actionsContainer {
       display: flex;
+      justify-content: space-between;
+      padding: v.$s*1.5 0;
+      .inputOptionsContainer {
+        display: flex;
+      }
+      .iconContainer {
+        @include v.hoverGlowMainAccent;
+        &:active {
+          background-color: v.$clrMainAccentGlowActive;
+        }
+        width: 34px;
+        height: 34px;
+        border-radius: 9999px;
+        display: flex;
+        justify-content: center;
+        align-items: center;     
+      }
+      .icon {
+          width: 18px;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          & > * {
+            fill: v.$clrMainAccent;
+          }
+      }
+      .button {
+        @include v.button;
+        padding: v.$s v.$s*2;
+        background-color: v.$clrMainAccent;
+        color: v.$clrWhite;
+      }
     }
   }
+}
+
+.divider {
+  height: 0;
+  border-bottom: 1px solid v.$clrBgGrey;
 }

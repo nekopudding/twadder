@@ -1,9 +1,13 @@
 @use 'variables' as v;
 
+.page {
+  display: flex;
+  justify-content: center;
+}
 .layout {
   display: flex;
-  padding-left: 142px;
-  & > * + * {
-    margin-left: v.$s*3;
+  & > * {
+    padding-left: v.$s*1.5;
+    padding-right: v.$s*1.5;
   }
 }

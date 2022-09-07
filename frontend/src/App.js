@@ -13,10 +13,13 @@ import styles from 'styles/css/App.module.css'
 function App() {
   return (
     <>
-      <div className={styles.layout}>
+    <div className={styles.page}>
+    <div className={styles.layout}>
         <Drawer/>
         <Outlet/>
       </div>
+    </div>
+      
     </>
   );
 }
