@@ -1,0 +1,56 @@
+@use 'variables' as v;
+
+.container {
+}
+
+.header {
+  margin: v.$s*1.5 v.$s*2;
+  display: flex;
+}
+.media,.actions {
+  margin: 0 76px v.$s*2 0;
+}
+
+
+.headerLeft {
+  display: flex;
+  flex-grow: 1;
+  .avatar {
+    border-radius: 9999px;
+    width: 48px;
+    height: 48px;
+    background-color: v.$clrBgGrey;
+  }
+  .headerText {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: v.$s*1.5;
+    .displayName {
+      margin-right: 4px;
+    }
+    .greyText {
+      color: v.$clrTextGrey;
+    }
+    .bodyText {
+      margin-top: 2px;
+    }
+  }
+}
+
+.moreIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: -8px;
+  @include v.hoverGlowMainAccent;
+
+  & > svg {
+    width: 16px;
+    fill: v.$clrTextGrey;
+  }
+}

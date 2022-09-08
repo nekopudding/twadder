@@ -1,10 +1,13 @@
 @use 'variables' as v;
 
+$border: 1px v.$clrBgGrey solid;
+
 .container {
   width: 598px;
-  border: 1px v.$clrBgGrey solid;
+  border-left: $border;
+  border-right: $border;
   & > * + * {
-    border-bottom: 1px v.$clrBgGrey solid;
+    border-bottom: $border;
   }
 }
 .sectionTitleContainer {
@@ -45,7 +48,7 @@
     .actionsContainer {
       display: flex;
       justify-content: space-between;
-      padding: v.$s*1.5 0;
+      padding-top: v.$s*1.5;
       .inputOptionsContainer {
         display: flex;
       }
@@ -82,5 +85,5 @@
 
 .divider {
   height: 0;
-  border-bottom: 1px solid v.$clrBgGrey;
+  border-bottom: $border;
 }

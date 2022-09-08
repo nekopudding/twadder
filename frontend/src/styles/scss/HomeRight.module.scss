@@ -11,20 +11,27 @@
   display: flex;
   align-items: center;
   padding-left: v.$s*1.5;
-  &,&:focus-visible {
+  & {
     background-color: v.$clrBgGrey;
   }
   .icon {
     display: flex;
     align-items: center;
     padding-left: v.$s*0.5;
-    & > * {
+    & > svg {
       width: 14px;
+      fill: v.$clrTextGrey;
     }
   }
   .input {
     padding: v.$s*1.5;
     flex-grow: 1;
+  }
+  &:focus-within {
+    border: 1px solid v.$clrMainAccent;
+    & svg {
+      fill: v.$clrMainAccent;
+    }
   }
 }
 

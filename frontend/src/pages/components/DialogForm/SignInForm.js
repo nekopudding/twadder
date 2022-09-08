@@ -24,7 +24,7 @@ function SignInForm({
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const {name,email,username,password,month,day,year,enableNotifications,verificationCode} = formData;
+    const {username,password} = formData;
 
     const res = await fetchApi(`/login`,'POST',{username,password});
     const {msg,sessionId} = await res.json();
@@ -55,32 +55,32 @@ function SignInForm({
         <div className={`body ${styles.divider}`}>
           <div className={`body ${styles.text}`}>or</div>
         </div>
-      <StyledInput
-        name='username'
-        label='Username'
-        autoComplete='off'
-        type='text'
-        value={formData.username}
-        onChange={handleDataChange}
-      />
+        <StyledInput
+          name='username'
+          label='Username'
+          autoComplete='off'
+          type='text'
+          value={formData.username}
+          onChange={handleDataChange}
+        />
 
-      <StyledInput
-        name='password'
-        label='Password'
-        type='password'
-        autoComplete='off'
-        value={formData.password}
-        onChange={handleDataChange}
-        enableShowToggle={true}
-      />
-      <div className={`subText ${styles.link}`}>Forgot password?</div>
-      <div className={`${styles.buttonContainer} ${styles.signInButtonContainer}`}>
-        <button 
-          className={`sidebarButton ${styles.nextButton}`} 
-          onClick={submitForm}
-          disabled={!(formData.username && formData.password)}
-        >Sign In</button>
-      </div>
+        <StyledInput
+          name='password'
+          label='Password'
+          type='password'
+          autoComplete='off'
+          value={formData.password}
+          onChange={handleDataChange}
+          enableShowToggle={true}
+        />
+        <div className={`subText ${styles.link}`}>Forgot password?</div>
+        <div className={`${styles.buttonContainer} ${styles.signInButtonContainer}`}>
+          <button 
+            className={`sidebarButton ${styles.nextButton}`} 
+            onClick={submitForm}
+            disabled={!(formData.username && formData.password)}
+          >Sign In</button>
+        </div>
       </div>
     </>
   )
