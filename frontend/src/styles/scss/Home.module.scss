@@ -1,2 +1,6 @@
 @use 'variables' as v;
 
+.container {
+  padding-left: v.$s*1.5;
+  padding-right: v.$s*1.5;
+}

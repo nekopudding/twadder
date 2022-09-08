@@ -6,8 +6,4 @@
 }
 .layout {
   display: flex;
-  & > * {
-    padding-left: v.$s*1.5;
-    padding-right: v.$s*1.5;
-  }
 }

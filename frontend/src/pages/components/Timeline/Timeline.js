@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../../styles/css/PostSection.module.css'
+import styles from '../../../styles/css/Timeline.module.css'
 import {ReactComponent as PhotoIcon} from '../../../assets/icons/media.svg'
 import {ReactComponent as GIFIcon} from '../../../assets/icons/gif.svg'
 import {ReactComponent as EmojiIcon} from '../../../assets/icons/emoji.svg'
@@ -7,7 +7,7 @@ import { autoResize } from 'utils/textarea-auto-resize'
 
 
 
-function PostSection() {
+function Timeline() {
   return (
     <div className={styles.container}>
       <div className={styles.sectionTitleContainer}>
@@ -43,4 +43,4 @@ function PostSection() {
   )
 }
 
-export default PostSection
+export default Timeline

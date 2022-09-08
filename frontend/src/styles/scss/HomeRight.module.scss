@@ -1,0 +1,36 @@
+@use 'variables' as v;
+
+.container {
+  width: 350px;
+  margin-top: v.$s*3;
+}
+.searchBar {
+  height: 42px;
+  width: 100%;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  padding-left: v.$s*1.5;
+  &,&:focus-visible {
+    background-color: v.$clrBgGrey;
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    padding-left: v.$s*0.5;
+    & > * {
+      width: 14px;
+    }
+  }
+  .input {
+    padding: v.$s*1.5;
+    flex-grow: 1;
+  }
+}
+
+.whoToFollow {
+  margin-top: v.$s*2.5;
+  border-radius: 12px;
+  padding: v.$s*1.5 v.$s*2 0;
+  background-color: v.$clrBgGrey;
+}

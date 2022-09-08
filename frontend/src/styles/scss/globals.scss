@@ -12,12 +12,13 @@ h1,h2,h3,input,a,p,body,div,select,textarea {
   font-family: v.$ff;
   color: v.$clrWhite;
 }
-input,input:focus-visible, select, select:focus-visible,
-textarea,textarea:focus-visible {
-  border: none;
-  outline: none;
-  resize: none;
-  background: none;
+input,select,textarea {
+  &, &:focus-visible {
+    border: none;
+    outline: none;
+    resize: none;
+    background: none;
+  }
 }
 
 textarea {

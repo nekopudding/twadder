@@ -1,13 +1,17 @@
 import React from 'react'
 import styles from 'styles/css/Home.module.css'
 import Drawer from './components/Drawer'
-import PostSection from './components/PostSection/PostSection'
+import HomeRight from './components/HomeRight'
+import Timeline from './components/Timeline/Timeline'
 
 function Home() {
   return (
     <>
-      <div className={styles.layout}>
-        <PostSection/>
+      <div className={styles.container}>
+        <Timeline/>
+      </div>
+      <div className={styles.container}>
+        <HomeRight/>
       </div>
     </>
   )
