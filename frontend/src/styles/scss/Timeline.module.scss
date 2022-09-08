@@ -12,13 +12,15 @@ $border: 1px v.$clrBgGrey solid;
 }
 .sectionTitleContainer {
   position: fixed;
+  width: 596px;
   padding: v.$s*2;
-  background-color: v.$clrBlack;
-  backdrop-filter: blur(5px);
+  background-color: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
   border-bottom: none;
+  z-index: 10;
 }
 .sectionTitleOffset {
-  padding: v.$s*2;
+  height: 56px;
   border-bottom: none;
 }
 .inputContainer {
@@ -53,16 +55,9 @@ $border: 1px v.$clrBgGrey solid;
         display: flex;
       }
       .iconContainer {
-        @include v.hoverGlowMainAccent;
-        &:active {
-          background-color: v.$clrMainAccentGlowActive;
-        }
+        @include v.iconButtonMainAccent;
         width: 34px;
         height: 34px;
-        border-radius: 9999px;
-        display: flex;
-        justify-content: center;
-        align-items: center;     
       }
       .icon {
           width: 18px;

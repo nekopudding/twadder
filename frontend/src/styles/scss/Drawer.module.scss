@@ -33,14 +33,17 @@
   }
 }
 .linkGlow,.accountButton {
-  @include v.hoverGlowWhite;
+  @include v.iconButtonWhiteHoverOnly;
   padding: v.$s*1.5;
   display: inline-flex;
   border-radius: 9999px;
 
   &.logo {
-    @include v.hoverGlowMainAccent;
+    @include v.iconButtonMainAccentHoverOnly;
     margin-bottom: v.$s;
+  }
+  &.accountButton {
+    @include v.iconButtonWhite;
   }
 }
 
