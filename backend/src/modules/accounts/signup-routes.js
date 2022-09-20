@@ -5,7 +5,8 @@ const { Account } = require('./models/account-model');
 const { EmailVerification } = require('./models/email-verification-model.js');
 const { Profile } = require('./models/profile-model');
 
-module.exports = function(app) {
+module.exports = {
+  routes: function(app) {
   const transporter = nodemailer.createTransport({
     service: 'hotmail',
     auth: {
@@ -96,4 +97,5 @@ module.exports = function(app) {
       return res.status(500).json(err);
     }
   })
+}
 }

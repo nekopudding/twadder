@@ -22,7 +22,7 @@ $clrMainAccentActive: rgba(118, 29, 240,0.25);
 $clrRetwaddHover: 	rgba(0, 186, 124,0.15);
 $clrRetwaddActive: 	rgba(0, 186, 124,0.25);
 $clrLikeHover: 	rgba(249, 24, 128,0.1);
-$clrLikeActive: 	rgba(249, 24, 128,0.1);
+$clrLikeActive: 	rgba(249, 24, 128,0.2);
 
 
 
@@ -30,6 +30,7 @@ $clrLikeActive: 	rgba(249, 24, 128,0.1);
 $ff: 'Libre Franklin', sans-serif;
 
 @mixin clickable() {
+  @include opacityTransition();
   user-select: none;
   @media (any-hover: hover) { 
     &:hover {
@@ -44,7 +45,15 @@ $ff: 'Libre Franklin', sans-serif;
   }
 }
 
+@mixin bgTransition {
+  transition: background-color 150ms ease-out;
+}
+@mixin opacityTransition {
+  transition: opacity 100ms ease-out;
+}
+
 @mixin iconButtonWhiteHoverOnly() {
+  @include bgTransition();
   @media (any-hover: hover) { 
     &:hover {
       background-color: $clrWhiteHover;
@@ -52,6 +61,7 @@ $ff: 'Libre Franklin', sans-serif;
   }
 }
 @mixin iconButtonWhite() {
+  @include bgTransition();
   @media (any-hover: hover) { 
     &:hover {
       background-color: $clrWhiteHover;
@@ -63,6 +73,7 @@ $ff: 'Libre Franklin', sans-serif;
 }
 
 @mixin iconButtonMainAccentHoverOnly() {
+  @include bgTransition();
   @media (any-hover: hover) { 
     &:hover {
       background-color: $clrMainAccentHover;
@@ -87,6 +98,7 @@ $ff: 'Libre Franklin', sans-serif;
 }
 
 @mixin iconButtonMainAccent() {
+  @include bgTransition();
   @include iconButton;
   @media (any-hover: hover) { 
     &:hover {
@@ -103,6 +115,7 @@ $ff: 'Libre Franklin', sans-serif;
 
 @mixin likeButton() {
   @include iconButton();
+  @include bgTransition();
   @media (any-hover: hover) { 
     &:hover {
       background-color: $clrLikeHover;
@@ -117,6 +130,7 @@ $ff: 'Libre Franklin', sans-serif;
 }
 @mixin retwaddButton() {
   @include iconButton();
+  @include bgTransition();
   @media (any-hover: hover) { 
     &:hover {
       background-color: $clrRetwaddHover;

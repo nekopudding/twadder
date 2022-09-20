@@ -31,6 +31,6 @@ module.exports = {
       }
     })
   },
-  getSessionList: () => { return sessionList; }
+  getAccountId: (sessionId) => { return sessionList.find(s => s.id === sessionId).accountId; }
 }
 

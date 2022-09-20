@@ -36,7 +36,10 @@ function PostPreview({
         </div>
         <div className={styles.media}></div>
         <div className={styles.actions}>
+        <div className={styles.action}>
           <div className={styles.commentButton}><CommentIcon/></div>
+          <span className={`subText ${styles.actionText}`}>0</span>
+        </div>
           <div className={styles.retwaddButton}><RetweetIcon/></div>
           <div className={styles.likeButton}><LikeIcon/></div>
           <div className={styles.shareButton}><ShareIcon/></div>
