@@ -1,4 +1,5 @@
 import Drawer from "pages/components/Drawer";
+import Toast from "pages/components/Toast";
 import {
   BrowserRouter,
   Routes,
@@ -19,6 +20,7 @@ function App() {
         <Outlet/>
       </div>
     </div>
+    {toast.msg !== '' && <Toast toast={toast} duration='2s' fadeOutTime='0.5s'/>}
       
     </>
   );

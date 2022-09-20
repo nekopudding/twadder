@@ -8,6 +8,10 @@ import {ReactComponent as UserIcon} from 'assets/icons/user.svg'
 import {ReactComponent as MoreCircleIcon} from 'assets/icons/ellipsis-circle.svg'
 import {ReactComponent as MoreIcon} from 'assets/icons/ellipsis.svg'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { fetchApi } from 'utils/fetch-api'
+import { getCookie } from 'utils/cookies'
 
 const linkList = [
   {
@@ -38,6 +42,24 @@ const linkList = [
 ]
 
 function Drawer() {
+  const [user,setUser] = useState({
+    displayName: 'Display Name',
+    username: 'username'
+  })
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const res = await fetchApi(`/me/profile`,'GET',{sessionId: getCookie('sessionId')});
+      const {msg,...profile} = await res.json();
+      // if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
+      if (res.status === 200)
+        setUser({
+          displayName: profile.name,
+          username: profile.username
+        })
+    }
+    getProfile();
+  },[])
   return (
     <>
       <div className={styles.container}>
@@ -75,8 +97,8 @@ function Drawer() {
           <div className={styles.accountButton}>
             <div className={styles.avatar}></div>
             <div className={styles.textContainer}>
-              <div className='bodyHeader'>Display Name</div>
-              <div className='body'>@username</div>
+              <div className='bodyHeader'>{user.displayName}</div>
+              <div className='body'>@{user.username}</div>
             </div>
             <div className={styles.icon}><MoreIcon/></div>
           </div>

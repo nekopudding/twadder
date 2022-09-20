@@ -14,11 +14,9 @@ import {
 import styles from 'styles/css/SignUp.module.css'
 import SignUpForm from './components/DialogForm/SignUpForm/SignUpForm';
 import SignInForm from './components/DialogForm/SignInForm';
-import Toast from './components/Toast';
 
 
 function SignUp() {
-  const [toast,setToast] = useState({update: true, msg: ''});
   const [signUpFormOpen, setSignUpFormOpen] = useState(false);
   const [signInFormOpen,setSignInFormOpen] = useState(false);
 
@@ -69,9 +67,8 @@ function SignUp() {
           </div>
         </div>
     </div>
-    {signUpFormOpen && <SignUpForm setOpen={setSignUpFormOpen} setToast={setToast} />}
-    {signInFormOpen && <SignInForm setOpen={setSignInFormOpen} setToast={setToast} />}
-    {toast.msg !== '' && <Toast toast={toast} duration='2s' fadeOutTime='0.5s'/>}
+    {signUpFormOpen && <SignUpForm setOpen={setSignUpFormOpen} setToast={context.setToast} />}
+    {signInFormOpen && <SignInForm setOpen={setSignInFormOpen} setToast={context.setToast} />}
     </>
   )
 }
