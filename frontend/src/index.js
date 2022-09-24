@@ -4,7 +4,6 @@ import './styles/css/globals.css';
 import App from './App';
 import reportWebVitals from './utils/tests/reportWebVitals';
 import { initializeApp } from 'firebase/app';
-import Drawer from "pages/components/Drawer";
 import {
   BrowserRouter,
   Routes,
@@ -18,12 +17,14 @@ import SignUp from './pages/SignUp';
 import Search from 'pages/Search';
 import Notifications from 'pages/Notifications';
 import Profile from 'pages/Profile';
+import store from './app/store'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
-    
     <Routes>
       <Route path="/signup" element={<SignUp/>} />
       <Route path="/" element={<App/>}>
@@ -36,6 +37,7 @@ root.render(
       </Route>
     </Routes>
   </BrowserRouter>
+  </Provider>
   </React.StrictMode>
 );
 

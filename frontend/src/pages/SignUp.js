@@ -67,8 +67,8 @@ function SignUp() {
           </div>
         </div>
     </div>
-    {signUpFormOpen && <SignUpForm setOpen={setSignUpFormOpen} setToast={context.setToast} />}
-    {signInFormOpen && <SignInForm setOpen={setSignInFormOpen} setToast={context.setToast} />}
+    {/* {signUpFormOpen && <SignUpForm setOpen={setSignUpFormOpen} setToast={context.setToast} />}
+    {signInFormOpen && <SignInForm setOpen={setSignInFormOpen} setToast={context.setToast} />} */}
     </>
   )
 }
