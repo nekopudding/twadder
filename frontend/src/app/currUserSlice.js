@@ -10,7 +10,7 @@ export const currUserSlice = createSlice({
   initialState,
   reducers: {
     setCurrUser: (state,action) => {
-      state.push(action.payload);
+      return {...action.payload};
     }
   }
 })

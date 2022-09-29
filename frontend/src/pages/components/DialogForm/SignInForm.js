@@ -7,16 +7,19 @@ import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
 import { fetchApi } from 'utils/fetch-api'
 import { useState } from 'react'
 import { getCookie, setCookie } from 'utils/cookies'
+import { useDispatch, useSelector } from 'react-redux'
+import { setToast } from 'app/toastSlice'
 
 
 function SignInForm({
-  setOpen,
-  setToast
+  setOpen
 }) {
   const [formData,setFormData] = useState({
     username: '',
     password: ''
   })
+  const toast = useSelector(state => state.toast);
+  const dispatch = useDispatch();
 
   const handleDataChange = (e) => {
     setFormData(prev => { return { ...prev, [e.target.name]: e.target.value} });
@@ -27,8 +30,11 @@ function SignInForm({
     const {username,password} = formData;
 
     const res = await fetchApi(`/login`,'POST',{username,password});
+    if (!res) {
+      return dispatch(setToast({update: !toast.update, msg: 'failed to connect to server'}));
+    }
     const {msg,sessionId} = await res.json();
-    if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
+    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
     if (sessionId) {
       setCookie('sessionId',sessionId,7);
       // console.log(getCookie('sessionId'));

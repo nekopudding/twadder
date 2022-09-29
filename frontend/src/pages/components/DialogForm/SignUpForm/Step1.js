@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
 import { fetchApi } from 'utils/fetch-api';
 import StyledInput from '../StyledInput';
+import { useDispatch, useSelector } from 'react-redux'
+import { setToast } from 'app/toastSlice'
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const nameRegex = /^[a-zA-Z0-9]{1,16}$/;
@@ -10,9 +12,10 @@ function Step1({
   formData,
   handleDataChange,
   setFormData,
-  changeStep,
-  setToast
+  changeStep
 }) {
+  const toast = useSelector(state => state.toast);
+  const dispatch = useDispatch();
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const [maxDay,setMaxDay] = useState(31);
 
@@ -61,7 +64,7 @@ function Step1({
     
     const res = await fetchApi(`/signup/verify?email=${formData.email}`,'GET');
     const {msg} = await res.json();
-    if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
+    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
     if (res.status === 200)
       changeStep(2);
   }

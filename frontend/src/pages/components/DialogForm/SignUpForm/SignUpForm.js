@@ -5,12 +5,10 @@ import {ReactComponent as BackIcon} from  'assets/icons/arrow-left.svg'
 import Step1 from './Step1'
 import Step2 from './Step2';
 import Step3 from './Step3';
-import Toast from '../../Toast';
 
 function SignUpForm({
-  setOpen, setToast
+  setOpen
 }) {
-
   const [currStep, setCurrStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -52,9 +50,9 @@ function SignUpForm({
           }
           <h2 className='h2'>{`Step ${currStep} of 3`}</h2>
         </div>
-        {currStep === 1 && <Step1 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep} setToast={setToast}/>}
-        {currStep === 2 && <Step2 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep} setToast={setToast}/>}
-        {currStep === 3 && <Step3 formData={formData} handleDataChange={handleDataChange} changeStep={changeStep} setToast={setToast} setOpen={setOpen}/>}
+        {currStep === 1 && <Step1 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep} />}
+        {currStep === 2 && <Step2 formData={formData} handleDataChange={handleDataChange} setFormData={setFormData} changeStep={changeStep} />}
+        {currStep === 3 && <Step3 formData={formData} handleDataChange={handleDataChange} changeStep={changeStep} setOpen={setOpen}/>}
       </div>
     </>
   )

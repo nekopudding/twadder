@@ -11,12 +11,13 @@ import {
 import styles from 'styles/css/App.module.css'
 import { fetchApi } from 'utils/fetch-api'
 import { getCookie } from 'utils/cookies'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrUser } from "app/currUserSlice";
 
 
 function App() {
   const dispatch = useDispatch();
+  const toast = useSelector((state) => state.toast);
   useEffect(() => {
     const getProfile = async () => {
       const res = await fetchApi(`/me/profile?sessionId=${getCookie('sessionId')}`,'GET');
@@ -39,8 +40,7 @@ function App() {
         <Outlet/>
       </div>
     </div>
-    {/* {toast.msg !== '' && <Toast toast={toast} duration='2s' fadeOutTime='0.5s'/>} */}
-      
+    <Toast duration='2s' fadeOutTime='0.5s'/>
     </>
   );
 }

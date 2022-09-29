@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
 import { fetchApi } from 'utils/fetch-api';
+import { useDispatch, useSelector } from 'react-redux'
+import { setToast } from 'app/toastSlice'
 
 function Step2({
   formData,
   handleDataChange,
-  changeStep,
-  setToast
+  changeStep
 }) {
+  const toast = useSelector(state => state.toast);
+  const dispatch = useDispatch();
   const {email,verificationCode} = formData;
 
   const submitForm = async (e) => {
@@ -15,7 +18,7 @@ function Step2({
     
     const res = await fetchApi(`/signup/verify`,'POST',{verificationCode,email});
     const {msg} = await res.json();
-    if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
+    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
     if (res.status === 200)
       changeStep(3);
   }

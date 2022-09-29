@@ -3,6 +3,8 @@ import { useState } from 'react'
 import styles from 'styles/css/SignUpForm.module.css'
 import { fetchApi } from 'utils/fetch-api';
 import StyledInput from '../StyledInput';
+import { useDispatch, useSelector } from 'react-redux'
+import { setToast } from 'app/toastSlice'
 
 const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
 //Password must be between 8 and 16 characters long.
@@ -11,10 +13,10 @@ const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+`~]{8,16}$/
 function Step3({
   formData,
   handleDataChange,
-  changeStep,
-  setToast,
   setOpen
 }) {
+  const toast = useSelector(state => state.toast);
+  const dispatch = useDispatch();
   const [enableChecks,setEnableChecks] = useState({
     username: false,
     password: false
@@ -35,7 +37,7 @@ function Step3({
       birthday: new Date(`${month}/${day}/${year}`)    
     });
     const {msg} = await res.json();
-    if (msg) setToast(prev => {return {update: !prev.update, msg: msg}});
+    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
     if (res.status === 200)
       setOpen(false);
   }

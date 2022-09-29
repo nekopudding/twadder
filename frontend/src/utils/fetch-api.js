@@ -13,7 +13,11 @@ const fetchApi = async (path = '',method = 'GET',body = null) => {
     return response;
   } catch (err) {
     console.log(`Server error: ${err}`);
-    return false;
+    return {
+      json: () => { return {
+        msg: `Server error: ${err}`
+      }}
+    };
   }
   
 }
