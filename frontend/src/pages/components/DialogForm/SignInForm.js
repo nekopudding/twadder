@@ -41,6 +41,7 @@ function SignInForm({
     }
     if (res.status === 200)
       setOpen(false);
+      window.location.href = '/';
   }
   const signInWithGoogle = async () => undefined;
 

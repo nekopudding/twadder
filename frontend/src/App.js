@@ -13,22 +13,30 @@ import { fetchApi } from 'utils/fetch-api'
 import { getCookie } from 'utils/cookies'
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrUser } from "app/currUserSlice";
+import { setToast } from "app/toastSlice";
 
 
 function App() {
   const dispatch = useDispatch();
   const toast = useSelector((state) => state.toast);
   useEffect(() => {
+    dispatch(setToast({update: true, msg:''}));
+
     const getProfile = async () => {
-      const res = await fetchApi(`/me/profile?sessionId=${getCookie('sessionId')}`,'GET');
+      const sessionId = getCookie('sessionId');
+      console.log(`sessionId: ${sessionId}`);
+      const res = await fetchApi(`/me/profile?sessionId=${sessionId}`,'GET');
       if (!res) return;
-      const {msg,...profile} = await res.json();
-      if (res.status === 200)
+      const {msg,profile} = await res.json();
+      if (res.status === 200) {
         console.log('user is logged in');
         dispatch(setCurrUser({
           displayName: profile.name,
           username: profile.username
         }))
+      } else {
+        window.location.href = '/signup'
+      }
     }
     getProfile();
   },[])

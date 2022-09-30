@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {ReactComponent as TwitterLogo} from '../assets/icons/twitter.svg'
 import {ReactComponent as GoogleLogo} from '../assets/icons/google.svg'
 import { 
@@ -15,10 +15,13 @@ import styles from 'styles/css/SignUp.module.css'
 import SignUpForm from './components/DialogForm/SignUpForm/SignUpForm';
 import SignInForm from './components/DialogForm/SignInForm';
 import Toast from './components/Toast';
+import { useDispatch } from 'react-redux';
+import { setToast } from 'app/toastSlice';
 
 function SignUp() {
   const [signUpFormOpen, setSignUpFormOpen] = useState(false);
   const [signInFormOpen,setSignInFormOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const signUpWithGoogle = async () => {
     var provider = new GoogleAuthProvider();
@@ -33,6 +36,10 @@ function SignUp() {
     setSignInFormOpen(true);
     setSignUpFormOpen(false);
   }
+
+  useEffect(()=> {
+    dispatch(setToast({update: true, msg:''}));
+  },[])
 
   return (
     <>

@@ -15,6 +15,7 @@ app.get('/',(req,res) => {
 require('./modules/accounts/profile-routes').routes(app);
 require('./modules/accounts/login-routes.js').routes(app);
 require('./modules/accounts/signup-routes.js').routes(app);
+require('./utils/debug')();
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running at port ${process.env.PORT || 3000}`)

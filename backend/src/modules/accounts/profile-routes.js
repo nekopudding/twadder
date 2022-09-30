@@ -11,15 +11,18 @@ module.exports = {
         const {sessionId} = req.query;
         const accountId = getAccountId(sessionId);
         if (!accountId) return res.status(400).json({msg: 'invalid sessionId provided'});
-        const account = Account.fineOne({_id: accountId});
-        const profile = Profile.findOne({accountId: accountId});
+        const account = await Account.findOne({_id: accountId});
+        const profile = await Profile.findOne({accountId: accountId});
   
         if (!account || !profile) {
           return res.status(500).json({msg: 'ERROR *** account not found'});
         }
+
         return res.status(200).json({
-          ...profile,
-          username: account.username,
+          profile: {
+            ...profile.toObject(),
+            username: account.username
+          },
           msg: 'successfully fetched'
         })
       } catch(err) {

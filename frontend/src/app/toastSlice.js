@@ -10,7 +10,7 @@ export const toastSlice = createSlice({
   initialState,
   reducers: {
     setToast: (state,action) => {
-      console.log(action.payload)
+      // console.log(action.payload)
       return {...action.payload};
     }
   }
