@@ -30,10 +30,10 @@ function Step3({
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const {name,email,username,password,month,day,year,enableNotifications,verificationCode} = formData;
+    const {displayName,email,username,password,month,day,year,enableNotifications,verificationCode} = formData;
 
     const res = await fetchApi(`/signup`,'POST',{
-      name,email,username,password,enableNotifications,verificationCode,
+      displayName,email,username,password,enableNotifications,verificationCode,
       birthday: new Date(`${month}/${day}/${year}`)    
     });
     const {msg} = await res.json();

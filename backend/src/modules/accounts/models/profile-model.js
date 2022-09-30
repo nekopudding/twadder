@@ -5,7 +5,7 @@ const { accountListFormat, URLFormat, displayNameFormat, bioFormat, locationForm
 const profileSchema = new mongoose.Schema({
   avatar: URLFormat,
   banner: URLFormat,
-  name: displayNameFormat,
+  displayName: displayNameFormat,
   bio: bioFormat,
   location: locationFormat,
   website: URLFormat,

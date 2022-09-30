@@ -66,7 +66,7 @@ module.exports = {
   })
 
   app.post('/signup', async (req,res) => {
-    const {username,password,googleId,email,enableNotifications,verificationCode, name, birthday} = req.body;
+    const {username,password,googleId,email,enableNotifications,verificationCode, displayName, birthday} = req.body;
     let createdAccount,createdProfile;
     try {
       const item = await EmailVerification.findOne({email}); //check email is verified
@@ -82,7 +82,7 @@ module.exports = {
           googleId,email,enableNotifications
         });
         const profile = new Profile({ 
-          name,birthday,
+          displayName,birthday,
           accountId: account._id
         });
         createdAccount = await account.save();

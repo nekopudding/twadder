@@ -30,10 +30,7 @@ function App() {
       const {msg,profile} = await res.json();
       if (res.status === 200) {
         console.log('user is logged in');
-        dispatch(setCurrUser({
-          displayName: profile.name,
-          username: profile.username
-        }))
+        dispatch(setCurrUser({...profile}))
       } else {
         window.location.href = '/signup'
       }

@@ -19,8 +19,8 @@ function Step1({
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const [maxDay,setMaxDay] = useState(31);
 
-  const [enableChecks,setEnableChecks] = useState({
-    name: false,
+  const [enableChecks,setEnableChecks] = useState({ //enable regex input checking for name and email
+    displayName: false,
     email: false
   })
   const toggleCheck = (key,bool) => {
@@ -53,7 +53,7 @@ function Step1({
     return valid;
   }
   const nameIsValid = () => {
-    return nameRegex.test(formData.name);
+    return nameRegex.test(formData.displayName);
   }
   const emailIsValid = () => {
     return emailRegex.test(formData.email);
@@ -76,13 +76,13 @@ function Step1({
           <div className={styles.stepTitle}>Create your account</div>
 
           <StyledInput
-            name='name'
+            name='displayName'
             label='Display Name'
             type='text'
-            value={formData.name}
+            value={formData.displayName}
             onChange={handleDataChange}
-            onBlur={()=>toggleCheck('name',true)}
-            showError={enableChecks.name && !nameIsValid()}
+            onBlur={()=>toggleCheck('displayName',true)}
+            showError={enableChecks.displayName && !nameIsValid()}
             errorMsg = 'Display names can only contain alphanumeric characters, and must be between 1 and 16 characters.'
           />
 

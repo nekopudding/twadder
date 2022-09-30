@@ -21,6 +21,7 @@ module.exports = {
         return res.status(200).json({
           profile: {
             ...profile.toObject(),
+            _id: undefined, accountId: undefined, __v: undefined, //removed unnecessary info
             username: account.username
           },
           msg: 'successfully fetched'

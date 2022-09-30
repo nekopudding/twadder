@@ -11,7 +11,7 @@ function SignUpForm({
 }) {
   const [currStep, setCurrStep] = useState(1);
   const [formData, setFormData] = useState({
-    name: '',
+    displayName: '',
     email: '',
     username: '',
     password: '',
