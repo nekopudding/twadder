@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports = {
+  //ACCOUNT
   emailFormat: {
     type: String, 
     required: true,
@@ -35,6 +36,7 @@ module.exports = {
     type: Boolean,
     required: true
   },
+  //PROFILE
   accountListFormat: {type: [mongoose.ObjectId], default: []},
   URLFormat: {
     type: String,
@@ -60,5 +62,14 @@ module.exports = {
   isPrivateFormat: {
     type: Boolean,
     default: false
-  }
+  },
+  //POST
+  postTextFormat: {
+    type: String,
+    required: true
+  },
+  imageFormat: {
+    data: Buffer,
+    contentType: String
+}
 }
