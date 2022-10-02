@@ -5,7 +5,8 @@ const { Account } = require('./models/account-model');
 const { EmailVerification } = require('./models/email-verification-model.js');
 const { Profile } = require('./models/profile-model');
 
-module.exports = function(app) {
+module.exports = {
+  routes: function(app) {
   const transporter = nodemailer.createTransport({
     service: 'hotmail',
     auth: {
@@ -65,7 +66,7 @@ module.exports = function(app) {
   })
 
   app.post('/signup', async (req,res) => {
-    const {username,password,googleId,email,enableNotifications,verificationCode, name, birthday} = req.body;
+    const {username,password,googleId,email,enableNotifications,verificationCode, displayName, birthday} = req.body;
     let createdAccount,createdProfile;
     try {
       const item = await EmailVerification.findOne({email}); //check email is verified
@@ -81,7 +82,7 @@ module.exports = function(app) {
           googleId,email,enableNotifications
         });
         const profile = new Profile({ 
-          name,birthday,
+          displayName,birthday,
           accountId: account._id
         });
         createdAccount = await account.save();
@@ -96,4 +97,5 @@ module.exports = function(app) {
       return res.status(500).json(err);
     }
   })
+}
 }

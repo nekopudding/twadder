@@ -8,6 +8,7 @@ import {ReactComponent as UserIcon} from 'assets/icons/user.svg'
 import {ReactComponent as MoreCircleIcon} from 'assets/icons/ellipsis-circle.svg'
 import {ReactComponent as MoreIcon} from 'assets/icons/ellipsis.svg'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const linkList = [
   {
@@ -38,6 +39,8 @@ const linkList = [
 ]
 
 function Drawer() {
+  const {username,displayName} = useSelector(state=>state.currUser);
+
   return (
     <>
       <div className={styles.container}>
@@ -68,15 +71,15 @@ function Drawer() {
             )
           })}
         </div>
-        <div className={styles.button}>
+        <button className={styles.button}>
           <div className='sidebarButton'>Twadd</div>
-        </div>
+        </button>
         <div className={styles.accountButtonContainer}>
           <div className={styles.accountButton}>
             <div className={styles.avatar}></div>
             <div className={styles.textContainer}>
-              <div className='bodyHeader'>Display Name</div>
-              <div className='body'>@username</div>
+              <div className='bodyHeader'>{displayName}</div>
+              <div className='body'>@{username}</div>
             </div>
             <div className={styles.icon}><MoreIcon/></div>
           </div>

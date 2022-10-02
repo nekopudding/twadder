@@ -72,9 +72,29 @@
   width: 35px;
   height: 35px;
  }
- & svg {
+ .action {
+  display: flex;
+  align-items: center;
+  @media (any-hover: hover) { 
+    &:hover > div,&:hover > span {
+      background-color: v.$clrMainAccentHover;
+      color: v.$clrMainAccent;
+      & > svg {
+        fill: v.$clrMainAccent;
+      }
+    }
+  }
+  &:active div {
+    background-color: v.$clrMainAccentActive;
+  }
+}
+.actionText {
+  padding: 0 v.$s*1.5
+}
+ svg,.actionText {
   width: 16px;
   fill: v.$clrTextGrey;
+  color: v.$clrTextGrey;
  }
  .commentButton {
   @include v.iconButtonMainAccent;
