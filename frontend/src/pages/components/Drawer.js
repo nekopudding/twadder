@@ -71,9 +71,9 @@ function Drawer() {
             )
           })}
         </div>
-        <div className={styles.button}>
+        <button className={styles.button}>
           <div className='sidebarButton'>Twadd</div>
-        </div>
+        </button>
         <div className={styles.accountButtonContainer}>
           <div className={styles.accountButton}>
             <div className={styles.avatar}></div>

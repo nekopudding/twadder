@@ -38,7 +38,7 @@ function SignUp() {
   }
 
   useEffect(()=> {
-    dispatch(setToast({update: true, msg:''}));
+    dispatch(setToast({update: true, msg:''})); //reset toast msg
   },[])
 
   return (
@@ -55,22 +55,22 @@ function SignUp() {
           <div className={styles.banner}>Happening Now</div>
           <div className={styles.actionsSection}>
             <div className={styles.subBanner}>Join Twadder today</div>
-            <div className={`${styles.button} ${styles.light}`} onClick={signUpWithGoogle}>
+            <button className={`${styles.button} ${styles.light}`} onClick={signUpWithGoogle} disabled>
               <GoogleLogo/>
               <span className='chatHeaderSelected'>Sign up with Google</span>
-            </div>
+            </button>
             <div>
               <div className={`body ${styles.divider}`}>
                 <div className={`body ${styles.text}`}>or</div>
               </div>
             </div>
-            <div className={`${styles.button} ${styles.accented}`} onClick={signUpWithEmail}>
+            <button className={`${styles.button} ${styles.accented}`} onClick={signUpWithEmail}>
               <span className='bodyHeader'>Sign up with email</span>
-            </div>
+            </button>
             <div className={`sidebarButton ${styles.haveAccountText}`}>Already have an account?</div>
-            <div className={`${styles.button} ${styles.outlined}`} onClick={signIn}>
+            <button className={`${styles.button} ${styles.outlined}`} onClick={signIn}>
               <span className='bodyHeader'>Sign in</span>
-            </div>
+            </button>
           </div>
         </div>
     </div>

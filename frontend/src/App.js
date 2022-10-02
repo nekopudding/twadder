@@ -20,7 +20,7 @@ function App() {
   const dispatch = useDispatch();
   const toast = useSelector((state) => state.toast);
   useEffect(() => {
-    dispatch(setToast({update: true, msg:''}));
+    dispatch(setToast({update: true, msg:''})); //reset toast message
 
     const getProfile = async () => {
       const sessionId = getCookie('sessionId');
