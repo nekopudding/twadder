@@ -3,6 +3,8 @@ const { getAccountId } = require('../accounts/login-routes');
 const { Post, Image } = require('./models/post-model');
 const fs = require('fs');
 const { upload } = require('../../utils/middleware/multer-upload');
+const sharp = require('sharp');
+const tmp = require('tmp');
 
 module.exports = {
   routes: function(app) {
@@ -35,14 +37,21 @@ module.exports = {
     //testing image upload
     app.get('/image', async (req, res) => {
       try {
+        await fs.access("./uploads", (error) => {
+          if (error) {
+            fs.mkdirSync("./uploads");
+          }
+        });
         const images = await Image.find({});
-        const imageArray = images.forEach((img,index) => {
-          console.log(typeof img.image.data);
-          const data = img.image.data;
-          const buffer = Buffer.from(data, "base64");
-          fs.writeFileSync(`file-${index}`,buffer);
+        const imageArray = images.map((img) => {
+          return img.image;
         })
-        res.status(200).json({images, msg: 'images fetched successfully'})
+        imageArray.forEach((i,index) => {
+          const tmpobj = tmp.fileSync();
+          tmpobj.fd
+        })
+        return res.json(imageArray);
+        
       } catch (err) {
         console.log(err)
         res.status(400).json(err);
@@ -51,9 +60,10 @@ module.exports = {
   });
     app.post('/image', upload.single('image'), async (req, res) => {
       try {
+        const buffer = await sharp(req.file.buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
         const img = new Image({
           image: {
-            data: req.file.buffer,
+            data: buffer,
             contentType: req.file.mimetype
         }})
         await img.save();
