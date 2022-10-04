@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 mongoose.connect((process.env.MONGO_BASE_URL || 'mongodb://localhost:27017') + '/twadderDB',
   { useNewUrlParser: true, useUnifiedTopology: true }
-  , err => console.log(err || 'connected')
+  , err => console.log(err || 'mongoose connected')
 );
 
 const app = express();
@@ -18,6 +18,7 @@ app.get('/',(req,res) => {
 require('./modules/accounts/profile-routes').routes(app);
 require('./modules/accounts/login-routes.js').routes(app);
 require('./modules/accounts/signup-routes.js').routes(app);
+require('./modules/posts/post-routes').routes(app);
 require('./utils/debug')();
 
 app.listen(process.env.PORT || 3000, () => {

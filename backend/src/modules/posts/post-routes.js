@@ -1,7 +1,8 @@
 require('dotenv').config();
-const { getAccountId } = require('./login-routes');
-// const { Account } = require('./models/account-model');
-// const { Profile } = require('./models/profile-model');
+const { getAccountId } = require('../accounts/login-routes');
+const { Post, Image } = require('./models/post-model');
+const fs = require('fs');
+const { upload } = require('../../utils/middleware/multer-upload');
 
 module.exports = {
   routes: function(app) {
@@ -30,7 +31,38 @@ module.exports = {
         console.log(err)
         return res.status(500).json(err);
       }
-    })
+    });
+    //testing image upload
+    app.get('/image', async (req, res) => {
+      try {
+        const images = await Image.find({});
+        const imageArray = images.forEach((img,index) => {
+          console.log(typeof img.image.data);
+          const data = img.image.data;
+          const buffer = Buffer.from(data, "base64");
+          fs.writeFileSync(`file-${index}`,buffer);
+        })
+        res.status(200).json({images, msg: 'images fetched successfully'})
+      } catch (err) {
+        console.log(err)
+        res.status(400).json(err);
+      }
+      
+  });
+    app.post('/image', upload.single('image'), async (req, res) => {
+      try {
+        const img = new Image({
+          image: {
+            data: req.file.buffer,
+            contentType: req.file.mimetype
+        }})
+        await img.save();
+        res.send('200');
+      } catch (err) {
+        console.log(err) 
+        res.send(err);
+      }
+    });
   },
 }
 

@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
 const { accountIdFormat, postTextFormat, imageFormat } = require('../../../utils/mongoose-types')
 
-const imageSchema  = new mongoose.Schema({
-  name: String,
-  desc: String,
-  img: imageFormat
-});
+const imageSchema = new mongoose.Schema({
+  image: imageFormat
+})
 const postSchema = new mongoose.Schema({
   accountId: accountIdFormat,
   text: postTextFormat,
-  image: imageSchema
+  image: imageFormat
 },{timestamps: true});
 
 module.exports = {
-  Account: mongoose.model('Account',accountSchema),
+  Post: mongoose.model('Post',postSchema),
+  Image: mongoose.model('Image',imageSchema)
 }
