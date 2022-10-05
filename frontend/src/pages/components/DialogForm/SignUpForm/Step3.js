@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/fetch-api';
+import { baseURL } from 'utils/fetch-api';
 import StyledInput from '../StyledInput';
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
+import axios from 'axios';
 
 const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
 //Password must be between 8 and 16 characters long.
@@ -32,14 +33,26 @@ function Step3({
     e.preventDefault();
     const {displayName,email,username,password,month,day,year,enableNotifications,verificationCode} = formData;
 
-    const res = await fetchApi(`/signup`,'POST',{
-      displayName,email,username,password,enableNotifications,verificationCode,
-      birthday: new Date(`${month}/${day}/${year}`)    
-    });
-    const {msg} = await res.json();
-    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
-    if (res.status === 200)
-      setOpen(false);
+    try {
+      const res = await axios({
+        method: 'post',
+        url: `${baseURL}/signup`,
+        data: {
+          displayName,email,username,password,enableNotifications,verificationCode,
+          birthday: new Date(`${month}/${day}/${year}`)    
+        }
+      });
+      const {msg} = res.data;
+      if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
+      if (res.status === 200)
+        setOpen(false);
+    } catch(err) {
+      console.log(err)
+
+      dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
+    }
+
+    
   }
 
   const usernameIsValid = () => {

@@ -9,11 +9,12 @@ import {
   Outlet
 } from "react-router-dom";
 import styles from 'styles/css/App.module.css'
-import { fetchApi } from 'utils/fetch-api'
 import { getCookie } from 'utils/cookies'
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrUser } from "app/currUserSlice";
 import { setToast } from "app/toastSlice";
+import axios from "axios";
+import { baseURL } from "utils/fetch-api";
 
 
 function App() {
@@ -23,18 +24,24 @@ function App() {
     dispatch(setToast({update: true, msg:''})); //reset toast message
 
     const getProfile = async () => {
-      const sessionId = getCookie('sessionId');
-      console.log(`sessionId: ${sessionId}`);
-      const res = await fetchApi(`/me/profile?sessionId=${sessionId}`,'GET');
-      if (!res) return;
-      const {msg,profile} = await res.json();
-      if (res.status === 200) {
-        console.log('user is logged in');
-        dispatch(setCurrUser({...profile}))
-      } else {
+      try {
+        const sessionId = getCookie('sessionId');
+        console.log(`sessionId: ${sessionId}`);
+        const res = await axios({
+          method: 'get',
+          url: `${baseURL}/me/profile`,
+          params: {sessionId}
+        });
+        const {msg,profile} = res.data;
+        if (res.status === 200) {
+          console.log('user is logged in');
+          dispatch(setCurrUser({...profile}))
+        }
+      }catch (err) {
+        console.log('user is not logged in');
         window.location.href = '/signup'
       }
-    }
+    } 
     getProfile();
   },[])
   return (

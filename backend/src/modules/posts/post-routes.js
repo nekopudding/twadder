@@ -57,6 +57,7 @@ module.exports = {
   });
     app.post('/image', upload.single('image'), async (req, res) => {
       try {
+        console.log(req.headers);
         const buffer = await sharp(req.file.buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
         const img = new Image({
           image: {
@@ -67,7 +68,7 @@ module.exports = {
         res.send('200');
       } catch (err) {
         console.log(err) 
-        res.send(err);
+        res.status(400).json(err);
       }
     });
   },

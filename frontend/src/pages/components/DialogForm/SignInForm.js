@@ -4,11 +4,12 @@ import StyledInput from './StyledInput'
 import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import {ReactComponent as Logo} from 'assets/icons/twitter.svg'
 import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
-import { fetchApi } from 'utils/fetch-api'
+import { baseURL } from 'utils/fetch-api'
 import { useState } from 'react'
 import { getCookie, setCookie } from 'utils/cookies'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
+import axios from 'axios'
 
 
 function SignInForm({
@@ -28,20 +29,26 @@ function SignInForm({
   const submitForm = async (e) => {
     e.preventDefault();
     const {username,password} = formData;
-
-    const res = await fetchApi(`/login`,'POST',{username,password});
-    if (!res) {
-      return dispatch(setToast({update: !toast.update, msg: 'failed to connect to server'}));
+    try {
+      const res = await axios({
+        method: 'post',
+        url: `${baseURL}/login`,
+        data: {username,password}
+      });
+      const {msg,sessionId} = res.data;
+      if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
+      if (sessionId) {
+        setCookie('sessionId',sessionId,7);
+        // console.log(getCookie('sessionId'));
+      }
+      if (res.status === 200) {
+        setOpen(false);
+        window.location.href = '/';
+      }
+    } catch(err) {
+      return dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
     }
-    const {msg,sessionId} = await res.json();
-    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
-    if (sessionId) {
-      setCookie('sessionId',sessionId,7);
-      // console.log(getCookie('sessionId'));
-    }
-    if (res.status === 200)
-      setOpen(false);
-      window.location.href = '/';
+    
   }
   const signInWithGoogle = async () => undefined;
 

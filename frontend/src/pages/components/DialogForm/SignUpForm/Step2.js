@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/fetch-api';
+import { baseURL } from 'utils/fetch-api';
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
+import axios from 'axios';
 
 function Step2({
   formData,
@@ -15,12 +16,20 @@ function Step2({
 
   const submitForm = async (e) => {
     e.preventDefault();
-    
-    const res = await fetchApi(`/signup/verify`,'POST',{verificationCode,email});
-    const {msg} = await res.json();
-    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
-    if (res.status === 200)
-      changeStep(3);
+
+    try {
+      const res = await axios({
+        method: 'post',
+        url: `${baseURL}/signup/verify`,
+        data: {verificationCode,email}
+      });
+      const {msg} = res.data;
+      if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
+      if (res.status === 200)
+        changeStep(3);
+    } catch (err) {
+      return dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
+    }
   }
 
   return (
