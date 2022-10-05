@@ -19,6 +19,7 @@ import Notifications from 'pages/Notifications';
 import Profile from 'pages/Profile';
 import store from './app/store'
 import { Provider } from 'react-redux'
+import ImageTest from 'ImageTest';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,7 +28,7 @@ root.render(
     <BrowserRouter>
     <Routes>
       <Route path="/signup" element={<SignUp/>} />
-      <Route path="/" element={<App/>}>
+      <Route path="/" element={<ImageTest/>}> 
         <Route index element={<Home/>}/>
         <Route path="home" element={<Home/>}/>
         <Route path="messages" element={<Messages/>}/>

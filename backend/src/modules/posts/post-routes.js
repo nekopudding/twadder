@@ -46,11 +46,8 @@ module.exports = {
         const imageArray = images.map((img) => {
           return img.image;
         })
-        imageArray.forEach((i,index) => {
-          const tmpobj = tmp.fileSync();
-          tmpobj.fd
-        })
-        return res.json(imageArray);
+
+        return res.json(imageArray); //return images as buffer
         
       } catch (err) {
         console.log(err)
