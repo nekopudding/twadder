@@ -71,5 +71,6 @@ module.exports = {
   imageFormat: {
     data: Buffer,
     contentType: String
-}
+  },
+  
 }
