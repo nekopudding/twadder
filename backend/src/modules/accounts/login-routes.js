@@ -5,6 +5,13 @@ const uuid = require('uuid');
 
 let sessionList = [];
 
+const invalidSessionMsg = 'invalid sessionId provided';
+const getAccountId = (sessionId) => { 
+  const session = sessionList.find(s => s.id === sessionId);
+
+  return session && session.accountId; 
+}
+
 module.exports = {
   routes: function(app) {
     app.post('/login', async (req,res) => {
@@ -31,9 +38,12 @@ module.exports = {
       }
     })
   },
-  getAccountId: (sessionId) => { 
-    const session = sessionList.find(s => s.id === sessionId);
-
-    return session && session.accountId; }
+  getAccountId,
+  invalidSessionMsg,
+  getCurrLogin: (req) => { //takes sessionId in query
+    const {sessionId} = req.query;
+    const accountId = getAccountId(sessionId);
+    return accountId;
+  }
 }
 

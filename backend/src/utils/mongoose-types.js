@@ -1,12 +1,24 @@
 const mongoose = require('mongoose');
 
+const repostSchema = new mongoose.Schema({
+  accountId: {
+    type: mongoose.ObjectId,
+    required: true
+  }
+}, {timestamps: true});
+
+const urlRegex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
+const displayNameRegex = /^[a-zA-Z0-9]{1,16}$/
+const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
 module.exports = {
   //ACCOUNT
   emailFormat: {
     type: String, 
     required: true,
     match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      emailRegex,
       "Please fill a valid email address",
     ]
   },
@@ -19,7 +31,7 @@ module.exports = {
   usernameFormat: {
     type: String,
     required: true,
-    match: /^[a-zA-Z0-9]{3,16}$/
+    match: usernameRegex
   },
   passwordHashFormat: { 
     type: String,
@@ -38,14 +50,14 @@ module.exports = {
   },
   //PROFILE
   accountListFormat: {type: [mongoose.ObjectId], default: []},
-  URLFormat: {
+  urlFormat: {
     type: String,
-    match: /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
+    match: urlRegex
   },
   displayNameFormat: {
     type: String,
     required: true,
-    match: /^[a-zA-Z0-9]{1,16}$/
+    match: displayNameRegex
   },
   bioFormat: {
     type: String,
@@ -72,5 +84,18 @@ module.exports = {
     data: Buffer,
     contentType: String
   },
-  
+  //list of postIds
+  repliesFormat: {type: [mongoose.ObjectId], default: []}, 
+  repostSchema,
+  repostListFormat: {
+    type: [repostSchema],
+    default: []
+  },
+  urlListFormat: {
+    type: [{
+      type: String,
+      match: urlRegex
+    }],
+    default: []
+  }
 }
