@@ -5,6 +5,7 @@ const fs = require('fs');
 const { upload } = require('../../utils/middleware/multer-upload');
 const sharp = require('sharp');
 const tmp = require('tmp');
+const {firebaseUpload} = require('../../utils/firebase/firebase-init');
 
 module.exports = {
   routes: function(app) {
@@ -57,15 +58,16 @@ module.exports = {
   });
     app.post('/image', upload.single('image'), async (req, res) => {
       try {
-        console.log(req.headers);
+        // console.log(req.file);
         const buffer = await sharp(req.file.buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
-        const img = new Image({
-          image: {
-            data: buffer,
-            contentType: req.file.mimetype
-        }})
-        await img.save();
-        res.send('200');
+        // const img = new Image({
+        //   image: {
+        //     data: buffer,
+        //     contentType: req.file.mimetype
+        // }})
+        // await img.save();
+        const url = await firebaseUpload('images',buffer,req.file.originalname);
+        res.send(url);
       } catch (err) {
         console.log(err) 
         res.status(400).json(err);
