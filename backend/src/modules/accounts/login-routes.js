@@ -40,7 +40,8 @@ module.exports = {
   },
   getAccountId,
   invalidSessionMsg,
-  getCurrLogin: (req) => { //takes sessionId in query
+  getCurrLogin: (req) => { 
+    //takes sessionId in query
     const {sessionId} = req.query;
     const accountId = getAccountId(sessionId);
     return accountId;

@@ -6,7 +6,22 @@ const { upload } = require('../../utils/middleware/multer-upload');
 const sharp = require('sharp');
 const tmp = require('tmp');
 const {firebaseUpload} = require('../../utils/firebase/firebase-init');
+const { Account } = require('../accounts/models/account-model');
 
+const POST_TYPE = {
+  POST:'POST',
+  REPLIES: 'REPLIES',
+  MEDIA: 'MEDIA',
+  LIKES: 'LIKES'
+}
+const findPosts = async (username) => {
+  const accountId = await Account.find({username})._id;
+  if (!username || !accountId) {
+    return await Post.find({});
+  } else {
+    return await Post.find({accountId});
+  }
+}
 module.exports = {
   routes: function(app) {
     app.get('/timeline',async (req,res) => {
@@ -22,51 +37,43 @@ module.exports = {
         return res.status(500).json(err);
       }
     });
-    app.post('/post',async (req,res) => {
+    app.post('/posts',upload.single('image'),async (req,res) => {
       try {
         const accountId = getCurrLogin(req);
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //create post
-        const {} = req.body;
+        const {text} = req.body;
+        const buffer = await sharp(req.file.buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
+        const url = await firebaseUpload(accountId,buffer,req.file.originalname);
 
-        return res.status(200).json({posts: [], msg: 'api work in progress'});
+        const post = new Post({
+          accountId, text, images: [url]
+        })
+        await post.save();
+
+        return res.status(200).json({msg: 'post successfully uploaded'});
+      } catch(err) {
+        console.log(err)
+        return res.status(500).json(err);
+      }
+    }),
+    app.get('/posts', async (req,res) => {
+      try {
+        const {username,type} = req.query;
+        let posts;
+        switch (type) {
+          case POST_TYPE.POST:
+            posts = await findPosts(username);
+            break;
+          default:
+            break;
+        }
+        return res.status(200).json({posts: posts, msg: 'fetch successful'})
       } catch(err) {
         console.log(err)
         return res.status(500).json(err);
       }
     })
-
-    //testing image upload
-    app.get('/image', async (req, res) => {
-      try {
-        await fs.access("./uploads", (error) => {
-          if (error) {
-            fs.mkdirSync("./uploads");
-          }
-        });
-        const images = await Image.find({});
-        const imageArray = images.map((img) => {
-          return img.image;
-        })
-
-        return res.json(imageArray); //return images as buffer
-        
-      } catch (err) {
-        console.log(err)
-        res.status(400).json(err);
-      }
-      
-  });
-    app.post('/image', upload.single('image'), async (req, res) => {
-      try {
-        const buffer = await sharp(req.file.buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
-        const url = await firebaseUpload('images',buffer,req.file.originalname);
-        res.send(url);
-      } catch (err) {
-        console.log(err) 
-        res.status(400).json(err);
-      }
-    });
   },
 }
 
