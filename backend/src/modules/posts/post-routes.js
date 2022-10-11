@@ -37,17 +37,21 @@ module.exports = {
         return res.status(500).json(err);
       }
     });
-    app.post('/posts',upload.single('image'),async (req,res) => {
+    app.post('/posts',upload.array('images',4),async (req,res) => {
       try {
         const accountId = getCurrLogin(req);
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //create post
         const {text} = req.body;
-        const buffer = await sharp(req.file.buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
-        const url = await firebaseUpload(accountId,buffer,req.file.originalname);
+
+        const urls = []
+        for(let i = 0;i<req.files.length;i++) {
+          const buffer = await sharp(req.files[i].buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
+          urls.push(await firebaseUpload(accountId,buffer,req.files[i].originalname));
+        }
 
         const post = new Post({
-          accountId, text, images: [url]
+          accountId, text, images: [...urls]
         })
         await post.save();
 
