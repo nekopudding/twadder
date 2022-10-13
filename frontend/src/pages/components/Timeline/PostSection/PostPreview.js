@@ -12,7 +12,12 @@ import {ReactComponent as ShareIcon} from 'assets/icons/share.svg'
 
 
 function PostPreview({
-  displayName,username,time,body,media
+  displayName = 'Display Name',
+  username='username',
+  time='null',
+  text='Post content.',
+  images=[],
+  video=null
 }) {
   return (
     <>
@@ -22,10 +27,10 @@ function PostPreview({
             <div className={styles.avatar}></div>
             <div className={styles.headerText}>
               <div>
-                <span className={`bodyHeader ${styles.displayName}`}>Display Name</span>
-                <span className={`body ${styles.greyText}`}>@username · 1h</span>
+                <span className={`bodyHeader ${styles.displayName}`}>{displayName}</span>
+                <span className={`body ${styles.greyText}`}>@{username} · {time}h</span>
               </div>
-              <div className={`body ${styles.bodyText}`}>Post content.</div>
+              <div className={`body ${styles.bodyText}`}>{text}</div>
             </div>
           </div>
           <div className={styles.headerRight}>
@@ -34,7 +39,9 @@ function PostPreview({
             </div>
           </div>
         </div>
-        <div className={styles.media}></div>
+        <div className={styles.media}>
+          {images.map((i,ind)=> <img className={styles.image} key={ind} src={i} alt=''/>)}
+        </div>
         <div className={styles.actions}>
         <div className={styles.action}>
           <div className={styles.commentButton}><CommentIcon/></div>

@@ -7,10 +7,19 @@ import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import { autoResize } from 'utils/textarea-auto-resize'
 import { useState } from 'react'
 import { useRef } from 'react'
+import { getCookie } from 'utils/cookies'
+import axios from 'axios'
+import { baseURL } from 'utils/fetch-api'
+import { useDispatch, useSelector } from 'react-redux'
+import { setToast } from 'app/toastSlice'
 
 function InputBox() {
   const [images,setImages] = useState([]);
+  const [text,setText] = useState('');
   const imageInputRef = useRef();
+  const dispatch = useDispatch();
+  const toast = useSelector(state => state.toast);
+
   const addImages = (e) => {
     const newImages = e.target.files;
     setImages([...images,...newImages]);
@@ -24,12 +33,47 @@ function InputBox() {
     imgs.splice(index,1);
     setImages(imgs);
   }
+  const uploadPost = async () => {
+    try {
+      if (images.length > 4) {
+        return dispatch(setToast({update: !toast.update, msg: 'max 4 images allowed.'}))
+      } 
+      const fd = new FormData();
+      images.forEach(i =>fd.append('images',i))
+      fd.append('text',text);
+      const sessionId = getCookie('sessionId');
+      const res = await axios({
+        method: 'post',
+        url: `${baseURL}/posts`,
+        params: {sessionId},
+        data: fd
+      });
+      if (res.status === 200) {
+        dispatch(setToast({update: !toast.update, msg: res.data.msg}));
+        setImages([])
+        setText('');
+      }
+    }catch (err) {
+      dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
+    }
+  }
+  const updateText = (e)=> {
+    setText(e.target.value.trimLeft()) //removes leading spaces
+  }
+
   return (
     <>
       <div className={styles.inputContainer}>
         <div className={styles.avatar}></div>
         <div className={styles.inputEditor}>
-          <textarea className={`input ${styles.textarea}`} name="input" placeholder={`What's happening?`} onInput={(e) => autoResize(e.target)}/>
+          <textarea 
+            className={`input ${styles.textarea}`} 
+            name="input" 
+            placeholder={`What's happening?`} 
+            onInput={(e) => autoResize(e.target)}
+            value={text}
+            onChange={updateText}
+          />
           {images.map((i,ind) => {
             console.log(i);
             return (
@@ -64,7 +108,7 @@ function InputBox() {
                 <div className={styles.icon}><EmojiIcon/></div>
               </div>
             </div>
-            <button className={styles.button}>
+            <button className={styles.button} onClick={uploadPost}>
               <span className='bodyHeader'>Twadd</span>
             </button>
           </div>

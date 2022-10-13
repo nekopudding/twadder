@@ -9,7 +9,7 @@ const {firebaseUpload} = require('../../utils/firebase/firebase-init');
 const { Account } = require('../accounts/models/account-model');
 
 const POST_TYPE = {
-  POST:'POST',
+  POSTS:'POSTS',
   REPLIES: 'REPLIES',
   MEDIA: 'MEDIA',
   LIKES: 'LIKES'
@@ -66,8 +66,8 @@ module.exports = {
         const {username,type} = req.query;
         let posts;
         switch (type) {
-          case POST_TYPE.POST:
-            posts = await findPosts(username);
+          case POST_TYPE.POSTS:
+            posts = await findPosts(username); //this needs to be changed, as it fetches all types except likes/retweets
             break;
           default:
             break;
