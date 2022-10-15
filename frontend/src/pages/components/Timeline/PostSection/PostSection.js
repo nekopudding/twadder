@@ -28,7 +28,8 @@ function PostSection() {
       {posts.map(p => {
         return (
           <PostPreview
-            key={p.createdAt}
+            key={p._id}
+            id={p._id}
             displayName={p.displayName}
             username={p.username}
             time={p.createdAt}

@@ -47,7 +47,7 @@ module.exports = {
 
         const urls = []
         for(let i = 0;i<req.files.length;i++) {
-          const buffer = await sharp(req.files[i].buffer).resize(1024, 1024,{fit: 'contain'}).toBuffer();
+          const buffer = await sharp(req.files[i].buffer).resize(1024, 1024,{fit: 'inside'}).jpeg({ quality: 80 }).toBuffer();
           urls.push(await firebaseUpload(accountId,buffer,req.files[i].originalname));
         }
 

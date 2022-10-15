@@ -16,6 +16,9 @@ import { setToast } from "app/toastSlice";
 import axios from "axios";
 import { baseURL } from "utils/fetch-api";
 
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+TimeAgo.addDefaultLocale(en)
 
 function App() {
   const dispatch = useDispatch();

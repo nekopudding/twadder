@@ -1,6 +1,4 @@
 import React from 'react'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
 import styles from 'styles/css/PostPreview.module.css'
 import {ReactComponent as MoreIcon} from 'assets/icons/ellipsis.svg'
 import {ReactComponent as CommentIcon} from 'assets/icons/comment.svg'
@@ -17,7 +15,7 @@ import ReactTimeAgo from 'react-time-ago'
 function PostPreview({
   displayName = 'Display Name',
   username='username',
-  time='null',
+  time=undefined,
   text='Post content.',
   images=[],
   video=null,
@@ -25,7 +23,6 @@ function PostPreview({
   likes=0,
   retwadds=0
 }) {
-  TimeAgo.addDefaultLocale(en)
   return (
     <>
       <div className={styles.container}>
@@ -47,7 +44,16 @@ function PostPreview({
           </div>
         </div>
         {images.length > 0 && <div className={styles.media}>
-          {images.map((i,ind)=> <img className={styles.image} key={ind} src={i} alt=''/>)}
+          {images.length !== 3 && images.map((i,ind)=> <img className={styles.image} key={ind} src={i} alt=''/>)}
+          {images.length === 3 &&
+          <>
+            <img className={styles.image} src={images[0]} alt=''/>
+            <div className={styles.col}>
+              <img className={styles.image} src={images[1]} alt=''/>
+              <img className={styles.image} src={images[2]} alt=''/>
+            </div>
+          </>
+          }
         </div>}
         <div className={styles.actions}>
           <div className={`${styles.action} ${styles.commentAction}`}>
