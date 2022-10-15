@@ -1,3 +1,5 @@
 .env
 /node_modules
 /build
+
+/src/utils/credentials/*

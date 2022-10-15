@@ -6,13 +6,22 @@ import {ReactComponent as RetweetIcon} from 'assets/icons/retweet.svg'
 import {ReactComponent as LikeIcon} from 'assets/icons/like-outlined.svg'
 import {ReactComponent as LikeFilledIcon} from 'assets/icons/like-filled.svg'
 import {ReactComponent as ShareIcon} from 'assets/icons/share.svg'
+import ReactTimeAgo from 'react-time-ago'
 
 
 
 
 
 function PostPreview({
-  displayName,username,time,body,media
+  displayName = 'Display Name',
+  username='username',
+  time=undefined,
+  text='Post content.',
+  images=[],
+  video=null,
+  comments=0,
+  likes=0,
+  retwadds=0
 }) {
   return (
     <>
@@ -22,10 +31,10 @@ function PostPreview({
             <div className={styles.avatar}></div>
             <div className={styles.headerText}>
               <div>
-                <span className={`bodyHeader ${styles.displayName}`}>Display Name</span>
-                <span className={`body ${styles.greyText}`}>@username · 1h</span>
+                <span className={`bodyHeader ${styles.displayName}`}>{displayName}</span>
+                <span className={`body ${styles.greyText}`}>@{username}&nbsp;·&nbsp;<ReactTimeAgo date={time} locale="en-US" timeStyle="twitter"/></span>
               </div>
-              <div className={`body ${styles.bodyText}`}>Post content.</div>
+              <div className={`body ${styles.bodyText}`}>{text}</div>
             </div>
           </div>
           <div className={styles.headerRight}>
@@ -34,14 +43,31 @@ function PostPreview({
             </div>
           </div>
         </div>
-        <div className={styles.media}></div>
+        {images.length > 0 && <div className={styles.media}>
+          {images.length !== 3 && images.map((i,ind)=> <img className={styles.image} key={ind} src={i} alt=''/>)}
+          {images.length === 3 &&
+          <>
+            <img className={styles.image} src={images[0]} alt=''/>
+            <div className={styles.col}>
+              <img className={styles.image} src={images[1]} alt=''/>
+              <img className={styles.image} src={images[2]} alt=''/>
+            </div>
+          </>
+          }
+        </div>}
         <div className={styles.actions}>
-        <div className={styles.action}>
-          <div className={styles.commentButton}><CommentIcon/></div>
-          <span className={`subText ${styles.actionText}`}>0</span>
-        </div>
-          <div className={styles.retwaddButton}><RetweetIcon/></div>
-          <div className={styles.likeButton}><LikeIcon/></div>
+          <div className={`${styles.action} ${styles.commentAction}`}>
+            <div className={styles.commentButton}><CommentIcon/></div>
+            <span className={`subText ${styles.actionText}`}>{comments}</span>
+          </div>
+          <div className={`${styles.action} ${styles.retwaddAction}`}>
+            <div className={styles.retwaddButton}><RetweetIcon/></div>
+            <span className={`subText ${styles.actionText}`}>{retwadds}</span>
+          </div>
+          <div className={`${styles.action} ${styles.likeAction}`}>
+            <div className={styles.likeButton}><LikeIcon/></div>
+            <span className={`subText ${styles.actionText}`}>{likes}</span>
+          </div>
           <div className={styles.shareButton}><ShareIcon/></div>
         </div>
       </div>

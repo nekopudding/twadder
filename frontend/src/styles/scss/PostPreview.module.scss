@@ -56,59 +56,138 @@
 }
 .media {
   background-color: v.$clrBgGrey;
-  min-height: 272px;
-  max-width: 506px;
+  height: 290px;
+  width: 506px;
   border-radius: 12px;
-}
-.actions {
- margin-top: v.$s*0.5;
- margin-bottom: v.$s*0.5;
- position: relative;
- display: flex;
- justify-content: space-between;
- left: v.$s*-1;
- right: 0;
- & > * {
-  width: 35px;
-  height: 35px;
- }
- .action {
   display: flex;
-  align-items: center;
-  @media (any-hover: hover) { 
-    &:hover > div,&:hover > span {
-      background-color: v.$clrMainAccentHover;
-      color: v.$clrMainAccent;
-      & > svg {
-        fill: v.$clrMainAccent;
-      }
+  flex-wrap: wrap;
+  overflow: hidden;
+  &::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid v.$clrBlack;
+  }
+  .image:first-child:nth-last-child(2), //selects if there are 2 at this level
+  .image:first-child:nth-last-child(2) ~ .image {
+    width: 50%;
+  }
+  .image:first-child:nth-last-child(4),
+  .image:first-child:nth-last-child(4) ~ .image { //selects if there are 4 at this level
+    width: 50%;
+    height: 50%;
+  }
+  .col { //for 3 images, the second two images are displayed in a column
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .image:first-child:nth-last-child(2),
+    .image:first-child:nth-last-child(2) ~ .image {
+      width: 100%;
+      height: 50%;
     }
   }
-  &:active div {
-    background-color: v.$clrMainAccentActive;
+}
+.actions {
+  margin-top: v.$s*0.5;
+  margin-bottom: v.$s*0.5;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  left: v.$s*-1;
+  right: 0;
+  & > * {
+    width: 35px;
+    height: 35px;
+  }
+  .action {
+    display: flex;
+    align-items: center;
+    position: relative;
+    & > * {
+      display: flex;
+      align-items: center;
+      position: absolute;
+    }
+    & > div {
+      left: 0px;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      border-radius: 9999px;
+    }
+    & > span {
+      left: 26px;
+      user-select: none;
+    }
   }
 }
 .actionText {
   padding: 0 v.$s*1.5
 }
- svg,.actionText {
+svg,.actionText {
   width: 16px;
+  height: 16px;
   fill: v.$clrTextGrey;
   color: v.$clrTextGrey;
- }
- .commentButton {
-  @include v.iconButtonMainAccent;
- }
- .retwaddButton {
-  @include v.retwaddButton;
-  & svg {
-    width: 21px;
+}
+.action { //individual button colors
+  @media (any-hover: hover) { 
+    &:hover{
+      &.commentAction {
+        .commentButton {
+          background-color: v.$clrMainAccentHover;
+          & > svg {
+            fill: v.$clrMainAccent;
+          }
+        }
+        &.commentAction span {
+          color: v.$clrMainAccent;
+        }
+      }
+      &.retwaddAction {
+        .retwaddButton {
+          background-color: v.$clrRetwaddHover;
+          & > svg {
+            fill: v.$clrRetwadd;
+          }
+        }
+        &.retwaddAction span {
+          color: v.$clrRetwadd;
+        }
+      }
+      &.likeAction {
+        .likeButton {
+          background-color: v.$clrLikeHover;
+          & > svg {
+            fill: v.$clrLike;
+          }
+        }
+        &.likeAction span {
+          color: v.$clrLike;
+        }
+      }
+    }
   }
- }
- .likeButton {
-  @include v.likeButton;
- }
- .shareButton {
+  &:active {
+    &.commentAction .commentButton {
+      background-color: v.$clrMainAccentActive;
+    }
+    &.retwaddAction .retwaddButton {
+      background-color: v.$clrRetwaddActive;
+    }
+    &.likeAction .likeButton {
+      background-color: v.$clrLikeActive;
+    }
+  }
+}
+.shareButton {
   @include v.iconButtonMainAccent;
   & svg, &:hover svg {
     fill: none;
@@ -120,5 +199,4 @@
   &:hover svg * {
     stroke: v.$clrMainAccent;
   }
- }
 }

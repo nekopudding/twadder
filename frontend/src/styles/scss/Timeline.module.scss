@@ -82,3 +82,46 @@ $border: 1px v.$clrBgGrey solid;
   height: 0;
   border-bottom: $border;
 }
+.imageUploadInput {
+  display: none;
+}
+
+.imagePreviewContainer {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  margin: v.$s*1.5 0;
+  .imageInputPreview {
+    object-fit: contain;
+    width: 100%;
+    border-radius: v.$s * 1.5;
+  }
+  .removeButtonContainer {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+    background-color: rgb(48, 48, 48);
+    opacity: 0.9;
+    &:hover {
+      background-color: rgb(28, 28, 28)
+    }
+    &:active {
+      background-color: black;
+    }
+
+    .icon {
+      width: 12px;
+      height: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.5;
+    }
+  }
+}

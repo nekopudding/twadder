@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const { accountListFormat, URLFormat, displayNameFormat, bioFormat, locationFormat, accountIdFormat, birthdayFormat, isPrivateFormat } = require('../../../utils/mongoose-types')
+const { accountListFormat, displayNameFormat, bioFormat, locationFormat, accountIdFormat, birthdayFormat, isPrivateFormat, urlFormat } = require('../../../utils/mongoose-types')
 
 
 const profileSchema = new mongoose.Schema({
-  avatar: URLFormat,
-  banner: URLFormat,
+  avatar: urlFormat,
+  banner: urlFormat,
   displayName: displayNameFormat,
   bio: bioFormat,
   location: locationFormat,
-  website: URLFormat,
+  website: urlFormat,
   accountId: accountIdFormat,
   birthday: birthdayFormat,
   following: accountListFormat,

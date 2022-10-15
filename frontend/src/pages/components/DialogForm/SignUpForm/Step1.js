@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
-import { fetchApi } from 'utils/fetch-api';
+import { baseURL } from 'utils/fetch-api';
 import StyledInput from '../StyledInput';
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
+import axios from 'axios';
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const nameRegex = /^[a-zA-Z0-9]{1,16}$/;
@@ -61,12 +62,20 @@ function Step1({
 
   const submitForm = async (e)=> {
     e.preventDefault();
-    
-    const res = await fetchApi(`/signup/verify?email=${formData.email}`,'GET');
-    const {msg} = await res.json();
-    if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
-    if (res.status === 200)
-      changeStep(2);
+
+    try {
+      const res = await axios({
+        method: 'get',
+        url: `${baseURL}/signup/verify?`,
+        params: {email: formData.email}
+      });
+      const {msg} = res.data;
+      if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
+      if (res.status === 200)
+        changeStep(2);
+    }catch(err) {
+      dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
+    }
   }
 
   return (

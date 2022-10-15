@@ -2,7 +2,11 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors');
-mongoose.connect((process.env.MONGO_BASE_URL || 'mongodb://localhost:27017') + '/twadderDB')
+const port = process.env.PORT || 4000;
+mongoose.connect((process.env.MONGO_BASE_URL || 'mongodb://localhost:27017') + '/twadderDB',
+  { useNewUrlParser: true, useUnifiedTopology: true }
+  , err => console.log(err || 'mongoose connected')
+);
 
 const app = express();
 app.use(cors());
@@ -15,9 +19,10 @@ app.get('/',(req,res) => {
 require('./modules/accounts/profile-routes').routes(app);
 require('./modules/accounts/login-routes.js').routes(app);
 require('./modules/accounts/signup-routes.js').routes(app);
+require('./modules/posts/post-routes').routes(app);
 require('./utils/debug')();
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running at port ${process.env.PORT || 3000}`)
+app.listen(port, () => {
+  console.log(`Server running at port ${port}`)
 })
 

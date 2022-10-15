@@ -76,6 +76,8 @@ module.exports = {
         return res.status(401).json({msg: 'invalid code submitted'})
       } else if (await Account.findOne({email})) {
         return res.status(400).json({msg: 'an account with this email already exists'});
+      } else if (await Account.findOne({username})) {
+        return res.status(400).json({msg: 'an account with this username already exists'});
       } else {
         const account = new Account({username,
           passwordHash: await encrypt(password),
