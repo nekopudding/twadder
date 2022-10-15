@@ -25,16 +25,18 @@ function PostSection() {
   },[])
   return (
     <>
-      <PostPreview/>
-      {posts.map(p => 
-        <PostPreview
-          key={p.createdAt}
-          displayName='test'
-          username={p.accountId}
-          time={p.createdAt}
-          text={p.text}
-          images={p.images}
-        />
+      {posts.map(p => {
+        return (
+          <PostPreview
+            key={p.createdAt}
+            displayName={p.displayName}
+            username={p.username}
+            time={p.createdAt}
+            text={p.text}
+            images={p.images}
+          />
+        )
+      }
       )}
     </>
   )

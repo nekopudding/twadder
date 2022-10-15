@@ -17,7 +17,10 @@ function PostPreview({
   time='null',
   text='Post content.',
   images=[],
-  video=null
+  video=null,
+  comments=0,
+  likes=0,
+  retwadds=0
 }) {
   return (
     <>
@@ -39,16 +42,22 @@ function PostPreview({
             </div>
           </div>
         </div>
-        <div className={styles.media}>
+        {images.length > 0 && <div className={styles.media}>
           {images.map((i,ind)=> <img className={styles.image} key={ind} src={i} alt=''/>)}
-        </div>
+        </div>}
         <div className={styles.actions}>
-        <div className={styles.action}>
-          <div className={styles.commentButton}><CommentIcon/></div>
-          <span className={`subText ${styles.actionText}`}>0</span>
-        </div>
-          <div className={styles.retwaddButton}><RetweetIcon/></div>
-          <div className={styles.likeButton}><LikeIcon/></div>
+          <div className={`${styles.action} ${styles.commentAction}`}>
+            <div className={styles.commentButton}><CommentIcon/></div>
+            <span className={`subText ${styles.actionText}`}>{comments}</span>
+          </div>
+          <div className={`${styles.action} ${styles.retwaddAction}`}>
+            <div className={styles.retwaddButton}><RetweetIcon/></div>
+            <span className={`subText ${styles.actionText}`}>{retwadds}</span>
+          </div>
+          <div className={`${styles.action} ${styles.likeAction}`}>
+            <div className={styles.likeButton}><LikeIcon/></div>
+            <span className={`subText ${styles.actionText}`}>{likes}</span>
+          </div>
           <div className={styles.shareButton}><ShareIcon/></div>
         </div>
       </div>

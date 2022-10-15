@@ -7,6 +7,7 @@ const sharp = require('sharp');
 const tmp = require('tmp');
 const {firebaseUpload} = require('../../utils/firebase/firebase-init');
 const { Account } = require('../accounts/models/account-model');
+const { getProfile } = require('../accounts/profile-routes');
 
 const POST_TYPE = {
   POSTS:'POSTS',
@@ -72,7 +73,16 @@ module.exports = {
           default:
             break;
         }
-        return res.status(200).json({posts: posts, msg: 'fetch successful'})
+        const viewablePosts = await Promise.all(await posts.map(async p => {
+          const profile = await getProfile(p.accountId);
+          return {
+            ...p.toObject(),
+            displayName: profile.displayName,
+            username: profile.username,
+            accountId: undefined
+          }
+        }))
+        return res.status(200).json({posts: viewablePosts, msg: 'fetch successful'})
       } catch(err) {
         console.log(err)
         return res.status(500).json(err);
