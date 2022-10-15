@@ -1,4 +1,6 @@
 import React from 'react'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
 import styles from 'styles/css/PostPreview.module.css'
 import {ReactComponent as MoreIcon} from 'assets/icons/ellipsis.svg'
 import {ReactComponent as CommentIcon} from 'assets/icons/comment.svg'
@@ -6,6 +8,7 @@ import {ReactComponent as RetweetIcon} from 'assets/icons/retweet.svg'
 import {ReactComponent as LikeIcon} from 'assets/icons/like-outlined.svg'
 import {ReactComponent as LikeFilledIcon} from 'assets/icons/like-filled.svg'
 import {ReactComponent as ShareIcon} from 'assets/icons/share.svg'
+import ReactTimeAgo from 'react-time-ago'
 
 
 
@@ -22,6 +25,7 @@ function PostPreview({
   likes=0,
   retwadds=0
 }) {
+  TimeAgo.addDefaultLocale(en)
   return (
     <>
       <div className={styles.container}>
@@ -31,7 +35,7 @@ function PostPreview({
             <div className={styles.headerText}>
               <div>
                 <span className={`bodyHeader ${styles.displayName}`}>{displayName}</span>
-                <span className={`body ${styles.greyText}`}>@{username} · {time}h</span>
+                <span className={`body ${styles.greyText}`}>@{username}&nbsp;·&nbsp;<ReactTimeAgo date={time} locale="en-US" timeStyle="twitter"/></span>
               </div>
               <div className={`body ${styles.bodyText}`}>{text}</div>
             </div>
