@@ -32,7 +32,7 @@ function PostPreview({
             <div className={styles.headerText}>
               <div>
                 <span className={`bodyHeader ${styles.displayName}`}>{displayName}</span>
-                <span className={`body ${styles.greyText}`}>@{username}&nbsp;·&nbsp;<ReactTimeAgo date={time} locale="en-US" timeStyle="twitter"/></span>
+                <span className={`body ${styles.greyText}`}>@{username}&nbsp;·&nbsp;<ReactTimeAgo date={new Date(time)} locale="en-US" timeStyle="twitter"/></span>
               </div>
               <div className={`body ${styles.bodyText}`}>{text}</div>
             </div>

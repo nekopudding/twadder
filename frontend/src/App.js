@@ -41,7 +41,7 @@ function App() {
           dispatch(setCurrUser({...profile}))
         }
       }catch (err) {
-        console.log('user is not logged in');
+        console.log(err);
         window.location.href = '/signup'
       }
     } 

@@ -41,11 +41,10 @@ function InputBox() {
       const fd = new FormData();
       images.forEach(i =>fd.append('images',i))
       fd.append('text',text);
-      const sessionId = getCookie('sessionId');
       const res = await axios({
         method: 'post',
         url: `${baseURL}/posts`,
-        params: {sessionId},
+        params: {sessionId: getCookie('sessionId')},
         data: fd
       });
       if (res.status === 200) {
