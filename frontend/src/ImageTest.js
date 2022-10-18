@@ -1,3 +1,7 @@
+/**
+ * Test code.
+ * Used to test the image upload functionality for firebase.
+ */
 import React from 'react'
 import { useState } from 'react'
 import { baseURL } from 'utils/fetch-api';

@@ -1,8 +1,8 @@
+/*
+Reusable theme for the application.
+*/
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;700&display=swap');
 
-/* ------------------- */
-/* Variables            */
-/* ------------------- */
 $s: 8px;
 
 /* Colors */
@@ -15,6 +15,7 @@ $clrRetwadd: #00ba7c;
 $clrLike: #f91880;
 $clrError: rgb(244, 33, 46);
 
+/* background colors for interactable elements */
 $clrWhiteHover: rgba(231, 233, 234,0.1);
 $clrWhiteActive: rgba(231, 233, 234,0.2);
 $clrMainAccentHover: rgba(118, 29, 240,0.2);

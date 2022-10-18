@@ -1,16 +1,18 @@
-Built with:
+# Twadder - Ultimate Twitter Clone
+Twadder is a fully functional twitter clone. Users can create an account and create posts/comments, message other users in realtime.
+
+## Built with:
 - frontend
   - scss && css modules && emotion/react
   - React
-  - css modules
 - cloud
-  - firebase hosting
-- backend
+  - firebase frontend hosting
+  - vultr backend hosting
+  - database - mongodb atlas, firebase cloud storage (files)
   - firestore for messages
-  - firebase storage for images
-  - nodejs server
+- backend
+  - express server
   - mongoose for database
-  - bcrypt for security
 
-
-site deployed at: [link](https://twadder-b2796.firebaseapp.com)
+## Deployment
+[Site Deployed Here](https://twadder-b2796.firebaseapp.com)
