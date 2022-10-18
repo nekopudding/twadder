@@ -5,6 +5,9 @@ const { Account } = require('./models/account-model');
 const { EmailVerification } = require('./models/email-verification-model.js');
 const { Profile } = require('./models/profile-model');
 
+/**
+ * Express endpoints for account creation.
+ */
 module.exports = {
   routes: function(app) {
   const transporter = nodemailer.createTransport({

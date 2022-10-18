@@ -1,3 +1,6 @@
+/**
+ * Express endpoints for the public facing profile.
+ */
 require('dotenv').config();
 const { getCurrLogin, invalidSessionMsg } = require('./login-routes');
 const { Account } = require('./models/account-model');

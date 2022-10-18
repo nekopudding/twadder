@@ -1,7 +1,11 @@
 require('dotenv').config()
 
+/**
+ * Configurations for local development and deployment onto 
+ * cloud.
+ */
 module.exports = {
-  url: (process.env.MONGO_BASE_URL || 'mongodb://localhost:27017'),
-  database: '/twadderDB',
-  imgBucket: "photos",
+  mongoUrl: (process.env.MONGO_BASE_URL || 'mongodb://localhost:27017'),
+  dbName: '/twadderDB',
+  firebaseCSBucket: 'twadder-b2796.appspot.com'
 };

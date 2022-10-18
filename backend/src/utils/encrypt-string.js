@@ -1,3 +1,8 @@
+/**
+ * Encrypts and validates the string passed in using bcrypt.
+ * Use for things like passwords so that we don't store plain passwords
+ * within our database.
+ */
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 

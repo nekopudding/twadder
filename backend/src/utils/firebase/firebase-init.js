@@ -1,16 +1,29 @@
-// https://stackoverflow.com/questions/39848132/upload-files-to-firebase-storage-using-node-js
+/**
+ * Firebase is used for storing media content files such as images and videos.
+ * https://stackoverflow.com/questions/39848132/upload-files-to-firebase-storage-using-node-js
+ */
 var admin = require("firebase-admin");
 const {format} = require('util');
+const { firebaseCSBucket } = require("../config");
 var serviceAccount = require("../credentials/twadder-b2796-firebase-adminsdk-3w3mb-1dccf355e0.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: "twadder-b2796.appspot.com"
+    storageBucket: firebaseCSBucket
 });
 
 var bucket = admin.storage().bucket();
 
-//https://stackoverflow.com/questions/65372182/firebase-function-upload-to-storage
+//
+/**
+ * Upload a file onto firebase cloud storage.
+ * 
+ * https://stackoverflow.com/questions/65372182/firebase-function-upload-to-storage
+ * @param {*} path - path from the root of the bucket
+ * @param {*} buffer - contents of the file as a buffer
+ * @param {*} filename - name of file to use
+ * @returns public url of the uploaded file
+ */
 async function firebaseUpload(path,buffer,filename) {
   try {
     const today = new Date()

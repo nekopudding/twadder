@@ -1,4 +1,8 @@
-// https://stackoverflow.com/questions/45395369/how-to-get-console-log-line-numbers-shown-in-nodejs
+/**
+ * Including this file in our app will allow each console
+ * output to display the line number where the log was called.
+ * https://stackoverflow.com/questions/45395369/how-to-get-console-log-line-numbers-shown-in-nodejs
+ */
 'use strict';
 
 const path = require('path');

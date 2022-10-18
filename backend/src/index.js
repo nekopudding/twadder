@@ -2,9 +2,10 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { mongoUrl, dbName } = require('./utils/config');
 
 const port = process.env.PORT || 4000;
-mongoose.connect((process.env.MONGO_BASE_URL || 'mongodb://localhost:27017') + '/twadderDB',
+mongoose.connect(mongoUrl + dbName,
   { useNewUrlParser: true, useUnifiedTopology: true }
   , err => console.log(err || 'mongoose connected')
 );

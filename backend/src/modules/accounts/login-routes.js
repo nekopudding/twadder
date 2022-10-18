@@ -1,3 +1,7 @@
+/**
+ * Express endpoint for logging in, maintains the current 
+ * active sessions.
+ */
 require('dotenv').config();
 const { validate } = require('../../utils/encrypt-string');
 const { Account } = require('./models/account-model');

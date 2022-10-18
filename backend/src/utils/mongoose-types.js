@@ -1,3 +1,6 @@
+/**
+ * Contains all the types we use to define our mongoose models.
+ */
 const mongoose = require('mongoose');
 
 const repostSchema = new mongoose.Schema({

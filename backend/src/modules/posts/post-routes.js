@@ -1,3 +1,7 @@
+/**
+ * Express endpoints for the post module.
+ * add/update/delete posts
+ */
 require('dotenv').config();
 const { getCurrLogin, invalidSessionMsg } = require('../accounts/login-routes');
 const { Post, Image } = require('./models/post-model');
@@ -15,6 +19,12 @@ const POST_TYPE = {
   MEDIA: 'MEDIA',
   LIKES: 'LIKES'
 }
+
+/**
+ * Find all posts, or posts by a specified user.
+ * @param {*} username - username as specified in the user account
+ * @returns array of posts by that user.
+ */
 const findPosts = async (username) => {
   const accountId = await Account.find({username})._id;
   if (!username || !accountId) {
