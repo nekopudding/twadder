@@ -10,12 +10,12 @@ const { Profile } = require('./models/profile-model');
 const getProfile = async (accountId) => {
   if (!accountId) throw {
     name: Error,
-    message: "accountId not provided"
+    msg: "accountId not provided"
   }
   const account = await Account.findOne({_id: accountId});
   const profile = await Profile.findOne({accountId: accountId});
   if (!account || !profile) throw { name: Error, 
-      message: "account not found"	
+      msg: "account not found"	
   }
 
   return {

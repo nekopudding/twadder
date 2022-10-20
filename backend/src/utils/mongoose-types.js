@@ -9,6 +9,7 @@ const repostSchema = new mongoose.Schema({
     required: true
   }
 }, {timestamps: true});
+const RepostModel = new mongoose.model('Repost',repostSchema);
 
 const urlRegex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
 const displayNameRegex = /^[a-zA-Z0-9]{1,16}$/
@@ -100,5 +101,6 @@ module.exports = {
       match: urlRegex
     }],
     default: []
-  }
+  },
+  RepostModel
 }
