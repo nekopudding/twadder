@@ -13,6 +13,7 @@ import ReactTimeAgo from 'react-time-ago'
 
 
 function PostPreview({
+  id,
   displayName = 'Display Name',
   username='username',
   time=undefined,

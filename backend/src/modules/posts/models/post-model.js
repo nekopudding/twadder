@@ -12,7 +12,8 @@ const postSchema = new mongoose.Schema({
   video: urlFormat,
   likes: repostListFormat,
   retwadds: repostListFormat,
-  replies: repliesFormat
+  replies: repliesFormat,
+  replyingTo: String
 },{timestamps: true});
 
 module.exports = {

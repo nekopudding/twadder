@@ -2,6 +2,13 @@
 
 <!-- Generated File tree using: -->
 <!-- https://marketplace.visualstudio.com/items?itemName=Shinotatwu-DS.file-tree-generator -->
+
+## Table of Contents
+- [File Structure](#file-structure)
+- [API Endpoints](#available-api-endpoints)
+  - [Accounts](#accounts)
+  - [Posts](#posts)
+## File Structure
 ```
 📦src
  ┣ 📂assets
@@ -33,3 +40,85 @@
  ┣ 📜.DS_Store
  ┗ 📜index.js
  ```
+
+ ## Available API Endpoints
+
+### Accounts
+```
+POST /login
+```
+Body:
+- username: String
+- password: String
+
+Response:
+- sessionId
+
+```
+GET /me/profile
+```
+Params: 
+- sessionId
+
+```
+GET /signup/verify
+```
+Description: get verification code send to your mailbox.
+
+Params:
+- email
+
+```
+POST /signup/verify
+```
+Description: verify the email.
+
+Body:
+- email
+- verificationCode
+
+Response:
+- status 200 if valid code
+
+```
+POST /signup
+```
+Body:
+- username
+- password
+- email
+- enableNotifications
+- verificationCode
+- displayName
+- birthday
+
+Response:
+- status 200 if account created
+
+### Posts
+```
+POST /posts
+```
+Params: 
+- sessionId
+
+FormData:
+- text
+- images
+- replyingTo: username
+
+```
+GET /posts
+```
+Params:
+- type: POSTS/REPLIES/MEDIA/LIKES
+- username: null (for all users) or an existing user
+
+Response:
+- posts: array of posts
+
+```
+PUT /posts/:id
+```
+Params:
+- mode: LIKE/RETWEET/

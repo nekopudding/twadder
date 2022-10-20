@@ -53,8 +53,12 @@ module.exports = {
         const accountId = getCurrLogin(req);
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //create post
-        const {text} = req.body;
+        //replyingTo should be username
+        const {text,replyingTo} = req.body;
 
+        if (replyingTo && !await Account.findOne({username: replyingTo})) {
+          throw {Type: Error, msg: 'cannot reply to a user that doesn\'t exist'}
+        }
         const urls = []
         for(let i = 0;i<req.files.length;i++) {
           const buffer = await sharp(req.files[i].buffer).resize(1024, 1024,{fit: 'inside'}).jpeg({ quality: 80 }).toBuffer();
@@ -62,14 +66,15 @@ module.exports = {
         }
 
         const post = new Post({
-          accountId, text, images: [...urls]
+          accountId, text, images: [...urls],
+          replyingTo
         })
         await post.save();
 
         return res.status(200).json({msg: 'post successfully uploaded'});
       } catch(err) {
         console.log(err)
-        return res.status(500).json(err);
+        return res.status(400).json(err);
       }
     }),
     app.get('/posts', async (req,res) => {
