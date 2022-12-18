@@ -12,12 +12,17 @@ const tmp = require('tmp');
 const {firebaseUpload} = require('../../utils/firebase/firebase-init');
 const { Account } = require('../accounts/models/account-model');
 const { getProfile } = require('../accounts/profile-routes');
+const { RepostModel } = require('../../utils/mongoose-types');
 
 const POST_TYPE = {
   POSTS:'POSTS',
   REPLIES: 'REPLIES',
   MEDIA: 'MEDIA',
   LIKES: 'LIKES'
+}
+const PUT_POST_MODE = {
+  LIKE: 'LIKE',
+  RETWEET: 'RETWEET'
 }
 
 /**
@@ -32,6 +37,10 @@ const findPosts = async (username) => {
   } else {
     return await Post.find({accountId});
   }
+}
+
+const hasAccountId = (list,accountId) => {
+  return list.filter(e => e.accountId === accountId).length > 0
 }
 module.exports = {
   routes: function(app) {
@@ -90,11 +99,29 @@ module.exports = {
         }
         const viewablePosts = await Promise.all(await posts.map(async p => {
           const profile = await getProfile(p.accountId);
+          const viewableLikes = await Promise.all(await p.likes.map(async l => {
+            const {username} = await Account.findById(l.accountId);
+            return {
+              ...l,
+              accountId: undefined,
+              username
+            }
+          }));
+          const viewableRetwadds = await Promise.all(await p.retwadds.map(async r => {
+            const {username} = await Account.findById(r.accountId);
+            return {
+              ...r,
+              accountId: undefined,
+              username
+            }
+          }))
           return {
             ...p.toObject(),
             displayName: profile.displayName,
             username: profile.username,
-            accountId: undefined
+            accountId: undefined,
+            likes: viewableLikes,
+            retwadds: viewableRetwadds
           }
         }))
         return res.status(200).json({posts: viewablePosts, msg: 'fetch successful'})
@@ -102,7 +129,40 @@ module.exports = {
         console.log(err)
         return res.status(500).json(err);
       }
+    });
+    app.put('/posts/:id', async (req,res) => {
+      return res.status(200).send('testtest');
+      try {
+        console.log('updating')
+
+        const postId = req.params.id;
+        const {mode} = req.body;
+        const accountId = getCurrLogin(req);
+
+
+        if (mode === PUT_POST_MODE.LIKE) {
+          const post = await Post.findById(postId);
+          if(hasAccountId(post.likes,accountId)) {
+            const post = await Post.updateOne({_id: postId},{
+              $pull: {
+                likes: [{accountId}]
+              }
+            })
+            console.log(post);
+          } else {
+            const newLike = new RepostModel({accountId});
+            const post = await Post.updateOne({_id: postId},{
+              $push: {
+                likes: newLike
+              }
+            })
+          }
+        }
+        res.status(200).json({msg: 'update successful'});
+      } catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+      }
     })
-  },
-}
+}}
 

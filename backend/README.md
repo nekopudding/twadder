@@ -57,7 +57,7 @@ Response:
 ```
 GET /me/profile
 ```
-Params: 
+Query: 
 - sessionId
 
 ```
@@ -65,7 +65,7 @@ GET /signup/verify
 ```
 Description: get verification code send to your mailbox.
 
-Params:
+Query:
 - email
 
 ```
@@ -99,7 +99,7 @@ Response:
 ```
 POST /posts
 ```
-Params: 
+Query: 
 - sessionId
 
 FormData:
@@ -110,7 +110,7 @@ FormData:
 ```
 GET /posts
 ```
-Params:
+Query:
 - type: POSTS/REPLIES/MEDIA/LIKES
 - username: null (for all users) or an existing user
 
@@ -120,5 +120,11 @@ Response:
 ```
 PUT /posts/:id
 ```
-Params:
-- mode: LIKE/RETWEET/
+Params: 
+- id: postId
+
+Query:
+- sessionId
+
+Body:
+- mode: LIKE/RETWEET
