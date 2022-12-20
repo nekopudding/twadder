@@ -13,6 +13,7 @@ const encrypt = async (s) => {
 }
 
 const validate = async (s, hash) => {
+  if (!s || !hash) throw {msg: 'username not found'};
   const result = await bcrypt.compare(s,hash);
   // console.log(result)
   return result;

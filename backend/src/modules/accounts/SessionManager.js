@@ -37,6 +37,8 @@ function SessionManager () {
   
   this.middleware = (req,res,next) => {
     const token = getToken(req?.headers?.cookie);
+    // console.log('token:',token)
+    // console.log('sessions:',sessions);
     if (!token || !sessions[token]) {
       return next(new SessionError());
     }

@@ -13,6 +13,7 @@ const {firebaseUpload} = require('../../utils/firebase/firebase-init');
 const { Account } = require('../accounts/models/account-model');
 const { getProfile } = require('../accounts/profile-routes');
 const { RepostModel } = require('../../utils/mongoose-types');
+const { Profile } = require('../accounts/models/profile-model');
 
 const POST_TYPE = {
   POSTS:'POSTS',
@@ -23,20 +24,6 @@ const POST_TYPE = {
 const PUT_POST_MODE = {
   LIKE: 'LIKE',
   RETWEET: 'RETWEET'
-}
-
-/**
- * Find all posts, or posts by a specified user.
- * @param {*} username - username as specified in the user account
- * @returns array of posts by that user.
- */
-const findPosts = async (username) => {
-  const accountId = await Account.find({username})._id;
-  if (!username || !accountId) {
-    return await Post.find({});
-  } else {
-    return await Post.find({accountId});
-  }
 }
 
 const hasAccountId = (list,accountId) => {
@@ -88,43 +75,30 @@ module.exports = {
     }),
     app.get('/posts', async (req,res) => {
       try {
-        const {username,type} = req.query;
-        let posts;
-        switch (type) {
-          case POST_TYPE.POSTS:
-            posts = await findPosts(username); //this needs to be changed, as it fetches all types except likes/retweets
-            break;
-          default:
-            break;
-        }
-        const viewablePosts = await Promise.all(await posts.map(async p => {
-          const profile = await getProfile(p.accountId);
-          const viewableLikes = await Promise.all(await p.likes.map(async l => {
-            const {username} = await Account.findById(l.accountId);
-            return {
-              ...l,
-              accountId: undefined,
-              username
-            }
-          }));
-          const viewableRetwadds = await Promise.all(await p.retwadds.map(async r => {
-            const {username} = await Account.findById(r.accountId);
-            return {
-              ...r,
-              accountId: undefined,
-              username
-            }
+        //gets the posts, then join it with metadata
+        Post.find({})
+        .then(posts => { //append user information
+          return Promise.all(posts.map(p => {
+              return new Promise((resolve,reject) => {
+                getProfile(p.accountId).then(profile => {
+                  if (!profile) {
+                    //delete the post if account has been deleted but somehow post was not removed
+                    Post.deleteMany({accountId:p.accountId}); 
+                  }
+                  resolve({
+                    username: profile?.username,
+                    displayname: profile?.displayname,
+                    ...p.toObject(),
+                    accountId: undefined,
+                    likes:[],retwadds:[]
+                  });
+                })
+              })
           }))
-          return {
-            ...p.toObject(),
-            displayName: profile.displayName,
-            username: profile.username,
-            accountId: undefined,
-            likes: viewableLikes,
-            retwadds: viewableRetwadds
-          }
-        }))
-        return res.status(200).json({posts: viewablePosts, msg: 'fetch successful'})
+        })
+        .then(posts => {
+          return res.status(200).json({posts, msg: 'fetch successful'})
+        })
       } catch(err) {
         console.log(err)
         return res.status(500).json(err);

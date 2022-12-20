@@ -4,7 +4,7 @@
  */
 import React from 'react'
 import { useState } from 'react'
-import { baseURL } from 'utils/fetch-api';
+import { baseURL, ins } from 'utils/fetch-api';
 import { Buffer } from 'buffer';
 import axios from 'axios';
 
@@ -14,7 +14,7 @@ function ImageTest() {
 
   const fetchImages = async () => {
     try {
-      const res = await axios({
+      const res = await ins({
         method: 'get',
         url: `${baseURL}/image`
       });
@@ -41,7 +41,7 @@ function ImageTest() {
       const fd = new FormData();
       console.log(imageToUpload)
       fd.append('image',imageToUpload);
-      const res = await axios({
+      const res = await ins({
         method: 'post',
         url: `${baseURL}/image`,
         data: fd,

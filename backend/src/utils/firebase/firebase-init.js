@@ -39,5 +39,16 @@ async function firebaseUpload(path,buffer,filename) {
     return false
   }
 }
+async function firebaseRemove(path,filename) {
+  admin.database().ref(`${path}/${filename}`);
+  del_ref.remove()
+    .then(function() {
+      res.send({ status: 'ok' });
+    })
+    .catch(function(error) {
+      console.log('Error deleting data:', error);
+      res.send({ status: 'error', error: error });
+    });
+}
 
 module.exports = {firebaseUpload};

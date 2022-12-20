@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from 'styles/css/SignUpForm.module.css'
-import { baseURL } from 'utils/fetch-api';
+import { baseURL, ins } from 'utils/fetch-api';
 import StyledInput from '../StyledInput';
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
@@ -64,7 +64,7 @@ function Step1({
     e.preventDefault();
 
     try {
-      const res = await axios({
+      const res = await ins({
         method: 'get',
         url: `${baseURL}/signup/verify?`,
         params: {email: formData.email}

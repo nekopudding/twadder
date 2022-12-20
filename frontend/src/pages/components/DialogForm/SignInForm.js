@@ -4,9 +4,8 @@ import StyledInput from './StyledInput'
 import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import {ReactComponent as Logo} from 'assets/icons/twitter.svg'
 import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
-import { baseURL } from 'utils/fetch-api'
+import { baseURL, ins } from 'utils/fetch-api'
 import { useState } from 'react'
-import { getCookie, setCookie } from 'utils/cookies'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
 import axios from 'axios'
@@ -30,21 +29,19 @@ function SignInForm({
     e.preventDefault();
     const {username,password} = formData;
     try {
-      const res = await axios({
+      const res = await ins({
         method: 'post',
         url: `${baseURL}/login`,
         data: {username,password}
       });
       const {msg,sessionId} = res.data;
       if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
-      if (sessionId) {
-        setCookie('sessionId',sessionId,7);
-        // console.log(getCookie('sessionId'));
-      }
       if (res.status === 200) {
         setOpen(false);
         window.location.href = '/';
       }
+      console.log(res)
+
     } catch(err) {
       return dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
     }
