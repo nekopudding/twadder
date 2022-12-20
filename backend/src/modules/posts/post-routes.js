@@ -46,7 +46,7 @@ module.exports = {
   routes: function(app) {
     app.get('/timeline',async (req,res) => {
       try {
-        const accountId = getCurrLogin(req);
+        const accountId = req.accountId;
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //get all user's followings
         //sort posts by their upload date
@@ -59,7 +59,7 @@ module.exports = {
     });
     app.post('/posts',upload.array('images',4),async (req,res) => {
       try {
-        const accountId = getCurrLogin(req);
+        const accountId = req.accountId;
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //create post
         //replyingTo should be username

@@ -11,6 +11,16 @@ const sessionManager = new SessionManager();
 const invalidSessionMsg = 'invalid sessionId provided';
 
 module.exports = {
+  middleware: (req,res,next) => {
+    const path = (req.baseUrl + req.path).trim();
+    if (path === '/login' 
+    || path === '/'
+    || path === '/signup/verify'
+    || path === '/signup') {
+      return next();
+    }
+    sessionManager.middleware(req,res,next)
+  },
   routes: function(app) {
     app.post('/login', async (req,res) => {
       const {username,password} = req.body;
@@ -26,8 +36,15 @@ module.exports = {
         console.log(err)
         return res.status(400).json(err);
       }
-    })
+    }),
+    app.route('/logout')
+      .get((req,res) => {
+        sessionManager.deleteSession(req);
+        return res.status(200).end();
+      })
+
   },
-  invalidSessionMsg
+  invalidSessionMsg,
+  sessionManager
 }
 

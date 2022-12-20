@@ -30,7 +30,7 @@ module.exports = {
     app.route('/me/profile')
     .get(async (req,res) => {
       try {
-        const accountId = getCurrLogin(req);
+        const accountId = req.accountId;
         const profile = await getProfile(accountId);
 
         return res.status(200).json({
