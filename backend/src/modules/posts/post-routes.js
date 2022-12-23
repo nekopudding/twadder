@@ -76,7 +76,7 @@ module.exports = {
     app.get('/posts', async (req,res) => {
       try {
         //gets the posts, then join it with metadata
-        Post.find({})
+        Post.find({}).sort({createdAt: 'desc'}).exec()
         .then(posts => { //append user information
           return Promise.all(posts.map(p => {
               return new Promise((resolve,reject) => {

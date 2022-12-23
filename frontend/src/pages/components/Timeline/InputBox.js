@@ -49,6 +49,7 @@ function InputBox() {
         dispatch(setToast({update: !toast.update, msg: res.data.msg}));
         setImages([])
         setText('');
+        window.location.reload();
       }
     }catch (err) {
       dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
