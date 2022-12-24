@@ -1,16 +1,18 @@
 import axios from "axios";
-import { getCookie } from "./cookies";
 
 export const baseURL = 'http://localhost:4000'
 
 export const toggleLike = async (postId) => {
-  const res = await axios({
+  const res = await ins({
     method: 'put',
     url: `${baseURL}/posts/${postId}`,
     params: {
-      sessionId: getCookie('sessionId'),
       mode: 'LIKE'
     },
   })
   return res;
 }
+
+export const ins = axios.create({ //instance of axios for enabling credentials
+  withCredentials: true
+})

@@ -14,9 +14,7 @@ const getProfile = async (accountId) => {
   }
   const account = await Account.findOne({_id: accountId});
   const profile = await Profile.findOne({accountId: accountId});
-  if (!account || !profile) throw { name: Error, 
-      msg: "account not found"	
-  }
+  if (!account || !profile) return null;
 
   return {
     ...profile.toObject(),
@@ -30,8 +28,10 @@ module.exports = {
     app.route('/me/profile')
     .get(async (req,res) => {
       try {
-        const accountId = getCurrLogin(req);
-        const profile = await getProfile(accountId);
+        const profile = await getProfile(req.accountId);
+        if (!profile) throw { name: Error, 
+          msg: "account not found"	
+      }
 
         return res.status(200).json({
           profile,

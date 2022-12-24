@@ -7,9 +7,8 @@ import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
 import { autoResize } from 'utils/textarea-auto-resize'
 import { useState } from 'react'
 import { useRef } from 'react'
-import { getCookie } from 'utils/cookies'
 import axios from 'axios'
-import { baseURL } from 'utils/fetch-api'
+import { baseURL, ins } from 'utils/fetch-api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
 
@@ -41,16 +40,16 @@ function InputBox() {
       const fd = new FormData();
       images.forEach(i =>fd.append('images',i))
       fd.append('text',text);
-      const res = await axios({
+      const res = await ins({
         method: 'post',
         url: `${baseURL}/posts`,
-        params: {sessionId: getCookie('sessionId')},
         data: fd
       });
       if (res.status === 200) {
         dispatch(setToast({update: !toast.update, msg: res.data.msg}));
         setImages([])
         setText('');
+        window.location.reload();
       }
     }catch (err) {
       dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));

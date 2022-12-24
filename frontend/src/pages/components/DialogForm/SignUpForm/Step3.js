@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import styles from 'styles/css/SignUpForm.module.css'
-import { baseURL } from 'utils/fetch-api';
+import { baseURL, ins } from 'utils/fetch-api';
 import StyledInput from '../StyledInput';
 import { useDispatch, useSelector } from 'react-redux'
 import { setToast } from 'app/toastSlice'
@@ -34,7 +34,7 @@ function Step3({
     const {displayName,email,username,password,month,day,year,enableNotifications,verificationCode} = formData;
 
     try {
-      const res = await axios({
+      const res = await ins({
         method: 'post',
         url: `${baseURL}/signup`,
         data: {

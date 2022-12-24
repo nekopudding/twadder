@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react'
-import { baseURL } from 'utils/fetch-api';
+import { baseURL, ins } from 'utils/fetch-api';
 import PostPreview from './PostPreview'
 
 function PostSection() {
@@ -10,11 +10,12 @@ function PostSection() {
   useEffect(()=>{
     const getPosts = async () => {
       try {
-        const res = await axios({
+        const res = await ins({
           method: 'GET',
           url: `${baseURL}/posts`,
           params: { type: 'POSTS'}
         })
+        console.log(res.data.posts);
         setPosts(res.data.posts);
         console.log(res.data.msg);
       } catch (err) {

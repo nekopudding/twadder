@@ -22,6 +22,7 @@
     flex-direction: column;
     justify-content: flex-end;
     margin-left: v.$s*1.5;
+    flex: 469px 1 1;
     .displayName {
       margin-right: 4px;
     }
@@ -30,6 +31,7 @@
     }
     .bodyText {
       margin-top: 2px;
+      overflow-wrap: anywhere;
     }
   }
 }

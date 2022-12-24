@@ -9,12 +9,11 @@ import {
   Outlet
 } from "react-router-dom";
 import styles from 'styles/css/App.module.css'
-import { getCookie } from 'utils/cookies'
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrUser } from "app/currUserSlice";
 import { setToast } from "app/toastSlice";
 import axios from "axios";
-import { baseURL } from "utils/fetch-api";
+import { baseURL, ins } from "utils/fetch-api";
 
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
@@ -28,12 +27,9 @@ function App() {
 
     const getProfile = async () => {
       try {
-        const sessionId = getCookie('sessionId');
-        console.log(`sessionId: ${sessionId}`);
-        const res = await axios({
+        const res = await ins({
           method: 'get',
           url: `${baseURL}/me/profile`,
-          params: {sessionId}
         });
         const {msg,profile} = res.data;
         if (res.status === 200) {

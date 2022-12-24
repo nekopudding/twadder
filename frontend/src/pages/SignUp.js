@@ -15,13 +15,15 @@ import styles from 'styles/css/SignUp.module.css'
 import SignUpForm from './components/DialogForm/SignUpForm/SignUpForm';
 import SignInForm from './components/DialogForm/SignInForm';
 import Toast from './components/Toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setToast } from 'app/toastSlice';
+import { baseURL, ins } from 'utils/fetch-api';
 
 function SignUp() {
   const [signUpFormOpen, setSignUpFormOpen] = useState(false);
   const [signInFormOpen,setSignInFormOpen] = useState(false);
   const dispatch = useDispatch();
+  const toast = useSelector(state => state.toast);
 
   const signUpWithGoogle = async () => {
     var provider = new GoogleAuthProvider();
@@ -40,6 +42,27 @@ function SignUp() {
   useEffect(()=> {
     dispatch(setToast({update: true, msg:''})); //reset toast msg
   },[])
+
+  const signInTest = async () => {
+    const formData = {
+      username: 'dean',
+      password: 'yang1234'
+    }
+    try {
+      const res = await ins({
+        method: 'post',
+        url: `${baseURL}/login`,
+        data: formData
+      });
+      const {msg,sessionId} = res.data;
+      if (msg) dispatch(setToast({update: !toast.update, msg: msg}));
+      if (res.status === 200) {
+        window.location.href = '/';
+      }
+    } catch(err) {
+      return dispatch(setToast({update: !toast.update, msg: err.response.data.msg || err.message}));
+    }
+  }
 
   return (
     <>
@@ -70,6 +93,9 @@ function SignUp() {
             <div className={`sidebarButton ${styles.haveAccountText}`}>Already have an account?</div>
             <button className={`${styles.button} ${styles.outlined}`} onClick={signIn}>
               <span className='bodyHeader'>Sign in</span>
+            </button>
+            <button className={`${styles.button} ${styles.light}`} onClick={signInTest}>
+              <span className='bodyHeader'>Sign in with test account</span>
             </button>
           </div>
         </div>

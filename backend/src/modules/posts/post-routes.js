@@ -9,10 +9,11 @@ const fs = require('fs');
 const { upload } = require('../../utils/middleware/multer-upload');
 const sharp = require('sharp');
 const tmp = require('tmp');
-const {firebaseUpload} = require('../../utils/firebase/firebase-init');
+const {firebaseUpload, firebaseEmptyBucket} = require('../../utils/firebase/firebase-init');
 const { Account } = require('../accounts/models/account-model');
 const { getProfile } = require('../accounts/profile-routes');
 const { RepostModel } = require('../../utils/mongoose-types');
+const { Profile } = require('../accounts/models/profile-model');
 
 const POST_TYPE = {
   POSTS:'POSTS',
@@ -25,28 +26,18 @@ const PUT_POST_MODE = {
   RETWEET: 'RETWEET'
 }
 
-/**
- * Find all posts, or posts by a specified user.
- * @param {*} username - username as specified in the user account
- * @returns array of posts by that user.
- */
-const findPosts = async (username) => {
-  const accountId = await Account.find({username})._id;
-  if (!username || !accountId) {
-    return await Post.find({});
-  } else {
-    return await Post.find({accountId});
-  }
-}
-
 const hasAccountId = (list,accountId) => {
   return list.filter(e => e.accountId === accountId).length > 0
 }
 module.exports = {
   routes: function(app) {
+    app.delete('/bucket',async (req,res) => {
+      await firebaseEmptyBucket();
+      return res.status(200).end();
+    }),
     app.get('/timeline',async (req,res) => {
       try {
-        const accountId = getCurrLogin(req);
+        const accountId = req.accountId;
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //get all user's followings
         //sort posts by their upload date
@@ -59,7 +50,7 @@ module.exports = {
     });
     app.post('/posts',upload.array('images',4),async (req,res) => {
       try {
-        const accountId = getCurrLogin(req);
+        const accountId = req.accountId;
         if (!accountId) return res.status(400).json({msg: invalidSessionMsg});
         //create post
         //replyingTo should be username
@@ -88,43 +79,30 @@ module.exports = {
     }),
     app.get('/posts', async (req,res) => {
       try {
-        const {username,type} = req.query;
-        let posts;
-        switch (type) {
-          case POST_TYPE.POSTS:
-            posts = await findPosts(username); //this needs to be changed, as it fetches all types except likes/retweets
-            break;
-          default:
-            break;
-        }
-        const viewablePosts = await Promise.all(await posts.map(async p => {
-          const profile = await getProfile(p.accountId);
-          const viewableLikes = await Promise.all(await p.likes.map(async l => {
-            const {username} = await Account.findById(l.accountId);
-            return {
-              ...l,
-              accountId: undefined,
-              username
-            }
-          }));
-          const viewableRetwadds = await Promise.all(await p.retwadds.map(async r => {
-            const {username} = await Account.findById(r.accountId);
-            return {
-              ...r,
-              accountId: undefined,
-              username
-            }
+        //gets the posts, then join it with metadata
+        Post.find({}).sort({createdAt: 'desc'}).exec()
+        .then(posts => { //append user information
+          return Promise.all(posts.map(p => {
+              return new Promise((resolve,reject) => {
+                getProfile(p.accountId).then(profile => {
+                  if (!profile) {
+                    //delete the post if account has been deleted but somehow post was not removed
+                    Post.deleteMany({accountId:p.accountId}); 
+                  }
+                  resolve({
+                    username: profile?.username,
+                    displayname: profile?.displayname,
+                    ...p.toObject(),
+                    accountId: undefined,
+                    likes:[],retwadds:[]
+                  });
+                })
+              })
           }))
-          return {
-            ...p.toObject(),
-            displayName: profile.displayName,
-            username: profile.username,
-            accountId: undefined,
-            likes: viewableLikes,
-            retwadds: viewableRetwadds
-          }
-        }))
-        return res.status(200).json({posts: viewablePosts, msg: 'fetch successful'})
+        })
+        .then(posts => {
+          return res.status(200).json({posts, msg: 'fetch successful'})
+        })
       } catch(err) {
         console.log(err)
         return res.status(500).json(err);
