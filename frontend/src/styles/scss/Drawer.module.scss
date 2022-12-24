@@ -21,7 +21,10 @@
     align-items: center;
 
     .icon {
-      width: 28px;
+      & * {
+        width: 28px;
+        height: 28px;
+      }
       display: flex;
       align-items: center;
     }
@@ -83,7 +86,10 @@
     flex-grow: 1;
   }
   .icon {
-    width: 19px;
+    & * {
+      width: 19px;
+      height: 19px;
+    }
     display: flex;
     align-items: center;
   }
