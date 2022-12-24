@@ -13,6 +13,7 @@ admin.initializeApp({
 });
 
 var bucket = admin.storage().bucket();
+const urlPrefix = 'https://storage.googleapis.com/'
 
 //
 /**
@@ -33,22 +34,29 @@ async function firebaseUpload(path,buffer,filename) {
       contentType: 'image/jpeg'
     });
     await file.makePublic(); //makes url publicly accessible
-    return format(`https://storage.googleapis.com/${bucket.name}/${file.name}`);
+    return format(`${urlPrefix}/${bucket.name}/${file.name}`);
   } catch(err) {
     console.log(err);
     return false
   }
 }
-async function firebaseRemove(path,filename) {
-  admin.database().ref(`${path}/${filename}`);
-  del_ref.remove()
-    .then(function() {
-      res.send({ status: 'ok' });
-    })
-    .catch(function(error) {
-      console.log('Error deleting data:', error);
-      res.send({ status: 'error', error: error });
-    });
+//https://cloud.google.com/nodejs/docs/reference/storage/latest
+async function firebaseDeleteFile(url) {
+  try {
+    console.log('url',url);
+    const fullpath = url.subString(urlPrefix.length) //remove prefix
+    console.log('fullpath',fullpath);
+    await bucket.file(fullpath).delete();
+  } catch (err) {
+    console.error(err)
+  }
+}
+async function firebaseEmptyBucket() {
+  try {
+    await bucket.deleteFiles();
+  } catch (err) {
+    console.error(err)
+  }
 }
 
-module.exports = {firebaseUpload};
+module.exports = {firebaseUpload,firebaseEmptyBucket,firebaseDeleteFile};

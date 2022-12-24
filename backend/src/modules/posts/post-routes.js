@@ -9,7 +9,7 @@ const fs = require('fs');
 const { upload } = require('../../utils/middleware/multer-upload');
 const sharp = require('sharp');
 const tmp = require('tmp');
-const {firebaseUpload} = require('../../utils/firebase/firebase-init');
+const {firebaseUpload, firebaseEmptyBucket} = require('../../utils/firebase/firebase-init');
 const { Account } = require('../accounts/models/account-model');
 const { getProfile } = require('../accounts/profile-routes');
 const { RepostModel } = require('../../utils/mongoose-types');
@@ -31,6 +31,10 @@ const hasAccountId = (list,accountId) => {
 }
 module.exports = {
   routes: function(app) {
+    app.delete('/bucket',async (req,res) => {
+      await firebaseEmptyBucket();
+      return res.status(200).end();
+    }),
     app.get('/timeline',async (req,res) => {
       try {
         const accountId = req.accountId;
