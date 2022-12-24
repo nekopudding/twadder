@@ -91,3 +91,38 @@
   font-size: 17px;
   font-weight: 700;
 }
+.messageInput {
+  border-top: v.$border;
+  padding: 4px 12px;
+}
+
+.searchBar {
+  height: 42px;
+  width: 100%;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  padding-left: v.$s*1.5;
+  & {
+    background-color: v.$clrBgGrey;
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    padding-left: v.$s*0.5;
+    & > svg {
+      width: 14px;
+      fill: v.$clrTextGrey;
+    }
+  }
+  .input {
+    padding: v.$s*1.5;
+    flex-grow: 1;
+  }
+  &:focus-within {
+    border: 1px solid v.$clrMainAccent;
+    & svg {
+      fill: v.$clrMainAccent;
+    }
+  }
+}
