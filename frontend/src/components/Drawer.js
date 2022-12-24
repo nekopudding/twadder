@@ -71,7 +71,7 @@ function Drawer() {
             )
           })}
         </div>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={()=> {window.scrollTo(0, 0)}}>
           <div className='sidebarButton'>Twadd</div>
         </button>
         <div className={styles.accountButtonContainer}>

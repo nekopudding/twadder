@@ -1,5 +1,5 @@
-import Drawer from "pages/components/Drawer";
-import Toast from "pages/components/Toast";
+import Drawer from "components/Drawer";
+import Toast from "components/Toast";
 import { useEffect } from "react";
 import {
   BrowserRouter,

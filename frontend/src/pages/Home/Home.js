@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from 'styles/css/Home.module.css'
-import Drawer from './components/Drawer'
-import HomeRight from './components/HomeRight'
-import Timeline from './components/Timeline/Timeline'
+import Drawer from '../../components/Drawer'
+import HomeRight from './HomeRight'
+import Timeline from './Timeline/Timeline'
 
 function Home() {
   return (

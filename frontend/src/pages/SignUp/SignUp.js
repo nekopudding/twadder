@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React, { useEffect, useState } from 'react'
-import {ReactComponent as TwitterLogo} from '../assets/icons/twitter.svg'
-import {ReactComponent as GoogleLogo} from '../assets/icons/google.svg'
+import {ReactComponent as TwitterLogo} from 'assets/icons/twitter.svg'
+import {ReactComponent as GoogleLogo} from 'assets/icons/google.svg'
 import { 
   getAuth, 
   createUserWithEmailAndPassword,
@@ -12,9 +12,9 @@ import {
   signOut,
 } from "firebase/auth";
 import styles from 'styles/css/SignUp.module.css'
-import SignUpForm from './components/DialogForm/SignUpForm/SignUpForm';
-import SignInForm from './components/DialogForm/SignInForm';
-import Toast from './components/Toast';
+import SignUpForm from './SignUpForm/SignUpForm';
+import SignInForm from './SignInForm';
+import Toast from '../../components/Toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToast } from 'app/toastSlice';
 import { baseURL, ins } from 'utils/fetch-api';
@@ -43,7 +43,7 @@ function SignUp() {
     dispatch(setToast({update: true, msg:''})); //reset toast msg
   },[])
 
-  const signInTest = async () => {
+  const autoSignIn = async () => {
     const formData = {
       username: 'dean',
       password: 'yang1234'
@@ -94,7 +94,7 @@ function SignUp() {
             <button className={`${styles.button} ${styles.outlined}`} onClick={signIn}>
               <span className='bodyHeader'>Sign in</span>
             </button>
-            <button className={`${styles.button} ${styles.light}`} onClick={signInTest}>
+            <button className={`${styles.button} ${styles.light}`} onClick={autoSignIn}>
               <span className='bodyHeader'>Sign in with test account</span>
             </button>
           </div>

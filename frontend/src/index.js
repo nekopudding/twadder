@@ -11,9 +11,9 @@ import {
   Link,
   Outlet
 } from "react-router-dom";
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Messages from './pages/Messages';
-import SignUp from './pages/SignUp';
+import SignUp from './pages/SignUp/SignUp';
 import Search from 'pages/Search';
 import Notifications from 'pages/Notifications';
 import Profile from 'pages/Profile';
