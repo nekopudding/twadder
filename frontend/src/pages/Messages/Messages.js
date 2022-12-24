@@ -14,11 +14,14 @@ const fillerUserList = [
     }
   }
 ]
+const fillerMessageList = [
+
+]
 
 function Messages() {
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.userList}>
         <div className={styles.sectionTitleContainer}>
           <h2 className='h2'>Messages</h2>
         </div>
@@ -42,6 +45,12 @@ function Messages() {
             </div>
           )
         })}
+      </div>
+      <div className={styles.chatbox}>
+        <div className={styles.sectionTitleContainer}>
+          <h2 className={styles.chatboxTitle}>Dakuro</h2>
+        </div>
+        <div className={styles.sectionTitleOffset}></div>
       </div>
     </>
   )

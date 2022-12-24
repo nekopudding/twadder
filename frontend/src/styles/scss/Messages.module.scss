@@ -1,14 +1,18 @@
 @use 'variables' as v;
 
-.container {
+.userList {
   width: 390px;
   border-left: v.$border;
   border-right: v.$border;
+  overflow: auto;
 }
 .sectionTitleContainer {
   position: fixed;
   width: 388px; //minus the border
-  padding: v.$s*2;
+  height: 56px;
+  padding-left: v.$s*2;
+  display: flex;
+  align-items: center;
   background-color: rgba(0,0,0,0.65);
   backdrop-filter: blur(12px);
   border-bottom: none;
@@ -77,4 +81,13 @@
     margin-top: 2px;
     overflow-wrap: anywhere;
   }
+}
+.chatbox {
+  width: 600px;
+  border-right: v.$border;
+  overflow: auto;
+}
+.chatboxTitle {
+  font-size: 17px;
+  font-weight: 700;
 }

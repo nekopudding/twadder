@@ -16,14 +16,15 @@
 }
 .linkList {
   margin: v.$s 0;
+  margin-top: 8px;
   .link {
     display: inline-flex;
     align-items: center;
-
     .icon {
       & * {
         width: 28px;
         height: 28px;
+        fill: #fff;
       }
       display: flex;
       align-items: center;
@@ -37,6 +38,7 @@
 }
 .linkGlow,.accountButton {
   @include v.iconButtonWhiteHoverOnly;
+  margin-bottom: 8px;
   padding: v.$s*1.5;
   display: inline-flex;
   border-radius: 9999px;
@@ -47,6 +49,9 @@
   }
   &.accountButton {
     @include v.iconButtonWhite;
+  }
+  &.selected {
+    background-color: v.$clrWhiteHover;
   }
 }
 
@@ -89,6 +94,7 @@
     & * {
       width: 19px;
       height: 19px;
+      fill: #fff;
     }
     display: flex;
     align-items: center;
