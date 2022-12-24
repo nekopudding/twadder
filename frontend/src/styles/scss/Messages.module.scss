@@ -1,0 +1,80 @@
+@use 'variables' as v;
+
+.container {
+  width: 390px;
+  border-left: v.$border;
+  border-right: v.$border;
+}
+.sectionTitleContainer {
+  position: fixed;
+  width: 388px; //minus the border
+  padding: v.$s*2;
+  background-color: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  border-bottom: none;
+  z-index: 10;
+}
+.sectionTitleOffset {
+  height: 56px;
+  border-bottom: none;
+}
+
+.searchBar {
+  height: 42px;
+  margin: 12px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: v.$s*1.5;
+  border: v.$border;
+  .icon {
+    display: flex;
+    align-items: center;
+    padding-left: v.$s*0.5;
+    & > svg {
+      width: 14px;
+      fill: v.$clrTextGrey;
+    }
+  }
+  .input {
+    padding: v.$s*1.5;
+    font-size: 14px;
+    &:focus-visible {
+      flex-grow: 1;
+    }
+  }
+  &:focus-within {
+    border: 1px solid v.$clrMainAccent;
+  }
+}
+
+.user {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  .avatar {
+    width: 48px;
+    height: 48px;
+    background-color: v.$clrBgGrey;
+    border-radius: 9999px;
+    margin-right: 12px;
+  }
+}
+.headerText {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 280px 1 1;
+  .displayName {
+    margin-right: 4px;
+  }
+  .greyText {
+    color: v.$clrTextGrey;
+  }
+  .bodyText {
+    margin-top: 2px;
+    overflow-wrap: anywhere;
+  }
+}

@@ -1,13 +1,13 @@
 @use 'variables' as v;
 
-$border: 1px v.$clrBgGrey solid;
+
 
 .container {
   width: 598px;
-  border-left: $border;
-  border-right: $border;
+  border-left: v.$border;
+  border-right: v.$border;
   & > * + * {
-    border-bottom: $border;
+    border-bottom: v.$border;
   }
 }
 .sectionTitleContainer {
@@ -80,7 +80,7 @@ $border: 1px v.$clrBgGrey solid;
 
 .divider {
   height: 0;
-  border-bottom: $border;
+  border-bottom: v.$border;
 }
 .imageUploadInput {
   display: none;

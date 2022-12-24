@@ -15,9 +15,7 @@ function PostSection() {
           url: `${baseURL}/posts`,
           params: { type: 'POSTS'}
         })
-        console.log(res.data.posts);
         setPosts(res.data.posts);
-        console.log(res.data.msg);
       } catch (err) {
         console.log(err);
       }
