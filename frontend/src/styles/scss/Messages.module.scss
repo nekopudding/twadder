@@ -42,8 +42,10 @@
     }
   }
   .input {
+    caret-color: v.$clrMainAccent;
     padding: v.$s*1.5;
     font-size: 14px;
+    
     &:focus-visible {
       flex-grow: 1;
     }
@@ -86,30 +88,34 @@
   width: 600px;
   border-right: v.$border;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 .chatboxTitle {
   font-size: 17px;
   font-weight: 700;
 }
+
 .messageInput {
   border-top: v.$border;
   padding: 4px 12px;
 }
 
-.searchBar {
-  height: 42px;
-  width: 100%;
-  border-radius: 9999px;
+//MESSAGE INPUT
+.messageInputBox {
+  height: 44px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   padding-left: v.$s*1.5;
+  padding-right: v.$s*1.5;
   & {
     background-color: v.$clrBgGrey;
   }
   .icon {
     display: flex;
     align-items: center;
-    padding-left: v.$s*0.5;
+    justify-content: center;
     & > svg {
       width: 14px;
       fill: v.$clrTextGrey;
@@ -119,10 +125,44 @@
     padding: v.$s*1.5;
     flex-grow: 1;
   }
-  &:focus-within {
-    border: 1px solid v.$clrMainAccent;
-    & svg {
-      fill: v.$clrMainAccent;
-    }
+}
+.messageInput {
+  .imageUploadInput {
+    display: none;
   }
+  .inputOptionsContainer {
+    display: flex;
+  }
+  .iconContainer {
+    @include v.iconButtonMainAccent;
+    width: 34px;
+    height: 34px;
+  }
+  .icon {
+      display: flex;
+      align-items: center;
+      & > svg {
+        width: 18px;
+        height: 18px;
+        fill: v.$clrMainAccent;
+      }
+  }
+}
+
+//CHAT
+.chat {
+  flex-grow: 1;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.messageContainer {
+  margin: 3px 0;
+}
+.message {
+  padding: 12px 16px;
+  background-color: v.$clrBgGrey;
+  border-radius: 24px;
+  max-width: 60%;
+  display: inline-block;
 }

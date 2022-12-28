@@ -9,6 +9,8 @@
   overflow: auto;
   padding-left: v.$s*1.5;
   padding-right: v.$s*1.5;
+  background-color: v.$clrBlack;
+  z-index: 1000;
 }
 .containerOffset {
   width: 233px + v.$s*4;
