@@ -1,14 +1,12 @@
 import React from 'react'
 import styles from 'styles/css/Messages.module.css'
 import {ReactComponent as SearchIcon} from 'assets/icons/search.svg'
-import {ReactComponent as SendIcon} from 'assets/icons/paper-plane-regular.svg'
-import {ReactComponent as PhotoIcon} from 'assets/icons/media.svg'
-import {ReactComponent as GIFIcon} from 'assets/icons/gif.svg'
-import {ReactComponent as EmojiIcon} from 'assets/icons/emoji.svg'
-import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
+
 import ReactTimeAgo from 'react-time-ago'
 import { useState } from 'react'
 import { useRef } from 'react'
+import { useSelector } from 'react-redux'
+import MessageInput from './MessageInput'
 
 const fillerUserList = [
   {
@@ -21,8 +19,15 @@ const fillerUserList = [
     }
   }
 ]
+
+//list should be sorted to have newest first
 const fillerMessageList = [
- {
+  {
+    username: 'dean',
+    dateSent: new Date(),
+    text: 'wtf r u sayin'
+  },
+  {
   username: 'dakuro',
   dateSent: new Date(),
   text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque, augue et porttitor dignissim, massa neque vulputate tortor, sodales congue magna sem eu mi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed tempus nisl massa, vitae interdum odio cursus non. Etiam tincidunt volutpat leo eget scelerisque. Aenean varius ut diam id tincidunt. Vivamus commodo mi id vehicula ultricies. Proin in augue varius, egestas nunc eu, aliquam augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam varius consectetur nibh a consequat. Aliquam tellus risus, facilisis non leo a, euismod ullamcorper dui. Fusce facilisis ipsum vitae lorem aliquam volutpat. Nam eget urna sodales, accumsan enim ac, pulvinar libero. Phasellus luctus cursus velit, in scelerisque elit. Nam eget arcu nec turpis molestie porttitor. Phasellus neque lectus, fringilla vitae pellentesque id, vestibulum eu purus.'
@@ -31,54 +36,27 @@ const fillerMessageList = [
   username: 'dakuro',
   dateSent: new Date(),
   text: 'Lorem ipsum.'
- }
+ },
+ {
+  username: 'dean',
+  dateSent: new Date(),
+  text: 'HIHI!!!'
+ },
 ]
 
 function Messages() {
-  const [images,setImages] = useState([]);
-  const [text,setText] = useState('');
-  const imageInputRef = useRef();
+  const currUser = useSelector(state=>state.currUser);
+  const [messageList,setMessageList] = useState(fillerMessageList);
+  const [userList,setUserList] = useState(fillerUserList);
 
-  const triggerImageClick = () => {
-    imageInputRef.current.click();
-  }
-
-  const addImages = (e) => {
-    const newImages = e.target.files;
-    setImages([...images,...newImages]);
-    e.target.value = null;
-  }
-
-  const MessageInput = () => {
-    return (
-      <div className={styles.messageInput}>
-          <div className={`${styles.messageInputBox}`}>
-            <div className={styles.inputOptionsContainer}>
-              <div className={styles.iconContainer} onClick={triggerImageClick}>
-                <div className={styles.icon}><PhotoIcon/></div>
-                <input 
-                  ref={imageInputRef}
-                  className={styles.imageUploadInput} 
-                  type="file" name="images" 
-                  accept=".png,.jpg,.jpeg,.webp" 
-                  multiple
-                  onChange={addImages}
-                />
-              </div>
-              <div className={styles.iconContainer}>
-                <div className={styles.icon}><GIFIcon/></div>
-              </div>
-              <div className={styles.iconContainer}>
-                <div className={styles.icon}><EmojiIcon/></div>
-              </div>
-            </div>
-            <input type="text"  className={`body ${styles.input}`} placeholder='Start a new message'/>
-            <div className={styles.iconContainer}>
-              <div className={styles.icon}><SendIcon/></div>
-            </div>
-          </div>
-        </div>
-    )
+  const sendMessage = (text) => {
+    text = text.trim()
+    if (text === '') return;
+    setMessageList([{
+      username: currUser.username, 
+      dateSent: new Date(),
+      text
+    },...messageList])
   }
 
   return (
@@ -92,7 +70,7 @@ function Messages() {
           <div className={styles.icon}><SearchIcon/></div>
           <input type="text"  className={`body ${styles.input}`} placeholder='Search Direct Messages'/>
         </div>
-        {fillerUserList.map(u => {
+        {userList.map(u => {
           return (
             <div className={styles.user} key={u.id}>
               <div className={styles.avatar}></div>
@@ -113,17 +91,17 @@ function Messages() {
         </div>
         <div className={styles.sectionTitleOffset}></div>
         <div className={styles.chat}>
-          {fillerMessageList.map((msg) => {
-            return (<>
-            <div className={styles.messageContainer}>
-              <p className={`body ${styles.message}`}>
+          {messageList.map((msg,i) => {
+            return (
+            <div className={styles.messageContainer} key={i}>
+              <p className={`body ${styles.message} ${currUser.username === msg.username && styles.myMessage}`}>
                 {msg.text}
               </p>
             </div>
-            </>)
+            )
           })}
         </div>
-        <MessageInput/>
+        <MessageInput sendMessage={sendMessage} />
       </div>
     </>
   )

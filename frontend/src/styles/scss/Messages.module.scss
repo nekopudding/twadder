@@ -90,6 +90,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 .chatboxTitle {
   font-size: 17px;
@@ -155,9 +156,12 @@
   padding: 0 16px;
   display: flex;
   flex-direction: column-reverse;
+  overflow: auto;
 }
 .messageContainer {
   margin: 3px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 .message {
   padding: 12px 16px;
@@ -165,4 +169,8 @@
   border-radius: 24px;
   max-width: 60%;
   display: inline-block;
+  &.myMessage {
+    background-color: v.$clrMainAccent;
+    margin-left: auto;
+  }
 }
