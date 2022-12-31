@@ -1,10 +1,11 @@
 @use 'variables' as v;
 
-.userList {
+.userListContainer {
   width: 390px;
   border-left: v.$border;
   border-right: v.$border;
   overflow: auto;
+  height: 100vh;
 }
 .sectionTitleContainer {
   position: fixed;
@@ -22,7 +23,6 @@
   height: 56px;
   border-bottom: none;
 }
-
 .searchBar {
   height: 42px;
   margin: 12px;
@@ -54,7 +54,6 @@
     border: 1px solid v.$clrMainAccent;
   }
 }
-
 .user {
   height: 80px;
   display: flex;
