@@ -6,18 +6,30 @@
   border-right: v.$border;
   overflow: auto;
   height: 100vh;
+  position: relative;
 }
 .sectionTitleContainer {
-  position: fixed;
-  width: 388px; //minus the border
+  position: absolute;
   height: 56px;
+  width: 100%;
   padding-left: v.$s*2;
+  padding-right: v.$s*1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: rgba(0,0,0,0.65);
   backdrop-filter: blur(12px);
   border-bottom: none;
   z-index: 10;
+  .iconButton {
+    @include v.iconButtonWhite;
+    @include v.iconButton;
+    width: 36px;
+    height: 36px;
+    & > svg {
+      fill: v.$clrWhite;
+    }
+  }
 }
 .sectionTitleOffset {
   height: 56px;
@@ -171,5 +183,41 @@
   &.myMessage {
     background-color: v.$clrMainAccent;
     margin-left: auto;
+  }
+}
+
+// New Conversation
+.newConvo {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.container {
+  margin:auto;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding-left: 32px;
+  padding-right: 32px;
+  .title {
+    font-size: 31px;
+    line-height: 36px;
+    font-weight: 700;
+    margin-bottom: v.$s;
+  }
+  .subtext {
+    color: v.$clrTextGrey;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 28px;
+  }
+  .button {
+    padding-left: 32px;
+    padding-right: 32px;
+    background-color: v.$clrMainAccent;
+    color: v.$clrWhite; 
+    height: 52px;
+    @include v.button;
   }
 }
