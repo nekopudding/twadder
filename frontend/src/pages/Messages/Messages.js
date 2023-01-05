@@ -242,16 +242,31 @@ function Messages() {
         }
       </div>
       <div className={styles.dialog}>
-      
         <div className={styles.header}>
-        <div className={styles.headerLeft}>
-          <div className={styles.closeIconContainer} onClick={()=>setDialogOpen(false)}><CloseIcon/></div>
-          <h2>New message</h2>
+          <div className={styles.top}>
+            <div className={styles.headerLeft}>
+              <div className={styles.closeIconContainer} onClick={()=>setDialogOpen(false)}><CloseIcon/></div>
+              <h2>New message</h2>
+            </div>
+            <button className={styles.nextButton} disabled>
+              <span>Next</span>
+            </button>
+          </div>
+          <div className={`${styles.searchBar}`}>
+            <div className={styles.icon}><SearchIcon/></div>
+            <input type="text"  className={`body ${styles.input}`} placeholder='Search people'/>
+          </div>
         </div>
-        <button className={styles.nextButton} disabled>
-          <span>Next</span>
-        </button>
-        
+        <div className={styles.newMsgUsers}>
+          <div className={styles.user}>
+            <div src="" alt="" className={styles.icon}/>
+            <div>
+              <div className={styles.userHeader}>
+                display name
+              </div>
+              <div className={styles.greyText}>@username</div>
+            </div>
+          </div>
         </div>
       </div>
     </>

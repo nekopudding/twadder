@@ -7,6 +7,38 @@
   overflow: auto;
   height: 100vh;
   position: relative;
+
+  .searchBar {
+    height: 42px;
+    margin: 12px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: v.$s*1.5;
+    border: v.$border;
+    .icon {
+      display: flex;
+      align-items: center;
+      padding-left: v.$s*0.5;
+      & > svg {
+        width: 14px;
+        fill: v.$clrTextGrey;
+      }
+    }
+    .input {
+      caret-color: v.$clrMainAccent;
+      padding: v.$s*1.5;
+      font-size: 14px;
+      
+      &:focus-visible {
+        flex-grow: 1;
+      }
+    }
+    &:focus-within {
+      border: 1px solid v.$clrMainAccent;
+    }
+  }
 }
 .sectionTitleContainer {
   position: absolute;
@@ -34,37 +66,6 @@
 .sectionTitleOffset {
   height: 56px;
   border-bottom: none;
-}
-.searchBar {
-  height: 42px;
-  margin: 12px;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: v.$s*1.5;
-  border: v.$border;
-  .icon {
-    display: flex;
-    align-items: center;
-    padding-left: v.$s*0.5;
-    & > svg {
-      width: 14px;
-      fill: v.$clrTextGrey;
-    }
-  }
-  .input {
-    caret-color: v.$clrMainAccent;
-    padding: v.$s*1.5;
-    font-size: 14px;
-    
-    &:focus-visible {
-      flex-grow: 1;
-    }
-  }
-  &:focus-within {
-    border: 1px solid v.$clrMainAccent;
-  }
 }
 .user {
   height: 80px;
@@ -229,55 +230,109 @@
   transform: translate(-50%,-50%);
   width: 600px;
   height: 650px;
-  overflow: auto;
   background-color: v.$clrBlack;
   border-radius: 16px;
-  padding: 0 (v.$s * 10);
-  padding-top: 53px;
+  padding-top: 95px;
 }
 .header {
   width: 100%;
-  height: 53px;
   padding: 0 (v.$s * 2);
   border-bottom: 1px solid v.$clrBgGrey;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: absolute;
   top: 0;
   left: 0;
-  .headerLeft {
+
+  .top {
+    height: 53px;
     display: flex;
     align-items: center;
-  }
-  
-  h2 {
-    margin-left: v.$s * 4.5;
-    letter-spacing: 1px;
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 700;
-  }
-  .closeIconContainer {
-    @include v.iconButtonWhite;
-    @include v.iconButton;
-    width: 36px;
-    height: 36px;
-    svg {
-      width: 20px;
-      height: 20px;
+    justify-content: space-between;
+    .headerLeft {
+      display: flex;
+      align-items: center;
+    }
+    
+    h2 {
+      margin-left: v.$s * 4.5;
+      letter-spacing: 1px;
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 700;
+    }
+    .closeIconContainer {
+      @include v.iconButtonWhite;
+      @include v.iconButton;
+      width: 36px;
+      height: 36px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .nextButton {
+      @include v.button;
+      height: 32px;
+      padding: 0 16px;
+      background-color: v.$clrWhite;
+      span {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 20px;
+        color: v.$clrBlack;
+      }
     }
   }
-  .nextButton {
-    @include v.button;
-    height: 32px;
-    padding: 0 16px;
-    background-color: v.$clrWhite;
-    span {
+  .searchBar {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    &:focus-within svg {
+      fill: v.$clrMainAccent !important;
+    }
+    .icon {
+      display: flex;
+      align-items: center;
+      width: 36px;
+      justify-content: center;
+      & > svg {
+        width: 20px;
+        fill: v.$clrTextGrey;
+      }
+    }
+    input {
+      padding: v.$s*1.5;
+      font-size: 15px;
+      flex-grow: 1;
+      line-height: 20px;
+    }
+  }
+}
+.newMsgUsers {
+  overflow: auto;
+  height: 100%;
+
+  .user {
+    padding: 12px 32px;
+    display: flex;
+    gap: 12px;
+    &:hover {
+      background-color: rgb(22, 24, 28);
+    }
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      background-color: v.$clrBgGrey;
+    }
+    .displayName {
       font-weight: 700;
       font-size: 15px;
       line-height: 20px;
-      color: v.$clrBlack;
+    }
+    .greyText {
+      font-size: 15px;
+      line-height: 20px;
+      color: v.$clrTextGrey;
     }
   }
 }
