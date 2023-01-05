@@ -2,6 +2,8 @@ import React from 'react'
 import styles from 'styles/css/Messages.module.css'
 import {ReactComponent as SearchIcon} from 'assets/icons/search.svg'
 import {ReactComponent as EnvelopeIcon} from 'assets/icons/envelope.svg'
+import {ReactComponent as CloseIcon} from  'assets/icons/close.svg'
+
 import ReactTimeAgo from 'react-time-ago'
 import { useState } from 'react'
 import { useRef } from 'react'
@@ -159,6 +161,7 @@ function Messages() {
   const currUser = useSelector(state=>state.currUser);
   const [messageList,setMessageList] = useState(fillerMessageList);
   const [userList,setUserList] = useState(fillerUserList);
+  const [dialogOpen,setDialogOpen] = useState(false);
 
   const sendMessage = (text) => {
     text = text.trim()
@@ -171,7 +174,7 @@ function Messages() {
   }
 
   const openDialog = () => {
-
+    setDialogOpen(true);
   }
 
   return (
@@ -237,6 +240,19 @@ function Messages() {
             </div>
           </>
         }
+      </div>
+      <div className={styles.dialog}>
+      
+        <div className={styles.header}>
+        <div className={styles.headerLeft}>
+          <div className={styles.closeIconContainer} onClick={()=>setDialogOpen(false)}><CloseIcon/></div>
+          <h2>New message</h2>
+        </div>
+        <button className={styles.nextButton} disabled>
+          <span>Next</span>
+        </button>
+        
+        </div>
       </div>
     </>
   )

@@ -221,3 +221,63 @@
     @include v.button;
   }
 }
+.dialog {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  height: 650px;
+  overflow: auto;
+  background-color: v.$clrBlack;
+  border-radius: 16px;
+  padding: 0 (v.$s * 10);
+  padding-top: 53px;
+}
+.header {
+  width: 100%;
+  height: 53px;
+  padding: 0 (v.$s * 2);
+  border-bottom: 1px solid v.$clrBgGrey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  .headerLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  h2 {
+    margin-left: v.$s * 4.5;
+    letter-spacing: 1px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+  .closeIconContainer {
+    @include v.iconButtonWhite;
+    @include v.iconButton;
+    width: 36px;
+    height: 36px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .nextButton {
+    @include v.button;
+    height: 32px;
+    padding: 0 16px;
+    background-color: v.$clrWhite;
+    span {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 20px;
+      color: v.$clrBlack;
+    }
+  }
+}

@@ -24,15 +24,19 @@
   top: 0;
   left: 0;
 
-  svg {
-    width: 20px;
-  }
   h2 {
     margin-left: v.$s * 4.5;
     letter-spacing: 1px;
   }
   .closeIconContainer {
-    @include v.clickable;
+    @include v.iconButtonWhite;
+    @include v.iconButton;
+    width: 36px;
+    height: 36px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 .stepContainer {
