@@ -21,7 +21,8 @@ function SessionManager () {
     const token = crypto.randomBytes(24).toString('hex');
     const sessionData = {username,accountId,timestamp:Date.now(),maxAge};
     sessions[token] = sessionData;
-    res.cookie(tokenName,token,{maxAge});
+    res.cookie(tokenName,token,{maxAge, sameSite: 'none',secure: true});
+    console.log('createToken:',token)
     setTimeout(() => {
       delete sessions[token];
     },maxAge);
@@ -40,6 +41,7 @@ function SessionManager () {
     // console.log('token:',token)
     // console.log('sessions:',sessions);
     if (!token || !sessions[token]) {
+      console.log('token:',token,'sessions[token]:',sessions[token])
       return next(new SessionError());
     }
     req.username = sessions[token].username;
